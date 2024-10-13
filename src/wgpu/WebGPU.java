@@ -27,6 +27,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuGetProcAddress = lookup(POINTER, "wgpuGetProcAddress", POINTER, POINTER);
 	public static MemorySegment wgpuGetProcAddress(final WGPUDevice device, final String procName) {
 		try(var arena = Arena.ofConfined()) {
@@ -38,6 +39,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuAdapterEnumerateFeatures = lookup(JAVA_LONG, "wgpuAdapterEnumerateFeatures", POINTER, POINTER);
 	public static long wgpuAdapterEnumerateFeatures(final WGPUAdapter adapter, FeatureName[] features) {
 		try(var arena = Arena.ofConfined()) {
@@ -55,6 +57,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuAdapterGetInfo = lookup(null, "wgpuAdapterGetInfo", POINTER, POINTER);
 	public static void wgpuAdapterGetInfo(final WGPUAdapter adapter, AdapterInfo info) {
 		try(var arena = Arena.ofConfined()) {
@@ -66,6 +69,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuAdapterGetLimits = lookup(JAVA_INT, "wgpuAdapterGetLimits", POINTER, POINTER);
 	public static boolean wgpuAdapterGetLimits(final WGPUAdapter adapter, SupportedLimits limits) {
 		try(var arena = Arena.ofConfined()) {
@@ -78,6 +82,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuAdapterHasFeature = lookup(JAVA_INT, "wgpuAdapterHasFeature", POINTER, JAVA_INT);
 	public static boolean wgpuAdapterHasFeature(final WGPUAdapter adapter, final FeatureName feature) {
 		try(var arena = Arena.ofConfined()) {
@@ -89,6 +94,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuAdapterRequestDevice = lookup(null, "wgpuAdapterRequestDevice", POINTER, POINTER, POINTER, JAVA_LONG);
 	public static void wgpuAdapterRequestDevice(final WGPUAdapter adapter, @Nullable final DeviceDescriptor descriptor, final AdapterRequestDeviceCallback callback, final long userdata) {
 		try(var arena = Arena.ofConfined()) {
@@ -101,6 +107,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuAdapterReference = lookup(null, "wgpuAdapterReference", POINTER);
 	public static void wgpuAdapterReference(final WGPUAdapter adapter) {
 		try(var arena = Arena.ofConfined()) {
@@ -110,6 +117,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuAdapterRelease = lookup(null, "wgpuAdapterRelease", POINTER);
 	public static void wgpuAdapterRelease(final WGPUAdapter adapter) {
 		try(var arena = Arena.ofConfined()) {
@@ -119,6 +127,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuAdapterInfoFreeMembers = lookup(null, "wgpuAdapterInfoFreeMembers", STRUCT(56));
 	public static void wgpuAdapterInfoFreeMembers(final AdapterInfo adapterInfo) {
 		try(var arena = Arena.ofConfined()) {
@@ -128,6 +137,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBindGroupSetLabel = lookup(null, "wgpuBindGroupSetLabel", POINTER, POINTER);
 	public static void wgpuBindGroupSetLabel(final WGPUBindGroup bindGroup, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -138,6 +148,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBindGroupReference = lookup(null, "wgpuBindGroupReference", POINTER);
 	public static void wgpuBindGroupReference(final WGPUBindGroup bindGroup) {
 		try(var arena = Arena.ofConfined()) {
@@ -147,6 +158,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBindGroupRelease = lookup(null, "wgpuBindGroupRelease", POINTER);
 	public static void wgpuBindGroupRelease(final WGPUBindGroup bindGroup) {
 		try(var arena = Arena.ofConfined()) {
@@ -156,6 +168,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBindGroupLayoutSetLabel = lookup(null, "wgpuBindGroupLayoutSetLabel", POINTER, POINTER);
 	public static void wgpuBindGroupLayoutSetLabel(final WGPUBindGroupLayout bindGroupLayout, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -166,6 +179,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBindGroupLayoutReference = lookup(null, "wgpuBindGroupLayoutReference", POINTER);
 	public static void wgpuBindGroupLayoutReference(final WGPUBindGroupLayout bindGroupLayout) {
 		try(var arena = Arena.ofConfined()) {
@@ -175,6 +189,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBindGroupLayoutRelease = lookup(null, "wgpuBindGroupLayoutRelease", POINTER);
 	public static void wgpuBindGroupLayoutRelease(final WGPUBindGroupLayout bindGroupLayout) {
 		try(var arena = Arena.ofConfined()) {
@@ -184,6 +199,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBufferDestroy = lookup(null, "wgpuBufferDestroy", POINTER);
 	public static void wgpuBufferDestroy(final WGPUBuffer buffer) {
 		try(var arena = Arena.ofConfined()) {
@@ -193,6 +209,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBufferGetConstMappedRange = lookup(POINTER, "wgpuBufferGetConstMappedRange", POINTER, JAVA_LONG, JAVA_LONG);
 	public static void wgpuBufferGetConstMappedRange(final WGPUBuffer buffer, final long offset, final long size) {
 		try(var arena = Arena.ofConfined()) {
@@ -204,6 +221,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBufferGetMapState = lookup(JAVA_INT, "wgpuBufferGetMapState", POINTER);
 	public static BufferMapState wgpuBufferGetMapState(final WGPUBuffer buffer) {
 		try(var arena = Arena.ofConfined()) {
@@ -214,6 +232,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBufferGetMappedRange = lookup(POINTER, "wgpuBufferGetMappedRange", POINTER, JAVA_LONG, JAVA_LONG);
 	public static void wgpuBufferGetMappedRange(final WGPUBuffer buffer, final long offset, final long size) {
 		try(var arena = Arena.ofConfined()) {
@@ -225,6 +244,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBufferGetSize = lookup(JAVA_LONG, "wgpuBufferGetSize", POINTER);
 	public static long wgpuBufferGetSize(final WGPUBuffer buffer) {
 		try(var arena = Arena.ofConfined()) {
@@ -235,6 +255,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBufferGetUsage = lookup(JAVA_INT, "wgpuBufferGetUsage", POINTER);
 	public static int wgpuBufferGetUsage(final WGPUBuffer buffer) {
 		try(var arena = Arena.ofConfined()) {
@@ -245,6 +266,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBufferMapAsync = lookup(null, "wgpuBufferMapAsync", POINTER, JAVA_INT, JAVA_LONG, JAVA_LONG, POINTER, JAVA_LONG);
 	public static void wgpuBufferMapAsync(final WGPUBuffer buffer, final int mode, final long offset, final long size, final BufferMapAsyncCallback callback, final long userdata) {
 		try(var arena = Arena.ofConfined()) {
@@ -259,6 +281,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBufferSetLabel = lookup(null, "wgpuBufferSetLabel", POINTER, POINTER);
 	public static void wgpuBufferSetLabel(final WGPUBuffer buffer, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -269,6 +292,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBufferUnmap = lookup(null, "wgpuBufferUnmap", POINTER);
 	public static void wgpuBufferUnmap(final WGPUBuffer buffer) {
 		try(var arena = Arena.ofConfined()) {
@@ -278,6 +302,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBufferReference = lookup(null, "wgpuBufferReference", POINTER);
 	public static void wgpuBufferReference(final WGPUBuffer buffer) {
 		try(var arena = Arena.ofConfined()) {
@@ -287,6 +312,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuBufferRelease = lookup(null, "wgpuBufferRelease", POINTER);
 	public static void wgpuBufferRelease(final WGPUBuffer buffer) {
 		try(var arena = Arena.ofConfined()) {
@@ -296,6 +322,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandBufferSetLabel = lookup(null, "wgpuCommandBufferSetLabel", POINTER, POINTER);
 	public static void wgpuCommandBufferSetLabel(final WGPUCommandBuffer commandBuffer, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -306,6 +333,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandBufferReference = lookup(null, "wgpuCommandBufferReference", POINTER);
 	public static void wgpuCommandBufferReference(final WGPUCommandBuffer commandBuffer) {
 		try(var arena = Arena.ofConfined()) {
@@ -315,6 +343,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandBufferRelease = lookup(null, "wgpuCommandBufferRelease", POINTER);
 	public static void wgpuCommandBufferRelease(final WGPUCommandBuffer commandBuffer) {
 		try(var arena = Arena.ofConfined()) {
@@ -324,6 +353,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderBeginComputePass = lookup(POINTER, "wgpuCommandEncoderBeginComputePass", POINTER, POINTER);
 	public static WGPUComputePassEncoder wgpuCommandEncoderBeginComputePass(final WGPUCommandEncoder commandEncoder, @Nullable final ComputePassDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -335,6 +365,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderBeginRenderPass = lookup(POINTER, "wgpuCommandEncoderBeginRenderPass", POINTER, POINTER);
 	public static WGPURenderPassEncoder wgpuCommandEncoderBeginRenderPass(final WGPUCommandEncoder commandEncoder, final RenderPassDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -346,6 +377,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderClearBuffer = lookup(null, "wgpuCommandEncoderClearBuffer", POINTER, POINTER, JAVA_LONG, JAVA_LONG);
 	public static void wgpuCommandEncoderClearBuffer(final WGPUCommandEncoder commandEncoder, final WGPUBuffer buffer, final long offset, final long size) {
 		try(var arena = Arena.ofConfined()) {
@@ -358,6 +390,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderCopyBufferToBuffer = lookup(null, "wgpuCommandEncoderCopyBufferToBuffer", POINTER, POINTER, JAVA_LONG, POINTER, JAVA_LONG, JAVA_LONG);
 	public static void wgpuCommandEncoderCopyBufferToBuffer(final WGPUCommandEncoder commandEncoder, final WGPUBuffer source, final long sourceOffset, final WGPUBuffer destination, final long destinationOffset, final long size) {
 		try(var arena = Arena.ofConfined()) {
@@ -372,6 +405,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderCopyBufferToTexture = lookup(null, "wgpuCommandEncoderCopyBufferToTexture", POINTER, POINTER, POINTER, POINTER);
 	public static void wgpuCommandEncoderCopyBufferToTexture(final WGPUCommandEncoder commandEncoder, final ImageCopyBuffer source, final ImageCopyTexture destination, final Extent3D copySize) {
 		try(var arena = Arena.ofConfined()) {
@@ -384,6 +418,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderCopyTextureToBuffer = lookup(null, "wgpuCommandEncoderCopyTextureToBuffer", POINTER, POINTER, POINTER, POINTER);
 	public static void wgpuCommandEncoderCopyTextureToBuffer(final WGPUCommandEncoder commandEncoder, final ImageCopyTexture source, final ImageCopyBuffer destination, final Extent3D copySize) {
 		try(var arena = Arena.ofConfined()) {
@@ -396,6 +431,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderCopyTextureToTexture = lookup(null, "wgpuCommandEncoderCopyTextureToTexture", POINTER, POINTER, POINTER, POINTER);
 	public static void wgpuCommandEncoderCopyTextureToTexture(final WGPUCommandEncoder commandEncoder, final ImageCopyTexture source, final ImageCopyTexture destination, final Extent3D copySize) {
 		try(var arena = Arena.ofConfined()) {
@@ -408,6 +444,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderFinish = lookup(POINTER, "wgpuCommandEncoderFinish", POINTER, POINTER);
 	public static WGPUCommandBuffer wgpuCommandEncoderFinish(final WGPUCommandEncoder commandEncoder, @Nullable final CommandBufferDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -419,6 +456,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderInsertDebugMarker = lookup(null, "wgpuCommandEncoderInsertDebugMarker", POINTER, POINTER);
 	public static void wgpuCommandEncoderInsertDebugMarker(final WGPUCommandEncoder commandEncoder, final String markerLabel) {
 		try(var arena = Arena.ofConfined()) {
@@ -429,6 +467,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderPopDebugGroup = lookup(null, "wgpuCommandEncoderPopDebugGroup", POINTER);
 	public static void wgpuCommandEncoderPopDebugGroup(final WGPUCommandEncoder commandEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -438,6 +477,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderPushDebugGroup = lookup(null, "wgpuCommandEncoderPushDebugGroup", POINTER, POINTER);
 	public static void wgpuCommandEncoderPushDebugGroup(final WGPUCommandEncoder commandEncoder, final String groupLabel) {
 		try(var arena = Arena.ofConfined()) {
@@ -448,6 +488,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderResolveQuerySet = lookup(null, "wgpuCommandEncoderResolveQuerySet", POINTER, POINTER, JAVA_INT, JAVA_INT, POINTER, JAVA_LONG);
 	public static void wgpuCommandEncoderResolveQuerySet(final WGPUCommandEncoder commandEncoder, final WGPUQuerySet querySet, final int firstQuery, final int queryCount, final WGPUBuffer destination, final long destinationOffset) {
 		try(var arena = Arena.ofConfined()) {
@@ -462,6 +503,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderSetLabel = lookup(null, "wgpuCommandEncoderSetLabel", POINTER, POINTER);
 	public static void wgpuCommandEncoderSetLabel(final WGPUCommandEncoder commandEncoder, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -472,6 +514,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderWriteTimestamp = lookup(null, "wgpuCommandEncoderWriteTimestamp", POINTER, POINTER, JAVA_INT);
 	public static void wgpuCommandEncoderWriteTimestamp(final WGPUCommandEncoder commandEncoder, final WGPUQuerySet querySet, final int queryIndex) {
 		try(var arena = Arena.ofConfined()) {
@@ -483,6 +526,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderReference = lookup(null, "wgpuCommandEncoderReference", POINTER);
 	public static void wgpuCommandEncoderReference(final WGPUCommandEncoder commandEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -492,6 +536,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuCommandEncoderRelease = lookup(null, "wgpuCommandEncoderRelease", POINTER);
 	public static void wgpuCommandEncoderRelease(final WGPUCommandEncoder commandEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -501,6 +546,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderDispatchWorkgroups = lookup(null, "wgpuComputePassEncoderDispatchWorkgroups", POINTER, JAVA_INT, JAVA_INT, JAVA_INT);
 	public static void wgpuComputePassEncoderDispatchWorkgroups(final WGPUComputePassEncoder computePassEncoder, final int workgroupCountX, final int workgroupCountY, final int workgroupCountZ) {
 		try(var arena = Arena.ofConfined()) {
@@ -513,6 +559,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderDispatchWorkgroupsIndirect = lookup(null, "wgpuComputePassEncoderDispatchWorkgroupsIndirect", POINTER, POINTER, JAVA_LONG);
 	public static void wgpuComputePassEncoderDispatchWorkgroupsIndirect(final WGPUComputePassEncoder computePassEncoder, final WGPUBuffer indirectBuffer, final long indirectOffset) {
 		try(var arena = Arena.ofConfined()) {
@@ -524,6 +571,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderEnd = lookup(null, "wgpuComputePassEncoderEnd", POINTER);
 	public static void wgpuComputePassEncoderEnd(final WGPUComputePassEncoder computePassEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -533,6 +581,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderInsertDebugMarker = lookup(null, "wgpuComputePassEncoderInsertDebugMarker", POINTER, POINTER);
 	public static void wgpuComputePassEncoderInsertDebugMarker(final WGPUComputePassEncoder computePassEncoder, final String markerLabel) {
 		try(var arena = Arena.ofConfined()) {
@@ -543,6 +592,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderPopDebugGroup = lookup(null, "wgpuComputePassEncoderPopDebugGroup", POINTER);
 	public static void wgpuComputePassEncoderPopDebugGroup(final WGPUComputePassEncoder computePassEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -552,6 +602,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderPushDebugGroup = lookup(null, "wgpuComputePassEncoderPushDebugGroup", POINTER, POINTER);
 	public static void wgpuComputePassEncoderPushDebugGroup(final WGPUComputePassEncoder computePassEncoder, final String groupLabel) {
 		try(var arena = Arena.ofConfined()) {
@@ -562,6 +613,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderSetBindGroup = lookup(null, "wgpuComputePassEncoderSetBindGroup", POINTER, JAVA_INT, POINTER, JAVA_LONG, POINTER);
 	public static void wgpuComputePassEncoderSetBindGroup(final WGPUComputePassEncoder computePassEncoder, final int groupIndex, @Nullable final WGPUBindGroup group, final long dynamicOffsetCount, final int[] dynamicOffsets) {
 		try(var arena = Arena.ofConfined()) {
@@ -575,6 +627,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderSetLabel = lookup(null, "wgpuComputePassEncoderSetLabel", POINTER, POINTER);
 	public static void wgpuComputePassEncoderSetLabel(final WGPUComputePassEncoder computePassEncoder, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -585,6 +638,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderSetPipeline = lookup(null, "wgpuComputePassEncoderSetPipeline", POINTER, POINTER);
 	public static void wgpuComputePassEncoderSetPipeline(final WGPUComputePassEncoder computePassEncoder, final WGPUComputePipeline pipeline) {
 		try(var arena = Arena.ofConfined()) {
@@ -595,6 +649,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderReference = lookup(null, "wgpuComputePassEncoderReference", POINTER);
 	public static void wgpuComputePassEncoderReference(final WGPUComputePassEncoder computePassEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -604,6 +659,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderRelease = lookup(null, "wgpuComputePassEncoderRelease", POINTER);
 	public static void wgpuComputePassEncoderRelease(final WGPUComputePassEncoder computePassEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -613,6 +669,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePipelineGetBindGroupLayout = lookup(POINTER, "wgpuComputePipelineGetBindGroupLayout", POINTER, JAVA_INT);
 	public static WGPUBindGroupLayout wgpuComputePipelineGetBindGroupLayout(final WGPUComputePipeline computePipeline, final int groupIndex) {
 		try(var arena = Arena.ofConfined()) {
@@ -624,6 +681,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePipelineSetLabel = lookup(null, "wgpuComputePipelineSetLabel", POINTER, POINTER);
 	public static void wgpuComputePipelineSetLabel(final WGPUComputePipeline computePipeline, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -634,6 +692,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePipelineReference = lookup(null, "wgpuComputePipelineReference", POINTER);
 	public static void wgpuComputePipelineReference(final WGPUComputePipeline computePipeline) {
 		try(var arena = Arena.ofConfined()) {
@@ -643,6 +702,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePipelineRelease = lookup(null, "wgpuComputePipelineRelease", POINTER);
 	public static void wgpuComputePipelineRelease(final WGPUComputePipeline computePipeline) {
 		try(var arena = Arena.ofConfined()) {
@@ -652,6 +712,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateBindGroup = lookup(POINTER, "wgpuDeviceCreateBindGroup", POINTER, POINTER);
 	public static WGPUBindGroup wgpuDeviceCreateBindGroup(final WGPUDevice device, final BindGroupDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -663,6 +724,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateBindGroupLayout = lookup(POINTER, "wgpuDeviceCreateBindGroupLayout", POINTER, POINTER);
 	public static WGPUBindGroupLayout wgpuDeviceCreateBindGroupLayout(final WGPUDevice device, final BindGroupLayoutDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -674,6 +736,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateBuffer = lookup(POINTER, "wgpuDeviceCreateBuffer", POINTER, POINTER);
 	public static WGPUBuffer wgpuDeviceCreateBuffer(final WGPUDevice device, final BufferDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -685,6 +748,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateCommandEncoder = lookup(POINTER, "wgpuDeviceCreateCommandEncoder", POINTER, POINTER);
 	public static WGPUCommandEncoder wgpuDeviceCreateCommandEncoder(final WGPUDevice device, @Nullable final CommandEncoderDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -696,6 +760,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateComputePipeline = lookup(POINTER, "wgpuDeviceCreateComputePipeline", POINTER, POINTER);
 	public static WGPUComputePipeline wgpuDeviceCreateComputePipeline(final WGPUDevice device, final ComputePipelineDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -707,6 +772,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateComputePipelineAsync = lookup(null, "wgpuDeviceCreateComputePipelineAsync", POINTER, POINTER, POINTER, JAVA_LONG);
 	public static void wgpuDeviceCreateComputePipelineAsync(final WGPUDevice device, final ComputePipelineDescriptor descriptor, final DeviceCreateComputePipelineAsyncCallback callback, final long userdata) {
 		try(var arena = Arena.ofConfined()) {
@@ -719,6 +785,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreatePipelineLayout = lookup(POINTER, "wgpuDeviceCreatePipelineLayout", POINTER, POINTER);
 	public static WGPUPipelineLayout wgpuDeviceCreatePipelineLayout(final WGPUDevice device, final PipelineLayoutDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -730,6 +797,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateQuerySet = lookup(POINTER, "wgpuDeviceCreateQuerySet", POINTER, POINTER);
 	public static WGPUQuerySet wgpuDeviceCreateQuerySet(final WGPUDevice device, final QuerySetDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -741,6 +809,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateRenderBundleEncoder = lookup(POINTER, "wgpuDeviceCreateRenderBundleEncoder", POINTER, POINTER);
 	public static WGPURenderBundleEncoder wgpuDeviceCreateRenderBundleEncoder(final WGPUDevice device, final RenderBundleEncoderDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -752,6 +821,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateRenderPipeline = lookup(POINTER, "wgpuDeviceCreateRenderPipeline", POINTER, POINTER);
 	public static WGPURenderPipeline wgpuDeviceCreateRenderPipeline(final WGPUDevice device, final RenderPipelineDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -763,6 +833,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateRenderPipelineAsync = lookup(null, "wgpuDeviceCreateRenderPipelineAsync", POINTER, POINTER, POINTER, JAVA_LONG);
 	public static void wgpuDeviceCreateRenderPipelineAsync(final WGPUDevice device, final RenderPipelineDescriptor descriptor, final DeviceCreateRenderPipelineAsyncCallback callback, final long userdata) {
 		try(var arena = Arena.ofConfined()) {
@@ -775,6 +846,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateSampler = lookup(POINTER, "wgpuDeviceCreateSampler", POINTER, POINTER);
 	public static WGPUSampler wgpuDeviceCreateSampler(final WGPUDevice device, @Nullable final SamplerDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -786,6 +858,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateShaderModule = lookup(POINTER, "wgpuDeviceCreateShaderModule", POINTER, POINTER);
 	public static WGPUShaderModule wgpuDeviceCreateShaderModule(final WGPUDevice device, final ShaderModuleDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -797,6 +870,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceCreateTexture = lookup(POINTER, "wgpuDeviceCreateTexture", POINTER, POINTER);
 	public static WGPUTexture wgpuDeviceCreateTexture(final WGPUDevice device, final TextureDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -808,6 +882,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceDestroy = lookup(null, "wgpuDeviceDestroy", POINTER);
 	public static void wgpuDeviceDestroy(final WGPUDevice device) {
 		try(var arena = Arena.ofConfined()) {
@@ -817,6 +892,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceEnumerateFeatures = lookup(JAVA_LONG, "wgpuDeviceEnumerateFeatures", POINTER, POINTER);
 	public static long wgpuDeviceEnumerateFeatures(final WGPUDevice device, FeatureName[] features) {
 		try(var arena = Arena.ofConfined()) {
@@ -834,6 +910,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceGetLimits = lookup(JAVA_INT, "wgpuDeviceGetLimits", POINTER, POINTER);
 	public static boolean wgpuDeviceGetLimits(final WGPUDevice device, SupportedLimits limits) {
 		try(var arena = Arena.ofConfined()) {
@@ -846,6 +923,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceGetQueue = lookup(POINTER, "wgpuDeviceGetQueue", POINTER);
 	public static WGPUQueue wgpuDeviceGetQueue(final WGPUDevice device) {
 		try(var arena = Arena.ofConfined()) {
@@ -856,6 +934,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceHasFeature = lookup(JAVA_INT, "wgpuDeviceHasFeature", POINTER, JAVA_INT);
 	public static boolean wgpuDeviceHasFeature(final WGPUDevice device, final FeatureName feature) {
 		try(var arena = Arena.ofConfined()) {
@@ -867,6 +946,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDevicePopErrorScope = lookup(null, "wgpuDevicePopErrorScope", POINTER, POINTER, JAVA_LONG);
 	public static void wgpuDevicePopErrorScope(final WGPUDevice device, final ErrorCallback callback, final long userdata) {
 		try(var arena = Arena.ofConfined()) {
@@ -878,6 +958,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDevicePushErrorScope = lookup(null, "wgpuDevicePushErrorScope", POINTER, JAVA_INT);
 	public static void wgpuDevicePushErrorScope(final WGPUDevice device, final ErrorFilter filter) {
 		try(var arena = Arena.ofConfined()) {
@@ -888,6 +969,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceSetLabel = lookup(null, "wgpuDeviceSetLabel", POINTER, POINTER);
 	public static void wgpuDeviceSetLabel(final WGPUDevice device, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -898,6 +980,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceReference = lookup(null, "wgpuDeviceReference", POINTER);
 	public static void wgpuDeviceReference(final WGPUDevice device) {
 		try(var arena = Arena.ofConfined()) {
@@ -907,6 +990,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDeviceRelease = lookup(null, "wgpuDeviceRelease", POINTER);
 	public static void wgpuDeviceRelease(final WGPUDevice device) {
 		try(var arena = Arena.ofConfined()) {
@@ -916,6 +1000,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuInstanceCreateSurface = lookup(POINTER, "wgpuInstanceCreateSurface", POINTER, POINTER);
 	public static WGPUSurface wgpuInstanceCreateSurface(final WGPUInstance instance, final SurfaceDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -927,6 +1012,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuInstanceHasWGSLLanguageFeature = lookup(JAVA_INT, "wgpuInstanceHasWGSLLanguageFeature", POINTER, JAVA_INT);
 	public static boolean wgpuInstanceHasWGSLLanguageFeature(final WGPUInstance instance, final WGSLFeatureName feature) {
 		try(var arena = Arena.ofConfined()) {
@@ -938,6 +1024,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuInstanceProcessEvents = lookup(null, "wgpuInstanceProcessEvents", POINTER);
 	public static void wgpuInstanceProcessEvents(final WGPUInstance instance) {
 		try(var arena = Arena.ofConfined()) {
@@ -947,6 +1034,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuInstanceRequestAdapter = lookup(null, "wgpuInstanceRequestAdapter", POINTER, POINTER, POINTER, JAVA_LONG);
 	public static void wgpuInstanceRequestAdapter(final WGPUInstance instance, @Nullable final RequestAdapterOptions options, final InstanceRequestAdapterCallback callback, final long userdata) {
 		try(var arena = Arena.ofConfined()) {
@@ -959,6 +1047,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuInstanceReference = lookup(null, "wgpuInstanceReference", POINTER);
 	public static void wgpuInstanceReference(final WGPUInstance instance) {
 		try(var arena = Arena.ofConfined()) {
@@ -968,6 +1057,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuInstanceRelease = lookup(null, "wgpuInstanceRelease", POINTER);
 	public static void wgpuInstanceRelease(final WGPUInstance instance) {
 		try(var arena = Arena.ofConfined()) {
@@ -977,6 +1067,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuPipelineLayoutSetLabel = lookup(null, "wgpuPipelineLayoutSetLabel", POINTER, POINTER);
 	public static void wgpuPipelineLayoutSetLabel(final WGPUPipelineLayout pipelineLayout, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -987,6 +1078,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuPipelineLayoutReference = lookup(null, "wgpuPipelineLayoutReference", POINTER);
 	public static void wgpuPipelineLayoutReference(final WGPUPipelineLayout pipelineLayout) {
 		try(var arena = Arena.ofConfined()) {
@@ -996,6 +1088,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuPipelineLayoutRelease = lookup(null, "wgpuPipelineLayoutRelease", POINTER);
 	public static void wgpuPipelineLayoutRelease(final WGPUPipelineLayout pipelineLayout) {
 		try(var arena = Arena.ofConfined()) {
@@ -1005,6 +1098,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQuerySetDestroy = lookup(null, "wgpuQuerySetDestroy", POINTER);
 	public static void wgpuQuerySetDestroy(final WGPUQuerySet querySet) {
 		try(var arena = Arena.ofConfined()) {
@@ -1014,6 +1108,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQuerySetGetCount = lookup(JAVA_INT, "wgpuQuerySetGetCount", POINTER);
 	public static int wgpuQuerySetGetCount(final WGPUQuerySet querySet) {
 		try(var arena = Arena.ofConfined()) {
@@ -1024,6 +1119,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQuerySetGetType = lookup(JAVA_INT, "wgpuQuerySetGetType", POINTER);
 	public static QueryType wgpuQuerySetGetType(final WGPUQuerySet querySet) {
 		try(var arena = Arena.ofConfined()) {
@@ -1034,6 +1130,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQuerySetSetLabel = lookup(null, "wgpuQuerySetSetLabel", POINTER, POINTER);
 	public static void wgpuQuerySetSetLabel(final WGPUQuerySet querySet, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -1044,6 +1141,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQuerySetReference = lookup(null, "wgpuQuerySetReference", POINTER);
 	public static void wgpuQuerySetReference(final WGPUQuerySet querySet) {
 		try(var arena = Arena.ofConfined()) {
@@ -1053,6 +1151,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQuerySetRelease = lookup(null, "wgpuQuerySetRelease", POINTER);
 	public static void wgpuQuerySetRelease(final WGPUQuerySet querySet) {
 		try(var arena = Arena.ofConfined()) {
@@ -1062,6 +1161,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQueueOnSubmittedWorkDone = lookup(null, "wgpuQueueOnSubmittedWorkDone", POINTER, POINTER, JAVA_LONG);
 	public static void wgpuQueueOnSubmittedWorkDone(final WGPUQueue queue, final QueueOnSubmittedWorkDoneCallback callback, final long userdata) {
 		try(var arena = Arena.ofConfined()) {
@@ -1073,6 +1173,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQueueSetLabel = lookup(null, "wgpuQueueSetLabel", POINTER, POINTER);
 	public static void wgpuQueueSetLabel(final WGPUQueue queue, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -1083,6 +1184,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQueueSubmit = lookup(null, "wgpuQueueSubmit", POINTER, JAVA_LONG, POINTER);
 	public static void wgpuQueueSubmit(final WGPUQueue queue, final long commandCount, final WGPUCommandBuffer[] commands) {
 		try(var arena = Arena.ofConfined()) {
@@ -1094,6 +1196,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQueueWriteBuffer = lookup(null, "wgpuQueueWriteBuffer", POINTER, POINTER, JAVA_LONG, POINTER, JAVA_LONG);
 	public static void wgpuQueueWriteBuffer(final WGPUQueue queue, final WGPUBuffer buffer, final long bufferOffset, final MemorySegment data, final long size) {
 		try(var arena = Arena.ofConfined()) {
@@ -1107,6 +1210,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQueueWriteTexture = lookup(null, "wgpuQueueWriteTexture", POINTER, POINTER, POINTER, JAVA_LONG, POINTER, POINTER);
 	public static void wgpuQueueWriteTexture(final WGPUQueue queue, final ImageCopyTexture destination, final MemorySegment data, final long dataSize, final TextureDataLayout dataLayout, final Extent3D writeSize) {
 		try(var arena = Arena.ofConfined()) {
@@ -1121,6 +1225,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQueueReference = lookup(null, "wgpuQueueReference", POINTER);
 	public static void wgpuQueueReference(final WGPUQueue queue) {
 		try(var arena = Arena.ofConfined()) {
@@ -1130,6 +1235,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQueueRelease = lookup(null, "wgpuQueueRelease", POINTER);
 	public static void wgpuQueueRelease(final WGPUQueue queue) {
 		try(var arena = Arena.ofConfined()) {
@@ -1139,6 +1245,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleSetLabel = lookup(null, "wgpuRenderBundleSetLabel", POINTER, POINTER);
 	public static void wgpuRenderBundleSetLabel(final WGPURenderBundle renderBundle, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -1149,6 +1256,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleReference = lookup(null, "wgpuRenderBundleReference", POINTER);
 	public static void wgpuRenderBundleReference(final WGPURenderBundle renderBundle) {
 		try(var arena = Arena.ofConfined()) {
@@ -1158,6 +1266,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleRelease = lookup(null, "wgpuRenderBundleRelease", POINTER);
 	public static void wgpuRenderBundleRelease(final WGPURenderBundle renderBundle) {
 		try(var arena = Arena.ofConfined()) {
@@ -1167,6 +1276,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderDraw = lookup(null, "wgpuRenderBundleEncoderDraw", POINTER, JAVA_INT, JAVA_INT, JAVA_INT, JAVA_INT);
 	public static void wgpuRenderBundleEncoderDraw(final WGPURenderBundleEncoder renderBundleEncoder, final int vertexCount, final int instanceCount, final int firstVertex, final int firstInstance) {
 		try(var arena = Arena.ofConfined()) {
@@ -1180,6 +1290,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderDrawIndexed = lookup(null, "wgpuRenderBundleEncoderDrawIndexed", POINTER, JAVA_INT, JAVA_INT, JAVA_INT, JAVA_INT, JAVA_INT);
 	public static void wgpuRenderBundleEncoderDrawIndexed(final WGPURenderBundleEncoder renderBundleEncoder, final int indexCount, final int instanceCount, final int firstIndex, final int baseVertex, final int firstInstance) {
 		try(var arena = Arena.ofConfined()) {
@@ -1194,6 +1305,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderDrawIndexedIndirect = lookup(null, "wgpuRenderBundleEncoderDrawIndexedIndirect", POINTER, POINTER, JAVA_LONG);
 	public static void wgpuRenderBundleEncoderDrawIndexedIndirect(final WGPURenderBundleEncoder renderBundleEncoder, final WGPUBuffer indirectBuffer, final long indirectOffset) {
 		try(var arena = Arena.ofConfined()) {
@@ -1205,6 +1317,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderDrawIndirect = lookup(null, "wgpuRenderBundleEncoderDrawIndirect", POINTER, POINTER, JAVA_LONG);
 	public static void wgpuRenderBundleEncoderDrawIndirect(final WGPURenderBundleEncoder renderBundleEncoder, final WGPUBuffer indirectBuffer, final long indirectOffset) {
 		try(var arena = Arena.ofConfined()) {
@@ -1216,6 +1329,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderFinish = lookup(POINTER, "wgpuRenderBundleEncoderFinish", POINTER, POINTER);
 	public static WGPURenderBundle wgpuRenderBundleEncoderFinish(final WGPURenderBundleEncoder renderBundleEncoder, @Nullable final RenderBundleDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -1227,6 +1341,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderInsertDebugMarker = lookup(null, "wgpuRenderBundleEncoderInsertDebugMarker", POINTER, POINTER);
 	public static void wgpuRenderBundleEncoderInsertDebugMarker(final WGPURenderBundleEncoder renderBundleEncoder, final String markerLabel) {
 		try(var arena = Arena.ofConfined()) {
@@ -1237,6 +1352,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderPopDebugGroup = lookup(null, "wgpuRenderBundleEncoderPopDebugGroup", POINTER);
 	public static void wgpuRenderBundleEncoderPopDebugGroup(final WGPURenderBundleEncoder renderBundleEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -1246,6 +1362,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderPushDebugGroup = lookup(null, "wgpuRenderBundleEncoderPushDebugGroup", POINTER, POINTER);
 	public static void wgpuRenderBundleEncoderPushDebugGroup(final WGPURenderBundleEncoder renderBundleEncoder, final String groupLabel) {
 		try(var arena = Arena.ofConfined()) {
@@ -1256,6 +1373,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderSetBindGroup = lookup(null, "wgpuRenderBundleEncoderSetBindGroup", POINTER, JAVA_INT, POINTER, JAVA_LONG, POINTER);
 	public static void wgpuRenderBundleEncoderSetBindGroup(final WGPURenderBundleEncoder renderBundleEncoder, final int groupIndex, @Nullable final WGPUBindGroup group, final long dynamicOffsetCount, final int[] dynamicOffsets) {
 		try(var arena = Arena.ofConfined()) {
@@ -1269,6 +1387,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderSetIndexBuffer = lookup(null, "wgpuRenderBundleEncoderSetIndexBuffer", POINTER, POINTER, JAVA_INT, JAVA_LONG, JAVA_LONG);
 	public static void wgpuRenderBundleEncoderSetIndexBuffer(final WGPURenderBundleEncoder renderBundleEncoder, final WGPUBuffer buffer, final IndexFormat format, final long offset, final long size) {
 		try(var arena = Arena.ofConfined()) {
@@ -1282,6 +1401,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderSetLabel = lookup(null, "wgpuRenderBundleEncoderSetLabel", POINTER, POINTER);
 	public static void wgpuRenderBundleEncoderSetLabel(final WGPURenderBundleEncoder renderBundleEncoder, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -1292,6 +1412,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderSetPipeline = lookup(null, "wgpuRenderBundleEncoderSetPipeline", POINTER, POINTER);
 	public static void wgpuRenderBundleEncoderSetPipeline(final WGPURenderBundleEncoder renderBundleEncoder, final WGPURenderPipeline pipeline) {
 		try(var arena = Arena.ofConfined()) {
@@ -1302,6 +1423,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderSetVertexBuffer = lookup(null, "wgpuRenderBundleEncoderSetVertexBuffer", POINTER, JAVA_INT, POINTER, JAVA_LONG, JAVA_LONG);
 	public static void wgpuRenderBundleEncoderSetVertexBuffer(final WGPURenderBundleEncoder renderBundleEncoder, final int slot, @Nullable final WGPUBuffer buffer, final long offset, final long size) {
 		try(var arena = Arena.ofConfined()) {
@@ -1315,6 +1437,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderReference = lookup(null, "wgpuRenderBundleEncoderReference", POINTER);
 	public static void wgpuRenderBundleEncoderReference(final WGPURenderBundleEncoder renderBundleEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -1324,6 +1447,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderBundleEncoderRelease = lookup(null, "wgpuRenderBundleEncoderRelease", POINTER);
 	public static void wgpuRenderBundleEncoderRelease(final WGPURenderBundleEncoder renderBundleEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -1333,6 +1457,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderBeginOcclusionQuery = lookup(null, "wgpuRenderPassEncoderBeginOcclusionQuery", POINTER, JAVA_INT);
 	public static void wgpuRenderPassEncoderBeginOcclusionQuery(final WGPURenderPassEncoder renderPassEncoder, final int queryIndex) {
 		try(var arena = Arena.ofConfined()) {
@@ -1343,6 +1468,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderDraw = lookup(null, "wgpuRenderPassEncoderDraw", POINTER, JAVA_INT, JAVA_INT, JAVA_INT, JAVA_INT);
 	public static void wgpuRenderPassEncoderDraw(final WGPURenderPassEncoder renderPassEncoder, final int vertexCount, final int instanceCount, final int firstVertex, final int firstInstance) {
 		try(var arena = Arena.ofConfined()) {
@@ -1356,6 +1482,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderDrawIndexed = lookup(null, "wgpuRenderPassEncoderDrawIndexed", POINTER, JAVA_INT, JAVA_INT, JAVA_INT, JAVA_INT, JAVA_INT);
 	public static void wgpuRenderPassEncoderDrawIndexed(final WGPURenderPassEncoder renderPassEncoder, final int indexCount, final int instanceCount, final int firstIndex, final int baseVertex, final int firstInstance) {
 		try(var arena = Arena.ofConfined()) {
@@ -1370,6 +1497,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderDrawIndexedIndirect = lookup(null, "wgpuRenderPassEncoderDrawIndexedIndirect", POINTER, POINTER, JAVA_LONG);
 	public static void wgpuRenderPassEncoderDrawIndexedIndirect(final WGPURenderPassEncoder renderPassEncoder, final WGPUBuffer indirectBuffer, final long indirectOffset) {
 		try(var arena = Arena.ofConfined()) {
@@ -1381,6 +1509,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderDrawIndirect = lookup(null, "wgpuRenderPassEncoderDrawIndirect", POINTER, POINTER, JAVA_LONG);
 	public static void wgpuRenderPassEncoderDrawIndirect(final WGPURenderPassEncoder renderPassEncoder, final WGPUBuffer indirectBuffer, final long indirectOffset) {
 		try(var arena = Arena.ofConfined()) {
@@ -1392,6 +1521,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderEnd = lookup(null, "wgpuRenderPassEncoderEnd", POINTER);
 	public static void wgpuRenderPassEncoderEnd(final WGPURenderPassEncoder renderPassEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -1401,6 +1531,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderEndOcclusionQuery = lookup(null, "wgpuRenderPassEncoderEndOcclusionQuery", POINTER);
 	public static void wgpuRenderPassEncoderEndOcclusionQuery(final WGPURenderPassEncoder renderPassEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -1410,6 +1541,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderExecuteBundles = lookup(null, "wgpuRenderPassEncoderExecuteBundles", POINTER, JAVA_LONG, POINTER);
 	public static void wgpuRenderPassEncoderExecuteBundles(final WGPURenderPassEncoder renderPassEncoder, final long bundleCount, final WGPURenderBundle[] bundles) {
 		try(var arena = Arena.ofConfined()) {
@@ -1421,6 +1553,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderInsertDebugMarker = lookup(null, "wgpuRenderPassEncoderInsertDebugMarker", POINTER, POINTER);
 	public static void wgpuRenderPassEncoderInsertDebugMarker(final WGPURenderPassEncoder renderPassEncoder, final String markerLabel) {
 		try(var arena = Arena.ofConfined()) {
@@ -1431,6 +1564,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderPopDebugGroup = lookup(null, "wgpuRenderPassEncoderPopDebugGroup", POINTER);
 	public static void wgpuRenderPassEncoderPopDebugGroup(final WGPURenderPassEncoder renderPassEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -1440,6 +1574,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderPushDebugGroup = lookup(null, "wgpuRenderPassEncoderPushDebugGroup", POINTER, POINTER);
 	public static void wgpuRenderPassEncoderPushDebugGroup(final WGPURenderPassEncoder renderPassEncoder, final String groupLabel) {
 		try(var arena = Arena.ofConfined()) {
@@ -1450,6 +1585,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderSetBindGroup = lookup(null, "wgpuRenderPassEncoderSetBindGroup", POINTER, JAVA_INT, POINTER, JAVA_LONG, POINTER);
 	public static void wgpuRenderPassEncoderSetBindGroup(final WGPURenderPassEncoder renderPassEncoder, final int groupIndex, @Nullable final WGPUBindGroup group, final long dynamicOffsetCount, final int[] dynamicOffsets) {
 		try(var arena = Arena.ofConfined()) {
@@ -1463,6 +1599,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderSetBlendConstant = lookup(null, "wgpuRenderPassEncoderSetBlendConstant", POINTER, POINTER);
 	public static void wgpuRenderPassEncoderSetBlendConstant(final WGPURenderPassEncoder renderPassEncoder, final Color color) {
 		try(var arena = Arena.ofConfined()) {
@@ -1473,6 +1610,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderSetIndexBuffer = lookup(null, "wgpuRenderPassEncoderSetIndexBuffer", POINTER, POINTER, JAVA_INT, JAVA_LONG, JAVA_LONG);
 	public static void wgpuRenderPassEncoderSetIndexBuffer(final WGPURenderPassEncoder renderPassEncoder, final WGPUBuffer buffer, final IndexFormat format, final long offset, final long size) {
 		try(var arena = Arena.ofConfined()) {
@@ -1486,6 +1624,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderSetLabel = lookup(null, "wgpuRenderPassEncoderSetLabel", POINTER, POINTER);
 	public static void wgpuRenderPassEncoderSetLabel(final WGPURenderPassEncoder renderPassEncoder, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -1496,6 +1635,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderSetPipeline = lookup(null, "wgpuRenderPassEncoderSetPipeline", POINTER, POINTER);
 	public static void wgpuRenderPassEncoderSetPipeline(final WGPURenderPassEncoder renderPassEncoder, final WGPURenderPipeline pipeline) {
 		try(var arena = Arena.ofConfined()) {
@@ -1506,6 +1646,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderSetScissorRect = lookup(null, "wgpuRenderPassEncoderSetScissorRect", POINTER, JAVA_INT, JAVA_INT, JAVA_INT, JAVA_INT);
 	public static void wgpuRenderPassEncoderSetScissorRect(final WGPURenderPassEncoder renderPassEncoder, final int x, final int y, final int width, final int height) {
 		try(var arena = Arena.ofConfined()) {
@@ -1519,6 +1660,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderSetStencilReference = lookup(null, "wgpuRenderPassEncoderSetStencilReference", POINTER, JAVA_INT);
 	public static void wgpuRenderPassEncoderSetStencilReference(final WGPURenderPassEncoder renderPassEncoder, final int reference) {
 		try(var arena = Arena.ofConfined()) {
@@ -1529,6 +1671,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderSetVertexBuffer = lookup(null, "wgpuRenderPassEncoderSetVertexBuffer", POINTER, JAVA_INT, POINTER, JAVA_LONG, JAVA_LONG);
 	public static void wgpuRenderPassEncoderSetVertexBuffer(final WGPURenderPassEncoder renderPassEncoder, final int slot, @Nullable final WGPUBuffer buffer, final long offset, final long size) {
 		try(var arena = Arena.ofConfined()) {
@@ -1542,6 +1685,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderSetViewport = lookup(null, "wgpuRenderPassEncoderSetViewport", POINTER, JAVA_FLOAT, JAVA_FLOAT, JAVA_FLOAT, JAVA_FLOAT, JAVA_FLOAT, JAVA_FLOAT);
 	public static void wgpuRenderPassEncoderSetViewport(final WGPURenderPassEncoder renderPassEncoder, final float x, final float y, final float width, final float height, final float minDepth, final float maxDepth) {
 		try(var arena = Arena.ofConfined()) {
@@ -1557,6 +1701,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderReference = lookup(null, "wgpuRenderPassEncoderReference", POINTER);
 	public static void wgpuRenderPassEncoderReference(final WGPURenderPassEncoder renderPassEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -1566,6 +1711,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderRelease = lookup(null, "wgpuRenderPassEncoderRelease", POINTER);
 	public static void wgpuRenderPassEncoderRelease(final WGPURenderPassEncoder renderPassEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -1575,6 +1721,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPipelineGetBindGroupLayout = lookup(POINTER, "wgpuRenderPipelineGetBindGroupLayout", POINTER, JAVA_INT);
 	public static WGPUBindGroupLayout wgpuRenderPipelineGetBindGroupLayout(final WGPURenderPipeline renderPipeline, final int groupIndex) {
 		try(var arena = Arena.ofConfined()) {
@@ -1586,6 +1733,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPipelineSetLabel = lookup(null, "wgpuRenderPipelineSetLabel", POINTER, POINTER);
 	public static void wgpuRenderPipelineSetLabel(final WGPURenderPipeline renderPipeline, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -1596,6 +1744,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPipelineReference = lookup(null, "wgpuRenderPipelineReference", POINTER);
 	public static void wgpuRenderPipelineReference(final WGPURenderPipeline renderPipeline) {
 		try(var arena = Arena.ofConfined()) {
@@ -1605,6 +1754,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPipelineRelease = lookup(null, "wgpuRenderPipelineRelease", POINTER);
 	public static void wgpuRenderPipelineRelease(final WGPURenderPipeline renderPipeline) {
 		try(var arena = Arena.ofConfined()) {
@@ -1614,6 +1764,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSamplerSetLabel = lookup(null, "wgpuSamplerSetLabel", POINTER, POINTER);
 	public static void wgpuSamplerSetLabel(final WGPUSampler sampler, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -1624,6 +1775,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSamplerReference = lookup(null, "wgpuSamplerReference", POINTER);
 	public static void wgpuSamplerReference(final WGPUSampler sampler) {
 		try(var arena = Arena.ofConfined()) {
@@ -1633,6 +1785,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSamplerRelease = lookup(null, "wgpuSamplerRelease", POINTER);
 	public static void wgpuSamplerRelease(final WGPUSampler sampler) {
 		try(var arena = Arena.ofConfined()) {
@@ -1642,6 +1795,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuShaderModuleGetCompilationInfo = lookup(null, "wgpuShaderModuleGetCompilationInfo", POINTER, POINTER, JAVA_LONG);
 	public static void wgpuShaderModuleGetCompilationInfo(final WGPUShaderModule shaderModule, final ShaderModuleGetCompilationInfoCallback callback, final long userdata) {
 		try(var arena = Arena.ofConfined()) {
@@ -1653,6 +1807,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuShaderModuleSetLabel = lookup(null, "wgpuShaderModuleSetLabel", POINTER, POINTER);
 	public static void wgpuShaderModuleSetLabel(final WGPUShaderModule shaderModule, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -1663,6 +1818,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuShaderModuleReference = lookup(null, "wgpuShaderModuleReference", POINTER);
 	public static void wgpuShaderModuleReference(final WGPUShaderModule shaderModule) {
 		try(var arena = Arena.ofConfined()) {
@@ -1672,6 +1828,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuShaderModuleRelease = lookup(null, "wgpuShaderModuleRelease", POINTER);
 	public static void wgpuShaderModuleRelease(final WGPUShaderModule shaderModule) {
 		try(var arena = Arena.ofConfined()) {
@@ -1681,6 +1838,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSurfaceConfigure = lookup(null, "wgpuSurfaceConfigure", POINTER, POINTER);
 	public static void wgpuSurfaceConfigure(final WGPUSurface surface, final SurfaceConfiguration config) {
 		try(var arena = Arena.ofConfined()) {
@@ -1691,6 +1849,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSurfaceGetCapabilities = lookup(null, "wgpuSurfaceGetCapabilities", POINTER, POINTER, POINTER);
 	public static void wgpuSurfaceGetCapabilities(final WGPUSurface surface, final WGPUAdapter adapter, SurfaceCapabilities capabilities) {
 		try(var arena = Arena.ofConfined()) {
@@ -1703,6 +1862,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSurfaceGetCurrentTexture = lookup(null, "wgpuSurfaceGetCurrentTexture", POINTER, POINTER);
 	public static void wgpuSurfaceGetCurrentTexture(final WGPUSurface surface, SurfaceTexture surfaceTexture) {
 		try(var arena = Arena.ofConfined()) {
@@ -1714,6 +1874,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSurfacePresent = lookup(null, "wgpuSurfacePresent", POINTER);
 	public static void wgpuSurfacePresent(final WGPUSurface surface) {
 		try(var arena = Arena.ofConfined()) {
@@ -1723,6 +1884,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSurfaceSetLabel = lookup(null, "wgpuSurfaceSetLabel", POINTER, POINTER);
 	public static void wgpuSurfaceSetLabel(final WGPUSurface surface, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -1733,6 +1895,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSurfaceUnconfigure = lookup(null, "wgpuSurfaceUnconfigure", POINTER);
 	public static void wgpuSurfaceUnconfigure(final WGPUSurface surface) {
 		try(var arena = Arena.ofConfined()) {
@@ -1742,6 +1905,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSurfaceReference = lookup(null, "wgpuSurfaceReference", POINTER);
 	public static void wgpuSurfaceReference(final WGPUSurface surface) {
 		try(var arena = Arena.ofConfined()) {
@@ -1751,6 +1915,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSurfaceRelease = lookup(null, "wgpuSurfaceRelease", POINTER);
 	public static void wgpuSurfaceRelease(final WGPUSurface surface) {
 		try(var arena = Arena.ofConfined()) {
@@ -1760,6 +1925,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSurfaceCapabilitiesFreeMembers = lookup(null, "wgpuSurfaceCapabilitiesFreeMembers", STRUCT(64));
 	public static void wgpuSurfaceCapabilitiesFreeMembers(final SurfaceCapabilities surfaceCapabilities) {
 		try(var arena = Arena.ofConfined()) {
@@ -1769,6 +1935,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureCreateView = lookup(POINTER, "wgpuTextureCreateView", POINTER, POINTER);
 	public static WGPUTextureView wgpuTextureCreateView(final WGPUTexture texture, @Nullable final TextureViewDescriptor descriptor) {
 		try(var arena = Arena.ofConfined()) {
@@ -1780,6 +1947,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureDestroy = lookup(null, "wgpuTextureDestroy", POINTER);
 	public static void wgpuTextureDestroy(final WGPUTexture texture) {
 		try(var arena = Arena.ofConfined()) {
@@ -1789,6 +1957,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureGetDepthOrArrayLayers = lookup(JAVA_INT, "wgpuTextureGetDepthOrArrayLayers", POINTER);
 	public static int wgpuTextureGetDepthOrArrayLayers(final WGPUTexture texture) {
 		try(var arena = Arena.ofConfined()) {
@@ -1799,6 +1968,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureGetDimension = lookup(JAVA_INT, "wgpuTextureGetDimension", POINTER);
 	public static TextureDimension wgpuTextureGetDimension(final WGPUTexture texture) {
 		try(var arena = Arena.ofConfined()) {
@@ -1809,6 +1979,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureGetFormat = lookup(JAVA_INT, "wgpuTextureGetFormat", POINTER);
 	public static TextureFormat wgpuTextureGetFormat(final WGPUTexture texture) {
 		try(var arena = Arena.ofConfined()) {
@@ -1819,6 +1990,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureGetHeight = lookup(JAVA_INT, "wgpuTextureGetHeight", POINTER);
 	public static int wgpuTextureGetHeight(final WGPUTexture texture) {
 		try(var arena = Arena.ofConfined()) {
@@ -1829,6 +2001,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureGetMipLevelCount = lookup(JAVA_INT, "wgpuTextureGetMipLevelCount", POINTER);
 	public static int wgpuTextureGetMipLevelCount(final WGPUTexture texture) {
 		try(var arena = Arena.ofConfined()) {
@@ -1839,6 +2012,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureGetSampleCount = lookup(JAVA_INT, "wgpuTextureGetSampleCount", POINTER);
 	public static int wgpuTextureGetSampleCount(final WGPUTexture texture) {
 		try(var arena = Arena.ofConfined()) {
@@ -1849,6 +2023,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureGetUsage = lookup(JAVA_INT, "wgpuTextureGetUsage", POINTER);
 	public static int wgpuTextureGetUsage(final WGPUTexture texture) {
 		try(var arena = Arena.ofConfined()) {
@@ -1859,6 +2034,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureGetWidth = lookup(JAVA_INT, "wgpuTextureGetWidth", POINTER);
 	public static int wgpuTextureGetWidth(final WGPUTexture texture) {
 		try(var arena = Arena.ofConfined()) {
@@ -1869,6 +2045,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureSetLabel = lookup(null, "wgpuTextureSetLabel", POINTER, POINTER);
 	public static void wgpuTextureSetLabel(final WGPUTexture texture, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -1879,6 +2056,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureReference = lookup(null, "wgpuTextureReference", POINTER);
 	public static void wgpuTextureReference(final WGPUTexture texture) {
 		try(var arena = Arena.ofConfined()) {
@@ -1888,6 +2066,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureRelease = lookup(null, "wgpuTextureRelease", POINTER);
 	public static void wgpuTextureRelease(final WGPUTexture texture) {
 		try(var arena = Arena.ofConfined()) {
@@ -1897,6 +2076,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureViewSetLabel = lookup(null, "wgpuTextureViewSetLabel", POINTER, POINTER);
 	public static void wgpuTextureViewSetLabel(final WGPUTextureView textureView, final String label) {
 		try(var arena = Arena.ofConfined()) {
@@ -1907,6 +2087,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureViewReference = lookup(null, "wgpuTextureViewReference", POINTER);
 	public static void wgpuTextureViewReference(final WGPUTextureView textureView) {
 		try(var arena = Arena.ofConfined()) {
@@ -1916,6 +2097,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuTextureViewRelease = lookup(null, "wgpuTextureViewRelease", POINTER);
 	public static void wgpuTextureViewRelease(final WGPUTextureView textureView) {
 		try(var arena = Arena.ofConfined()) {
@@ -1925,6 +2107,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuGenerateReport = lookup(null, "wgpuGenerateReport", POINTER, POINTER);
 	public static void wgpuGenerateReport(final WGPUInstance instance, GlobalReport report) {
 		try(var arena = Arena.ofConfined()) {
@@ -1936,6 +2119,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuInstanceEnumerateAdapters = lookup(JAVA_LONG, "wgpuInstanceEnumerateAdapters", POINTER, POINTER, POINTER);
 	public static long wgpuInstanceEnumerateAdapters(final WGPUInstance instance, @Nullable final InstanceEnumerateAdapterOptions options, WGPUAdapter[] adapters) {
 		try(var arena = Arena.ofConfined()) {
@@ -1954,6 +2138,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuQueueSubmitForIndex = lookup(JAVA_LONG, "wgpuQueueSubmitForIndex", POINTER, JAVA_LONG, POINTER);
 	public static long wgpuQueueSubmitForIndex(final WGPUQueue queue, final long commandCount, final WGPUCommandBuffer[] commands) {
 		try(var arena = Arena.ofConfined()) {
@@ -1966,6 +2151,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuDevicePoll = lookup(JAVA_INT, "wgpuDevicePoll", POINTER, JAVA_INT, POINTER);
 	public static boolean wgpuDevicePoll(final WGPUDevice device, final boolean wait, @Nullable final WrappedSubmissionIndex wrappedSubmissionIndex) {
 		try(var arena = Arena.ofConfined()) {
@@ -1978,6 +2164,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSetLogCallback = lookup(null, "wgpuSetLogCallback", POINTER, JAVA_LONG);
 	public static void wgpuSetLogCallback(final LogCallback callback, final long userdata) {
 		try(var arena = Arena.ofConfined()) {
@@ -1988,6 +2175,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuSetLogLevel = lookup(null, "wgpuSetLogLevel", JAVA_INT);
 	public static void wgpuSetLogLevel(final LogLevel level) {
 		try(var arena = Arena.ofConfined()) {
@@ -1997,6 +2185,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuGetVersion = lookup(JAVA_INT, "wgpuGetVersion");
 	public static int wgpuGetVersion() {
 		try(var arena = Arena.ofConfined()) {
@@ -2006,6 +2195,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderSetPushConstants = lookup(null, "wgpuRenderPassEncoderSetPushConstants", POINTER, JAVA_INT, JAVA_INT, JAVA_INT, POINTER);
 	public static void wgpuRenderPassEncoderSetPushConstants(final WGPURenderPassEncoder encoder, final int stages, final int offset, final int sizeBytes, final MemorySegment data) {
 		try(var arena = Arena.ofConfined()) {
@@ -2019,6 +2209,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderMultiDrawIndirect = lookup(null, "wgpuRenderPassEncoderMultiDrawIndirect", POINTER, POINTER, JAVA_LONG, JAVA_INT);
 	public static void wgpuRenderPassEncoderMultiDrawIndirect(final WGPURenderPassEncoder encoder, final WGPUBuffer buffer, final long offset, final int count) {
 		try(var arena = Arena.ofConfined()) {
@@ -2031,6 +2222,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderMultiDrawIndexedIndirect = lookup(null, "wgpuRenderPassEncoderMultiDrawIndexedIndirect", POINTER, POINTER, JAVA_LONG, JAVA_INT);
 	public static void wgpuRenderPassEncoderMultiDrawIndexedIndirect(final WGPURenderPassEncoder encoder, final WGPUBuffer buffer, final long offset, final int count) {
 		try(var arena = Arena.ofConfined()) {
@@ -2043,6 +2235,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderMultiDrawIndirectCount = lookup(null, "wgpuRenderPassEncoderMultiDrawIndirectCount", POINTER, POINTER, JAVA_LONG, POINTER, JAVA_LONG, JAVA_INT);
 	public static void wgpuRenderPassEncoderMultiDrawIndirectCount(final WGPURenderPassEncoder encoder, final WGPUBuffer buffer, final long offset, final WGPUBuffer count_buffer, final long count_buffer_offset, final int max_count) {
 		try(var arena = Arena.ofConfined()) {
@@ -2057,6 +2250,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderMultiDrawIndexedIndirectCount = lookup(null, "wgpuRenderPassEncoderMultiDrawIndexedIndirectCount", POINTER, POINTER, JAVA_LONG, POINTER, JAVA_LONG, JAVA_INT);
 	public static void wgpuRenderPassEncoderMultiDrawIndexedIndirectCount(final WGPURenderPassEncoder encoder, final WGPUBuffer buffer, final long offset, final WGPUBuffer count_buffer, final long count_buffer_offset, final int max_count) {
 		try(var arena = Arena.ofConfined()) {
@@ -2071,6 +2265,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderBeginPipelineStatisticsQuery = lookup(null, "wgpuComputePassEncoderBeginPipelineStatisticsQuery", POINTER, POINTER, JAVA_INT);
 	public static void wgpuComputePassEncoderBeginPipelineStatisticsQuery(final WGPUComputePassEncoder computePassEncoder, final WGPUQuerySet querySet, final int queryIndex) {
 		try(var arena = Arena.ofConfined()) {
@@ -2082,6 +2277,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuComputePassEncoderEndPipelineStatisticsQuery = lookup(null, "wgpuComputePassEncoderEndPipelineStatisticsQuery", POINTER);
 	public static void wgpuComputePassEncoderEndPipelineStatisticsQuery(final WGPUComputePassEncoder computePassEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -2091,6 +2287,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderBeginPipelineStatisticsQuery = lookup(null, "wgpuRenderPassEncoderBeginPipelineStatisticsQuery", POINTER, POINTER, JAVA_INT);
 	public static void wgpuRenderPassEncoderBeginPipelineStatisticsQuery(final WGPURenderPassEncoder renderPassEncoder, final WGPUQuerySet querySet, final int queryIndex) {
 		try(var arena = Arena.ofConfined()) {
@@ -2102,6 +2299,7 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 	private static final MethodHandle wgpuRenderPassEncoderEndPipelineStatisticsQuery = lookup(null, "wgpuRenderPassEncoderEndPipelineStatisticsQuery", POINTER);
 	public static void wgpuRenderPassEncoderEndPipelineStatisticsQuery(final WGPURenderPassEncoder renderPassEncoder) {
 		try(var arena = Arena.ofConfined()) {
@@ -2111,4 +2309,5 @@ public class WebGPU {
 			throw new RuntimeException(e);
 		}
 	}
+
 }
