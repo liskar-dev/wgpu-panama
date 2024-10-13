@@ -44,7 +44,7 @@ public class WebGPU {
 	public static long wgpuAdapterEnumerateFeatures(final WGPUAdapter adapter, FeatureName[] features) {
 		try(var arena = Arena.ofConfined()) {
 			var _adapter = pointer(arena, adapter);
-			var _features = pointer(arena, features);
+			var _features = empty(arena, features);
 			var ret = (long) wgpuAdapterEnumerateFeatures.invoke(_adapter, _features);
 			if(features != null) {
 				var in = new WGPUReader(_features);
@@ -62,7 +62,7 @@ public class WebGPU {
 	public static void wgpuAdapterGetInfo(final WGPUAdapter adapter, AdapterInfo info) {
 		try(var arena = Arena.ofConfined()) {
 			var _adapter = pointer(arena, adapter);
-			var _info = pointer(arena, info);
+			var _info = empty(arena, info);
 			wgpuAdapterGetInfo.invoke(_adapter, _info);
 			info.readFrom(_info);
 			wgpuAdapterInfoFreeMembers.invoke(_info);
@@ -75,7 +75,7 @@ public class WebGPU {
 	public static boolean wgpuAdapterGetLimits(final WGPUAdapter adapter, SupportedLimits limits) {
 		try(var arena = Arena.ofConfined()) {
 			var _adapter = pointer(arena, adapter);
-			var _limits = pointer(arena, limits);
+			var _limits = empty(arena, limits);
 			var ret = (int) wgpuAdapterGetLimits.invoke(_adapter, _limits);
 			limits.readFrom(_limits);
 			return ret != 0;
@@ -890,7 +890,7 @@ public class WebGPU {
 	public static long wgpuDeviceEnumerateFeatures(final WGPUDevice device, FeatureName[] features) {
 		try(var arena = Arena.ofConfined()) {
 			var _device = pointer(arena, device);
-			var _features = pointer(arena, features);
+			var _features = empty(arena, features);
 			var ret = (long) wgpuDeviceEnumerateFeatures.invoke(_device, _features);
 			if(features != null) {
 				var in = new WGPUReader(_features);
@@ -908,7 +908,7 @@ public class WebGPU {
 	public static boolean wgpuDeviceGetLimits(final WGPUDevice device, SupportedLimits limits) {
 		try(var arena = Arena.ofConfined()) {
 			var _device = pointer(arena, device);
-			var _limits = pointer(arena, limits);
+			var _limits = empty(arena, limits);
 			var ret = (int) wgpuDeviceGetLimits.invoke(_device, _limits);
 			limits.readFrom(_limits);
 			return ret != 0;
@@ -1848,7 +1848,7 @@ public class WebGPU {
 		try(var arena = Arena.ofConfined()) {
 			var _surface = pointer(arena, surface);
 			var _adapter = pointer(arena, adapter);
-			var _capabilities = pointer(arena, capabilities);
+			var _capabilities = empty(arena, capabilities);
 			wgpuSurfaceGetCapabilities.invoke(_surface, _adapter, _capabilities);
 			capabilities.readFrom(_capabilities);
 			wgpuSurfaceCapabilitiesFreeMembers.invoke(_capabilities);
@@ -1861,7 +1861,7 @@ public class WebGPU {
 	public static void wgpuSurfaceGetCurrentTexture(final WGPUSurface surface, SurfaceTexture surfaceTexture) {
 		try(var arena = Arena.ofConfined()) {
 			var _surface = pointer(arena, surface);
-			var _surfaceTexture = pointer(arena, surfaceTexture);
+			var _surfaceTexture = empty(arena, surfaceTexture);
 			wgpuSurfaceGetCurrentTexture.invoke(_surface, _surfaceTexture);
 			surfaceTexture.readFrom(_surfaceTexture);
 		} catch (Throwable e) {
@@ -2098,7 +2098,7 @@ public class WebGPU {
 	public static void wgpuGenerateReport(final WGPUInstance instance, GlobalReport report) {
 		try(var arena = Arena.ofConfined()) {
 			var _instance = pointer(arena, instance);
-			var _report = pointer(arena, report);
+			var _report = empty(arena, report);
 			wgpuGenerateReport.invoke(_instance, _report);
 			report.readFrom(_report);
 		} catch (Throwable e) {
@@ -2111,7 +2111,7 @@ public class WebGPU {
 		try(var arena = Arena.ofConfined()) {
 			var _instance = pointer(arena, instance);
 			var _options = pointer(arena, options);
-			var _adapters = pointer(arena, adapters);
+			var _adapters = empty(arena, adapters);
 			var ret = (long) wgpuInstanceEnumerateAdapters.invoke(_instance, _options, _adapters);
 			if(adapters != null) {
 				var in = new WGPUReader(_adapters);

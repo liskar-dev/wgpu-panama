@@ -42,6 +42,18 @@ public class Statics {
 		return writer.mem;
 	}
 
+	public static MemorySegment empty(Arena arena, WGPUStruct value) {
+		return value == null ? MemorySegment.NULL : value.allocEmpty(arena);
+	}
+	
+	public static MemorySegment empty(Arena arena, WGPUEnum[] values) {
+		return values == null ? MemorySegment.NULL : arena.allocate(values.length * 4, 4);
+	}
+	
+	public static MemorySegment empty(Arena arena, WGPUImpl[] values) {
+		return values == null ? MemorySegment.NULL : arena.allocate(values.length * 8, 8);
+	}
+
 	public static MemorySegment pointer(Arena arena, WGPUStruct[] values) {
 		if(values == null || values.length == 0) {
 			return MemorySegment.NULL;
