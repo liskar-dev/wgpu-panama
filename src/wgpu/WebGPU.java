@@ -65,6 +65,7 @@ public class WebGPU {
 			var _info = pointer(arena, info);
 			wgpuAdapterGetInfo.invoke(_adapter, _info);
 			info.readFrom(_info);
+			wgpuAdapterInfoFreeMembers.invoke(_info);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -129,14 +130,6 @@ public class WebGPU {
 	}
 
 	private static final MethodHandle wgpuAdapterInfoFreeMembers = lookup(null, "wgpuAdapterInfoFreeMembers", STRUCT(56));
-	public static void wgpuAdapterInfoFreeMembers(final AdapterInfo adapterInfo) {
-		try(var arena = Arena.ofConfined()) {
-			var _adapterInfo = value(arena, adapterInfo);
-			wgpuAdapterInfoFreeMembers.invoke(_adapterInfo);
-		} catch (Throwable e) {
-			throw new RuntimeException(e);
-		}
-	}
 
 	private static final MethodHandle wgpuBindGroupSetLabel = lookup(null, "wgpuBindGroupSetLabel", POINTER, POINTER);
 	public static void wgpuBindGroupSetLabel(final WGPUBindGroup bindGroup, final String label) {
@@ -1858,6 +1851,7 @@ public class WebGPU {
 			var _capabilities = pointer(arena, capabilities);
 			wgpuSurfaceGetCapabilities.invoke(_surface, _adapter, _capabilities);
 			capabilities.readFrom(_capabilities);
+			wgpuSurfaceCapabilitiesFreeMembers.invoke(_capabilities);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1927,14 +1921,6 @@ public class WebGPU {
 	}
 
 	private static final MethodHandle wgpuSurfaceCapabilitiesFreeMembers = lookup(null, "wgpuSurfaceCapabilitiesFreeMembers", STRUCT(64));
-	public static void wgpuSurfaceCapabilitiesFreeMembers(final SurfaceCapabilities surfaceCapabilities) {
-		try(var arena = Arena.ofConfined()) {
-			var _surfaceCapabilities = value(arena, surfaceCapabilities);
-			wgpuSurfaceCapabilitiesFreeMembers.invoke(_surfaceCapabilities);
-		} catch (Throwable e) {
-			throw new RuntimeException(e);
-		}
-	}
 
 	private static final MethodHandle wgpuTextureCreateView = lookup(POINTER, "wgpuTextureCreateView", POINTER, POINTER);
 	public static WGPUTextureView wgpuTextureCreateView(final WGPUTexture texture, @Nullable final TextureViewDescriptor descriptor) {
