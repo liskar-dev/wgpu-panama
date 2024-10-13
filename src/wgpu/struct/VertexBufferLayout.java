@@ -28,7 +28,7 @@ public class VertexBufferLayout extends WGPUStruct {
 		out.write(arrayStride);
 		out.write(stepMode);
 		out.padding(4);
-		out.write((long) attributes.length);
+		out.write((long) (attributes == null ? 0 : attributes.length));
 		out.pointer(attributes);
 	}
 

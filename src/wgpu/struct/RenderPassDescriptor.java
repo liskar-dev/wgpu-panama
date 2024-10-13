@@ -33,7 +33,7 @@ public class RenderPassDescriptor extends WGPUStruct {
 	protected void writeTo(WGPUWriter out) {
 		out.pointer(nextInChain);
 		out.pointer(label);
-		out.write((long) colorAttachments.length);
+		out.write((long) (colorAttachments == null ? 0 : colorAttachments.length));
 		out.pointer(colorAttachments);
 		out.pointer(depthStencilAttachment);
 		out.pointer(occlusionQuerySet);

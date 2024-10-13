@@ -35,7 +35,7 @@ public class SurfaceConfiguration extends WGPUStruct {
 		out.pointer(device);
 		out.write(format);
 		out.write(usage);
-		out.write((long) viewFormats.length);
+		out.write((long) (viewFormats == null ? 0 : viewFormats.length));
 		out.pointer(viewFormats);
 		out.write(alphaMode);
 		out.write(width);

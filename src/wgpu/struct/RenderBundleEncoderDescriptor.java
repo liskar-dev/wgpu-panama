@@ -31,7 +31,7 @@ public class RenderBundleEncoderDescriptor extends WGPUStruct {
 	protected void writeTo(WGPUWriter out) {
 		out.pointer(nextInChain);
 		out.pointer(label);
-		out.write((long) colorFormats.length);
+		out.write((long) (colorFormats == null ? 0 : colorFormats.length));
 		out.pointer(colorFormats);
 		out.write(depthStencilFormat);
 		out.write(sampleCount);

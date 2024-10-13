@@ -27,7 +27,7 @@ public class ShaderModuleSPIRVDescriptor extends ChainedStruct {
 		out.pointer(super.next);
 		out.write(SType.ShaderModuleSPIRVDescriptor);
 		out.padding(4);
-		out.write((int) code.byteSize());
+		out.write((int) (code == null ? 0 : code.byteSize()));
 		out.padding(4);
 		out.pointer(code);
 	}

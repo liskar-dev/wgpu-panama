@@ -27,7 +27,7 @@ public class ShaderModuleDescriptor extends WGPUStruct {
 	protected void writeTo(WGPUWriter out) {
 		out.pointer(nextInChain);
 		out.pointer(label);
-		out.write((long) hints.length);
+		out.write((long) (hints == null ? 0 : hints.length));
 		out.pointer(hints);
 	}
 

@@ -34,7 +34,7 @@ public class ShaderModuleGLSLDescriptor extends ChainedStruct {
 		out.write(stage);
 		out.padding(4);
 		out.pointer(code);
-		out.write((int) defines.length);
+		out.write((int) (defines == null ? 0 : defines.length));
 		out.padding(4);
 		out.pointer(defines);
 	}

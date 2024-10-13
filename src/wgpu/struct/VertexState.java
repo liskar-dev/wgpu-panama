@@ -31,9 +31,9 @@ public class VertexState extends WGPUStruct {
 		out.pointer(nextInChain);
 		out.pointer(module);
 		out.pointer(entryPoint);
-		out.write((long) constants.length);
+		out.write((long) (constants == null ? 0 : constants.length));
 		out.pointer(constants);
-		out.write((long) buffers.length);
+		out.write((long) (buffers == null ? 0 : buffers.length));
 		out.pointer(buffers);
 	}
 

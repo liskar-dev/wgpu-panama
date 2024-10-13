@@ -24,7 +24,7 @@ public class CompilationInfo extends WGPUStruct {
 
 	protected void writeTo(WGPUWriter out) {
 		out.pointer(nextInChain);
-		out.write((long) messages.length);
+		out.write((long) (messages == null ? 0 : messages.length));
 		out.pointer(messages);
 	}
 

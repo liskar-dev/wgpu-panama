@@ -31,11 +31,11 @@ public class BindGroupEntryExtras extends ChainedStruct {
 		out.write(SType.BindGroupEntryExtras);
 		out.padding(4);
 		out.pointer(buffers);
-		out.write((long) buffers.length);
+		out.write((long) (buffers == null ? 0 : buffers.length));
 		out.pointer(samplers);
-		out.write((long) samplers.length);
+		out.write((long) (samplers == null ? 0 : samplers.length));
 		out.pointer(textureViews);
-		out.write((long) textureViews.length);
+		out.write((long) (textureViews == null ? 0 : textureViews.length));
 	}
 
 	protected BindGroupEntryExtras readFrom(WGPUReader in) {

@@ -29,7 +29,7 @@ public class ProgrammableStageDescriptor extends WGPUStruct {
 		out.pointer(nextInChain);
 		out.pointer(module);
 		out.pointer(entryPoint);
-		out.write((long) constants.length);
+		out.write((long) (constants == null ? 0 : constants.length));
 		out.pointer(constants);
 	}
 

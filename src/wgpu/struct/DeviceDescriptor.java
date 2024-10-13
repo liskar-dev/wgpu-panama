@@ -33,7 +33,7 @@ public class DeviceDescriptor extends WGPUStruct {
 	protected void writeTo(WGPUWriter out) {
 		out.pointer(nextInChain);
 		out.pointer(label);
-		out.write((long) requiredFeatures.length);
+		out.write((long) (requiredFeatures == null ? 0 : requiredFeatures.length));
 		out.pointer(requiredFeatures);
 		out.pointer(requiredLimits);
 		out.write(defaultQueue);

@@ -27,7 +27,7 @@ public class BindGroupLayoutDescriptor extends WGPUStruct {
 	protected void writeTo(WGPUWriter out) {
 		out.pointer(nextInChain);
 		out.pointer(label);
-		out.write((long) entries.length);
+		out.write((long) (entries == null ? 0 : entries.length));
 		out.pointer(entries);
 	}
 

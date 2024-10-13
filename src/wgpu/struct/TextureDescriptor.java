@@ -42,7 +42,7 @@ public class TextureDescriptor extends WGPUStruct {
 		out.write(mipLevelCount);
 		out.write(sampleCount);
 		out.padding(4);
-		out.write((long) viewFormats.length);
+		out.write((long) (viewFormats == null ? 0 : viewFormats.length));
 		out.pointer(viewFormats);
 	}
 

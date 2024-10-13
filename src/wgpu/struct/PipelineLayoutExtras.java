@@ -26,7 +26,7 @@ public class PipelineLayoutExtras extends ChainedStruct {
 		out.pointer(super.next);
 		out.write(SType.PipelineLayoutExtras);
 		out.padding(4);
-		out.write((long) pushConstantRanges.length);
+		out.write((long) (pushConstantRanges == null ? 0 : pushConstantRanges.length));
 		out.pointer(pushConstantRanges);
 	}
 

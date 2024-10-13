@@ -27,7 +27,7 @@ public class PipelineLayoutDescriptor extends WGPUStruct {
 	protected void writeTo(WGPUWriter out) {
 		out.pointer(nextInChain);
 		out.pointer(label);
-		out.write((long) bindGroupLayouts.length);
+		out.write((long) (bindGroupLayouts == null ? 0 : bindGroupLayouts.length));
 		out.pointer(bindGroupLayouts);
 	}
 

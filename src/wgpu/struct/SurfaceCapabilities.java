@@ -33,11 +33,11 @@ public class SurfaceCapabilities extends WGPUStruct {
 		out.pointer(nextInChain);
 		out.write(usages);
 		out.padding(4);
-		out.write((long) formats.length);
+		out.write((long) (formats == null ? 0 : formats.length));
 		out.pointer(formats);
-		out.write((long) presentModes.length);
+		out.write((long) (presentModes == null ? 0 : presentModes.length));
 		out.pointer(presentModes);
-		out.write((long) alphaModes.length);
+		out.write((long) (alphaModes == null ? 0 : alphaModes.length));
 		out.pointer(alphaModes);
 	}
 

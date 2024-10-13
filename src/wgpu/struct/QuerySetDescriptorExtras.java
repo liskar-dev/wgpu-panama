@@ -27,7 +27,7 @@ public class QuerySetDescriptorExtras extends ChainedStruct {
 		out.write(SType.QuerySetDescriptorExtras);
 		out.padding(4);
 		out.pointer(pipelineStatistics);
-		out.write((long) pipelineStatistics.length);
+		out.write((long) (pipelineStatistics == null ? 0 : pipelineStatistics.length));
 	}
 
 	protected QuerySetDescriptorExtras readFrom(WGPUReader in) {

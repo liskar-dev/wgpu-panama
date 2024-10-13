@@ -29,7 +29,7 @@ public class BindGroupDescriptor extends WGPUStruct {
 		out.pointer(nextInChain);
 		out.pointer(label);
 		out.pointer(layout);
-		out.write((long) entries.length);
+		out.write((long) (entries == null ? 0 : entries.length));
 		out.pointer(entries);
 	}
 
