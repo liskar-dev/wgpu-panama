@@ -64,7 +64,7 @@ public class WebGPU {
 			var _adapter = pointer(arena, adapter);
 			var _info = pointer(arena, info);
 			wgpuAdapterGetInfo.invoke(_adapter, _info);
-			info.readFrom(_info); // TODO is that correct?
+			info.readFrom(_info);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -76,7 +76,7 @@ public class WebGPU {
 			var _adapter = pointer(arena, adapter);
 			var _limits = pointer(arena, limits);
 			var ret = (int) wgpuAdapterGetLimits.invoke(_adapter, _limits);
-			limits.readFrom(_limits); // TODO is that correct?
+			limits.readFrom(_limits);
 			return ret != 0;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -917,7 +917,7 @@ public class WebGPU {
 			var _device = pointer(arena, device);
 			var _limits = pointer(arena, limits);
 			var ret = (int) wgpuDeviceGetLimits.invoke(_device, _limits);
-			limits.readFrom(_limits); // TODO is that correct?
+			limits.readFrom(_limits);
 			return ret != 0;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1857,7 +1857,7 @@ public class WebGPU {
 			var _adapter = pointer(arena, adapter);
 			var _capabilities = pointer(arena, capabilities);
 			wgpuSurfaceGetCapabilities.invoke(_surface, _adapter, _capabilities);
-			capabilities.readFrom(_capabilities); // TODO is that correct?
+			capabilities.readFrom(_capabilities);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1869,7 +1869,7 @@ public class WebGPU {
 			var _surface = pointer(arena, surface);
 			var _surfaceTexture = pointer(arena, surfaceTexture);
 			wgpuSurfaceGetCurrentTexture.invoke(_surface, _surfaceTexture);
-			surfaceTexture.readFrom(_surfaceTexture); // TODO is that correct?
+			surfaceTexture.readFrom(_surfaceTexture);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2114,7 +2114,7 @@ public class WebGPU {
 			var _instance = pointer(arena, instance);
 			var _report = pointer(arena, report);
 			wgpuGenerateReport.invoke(_instance, _report);
-			report.readFrom(_report); // TODO is that correct?
+			report.readFrom(_report);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
