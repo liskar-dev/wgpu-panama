@@ -48,3 +48,5 @@ Enumerate all adapters and print their info:
     }
 
 All WebGPU.wgpu* method parameters that are effectively const in original headers are marked final. This changes nothing for the code itself, but serves as an information for the user, describing which params are output.
+
+Generator code that was used to generate the bindings is not in this repo as of yet. (it's a total mess with lots out printlns)
