@@ -48,6 +48,41 @@ public class Limits extends WGPUStruct {
 	public int maxComputeWorkgroupSizeZ;
 	public int maxComputeWorkgroupsPerDimension;
 
+	{
+		maxTextureDimension1D = 8192;
+		maxTextureDimension2D = 8192;
+		maxTextureDimension3D = 2048;
+		maxTextureArrayLayers = 256;
+		maxBindGroups = 4;
+		maxBindGroupsPlusVertexBuffers = 0;
+		maxBindingsPerBindGroup = 1000;
+		maxDynamicUniformBuffersPerPipelineLayout = 8;
+		maxDynamicStorageBuffersPerPipelineLayout = 4;
+		maxSampledTexturesPerShaderStage = 16;
+		maxSamplersPerShaderStage = 16;
+		maxStorageBuffersPerShaderStage = 8;
+		maxStorageTexturesPerShaderStage = 4;
+		maxUniformBuffersPerShaderStage = 12;
+		maxUniformBufferBindingSize = 65536;
+		maxStorageBufferBindingSize = 134217728;
+		minUniformBufferOffsetAlignment = 256;
+		minStorageBufferOffsetAlignment = 256;
+		maxVertexBuffers = 8;
+		maxBufferSize = 268435456;
+		maxVertexAttributes = 16;
+		maxVertexBufferArrayStride = 2048;
+		maxInterStageShaderComponents = 60;
+		maxInterStageShaderVariables = 0;
+		maxColorAttachments = 0;
+		maxColorAttachmentBytesPerSample = 0;
+		maxComputeWorkgroupStorageSize = 16384;
+		maxComputeInvocationsPerWorkgroup = 256;
+		maxComputeWorkgroupSizeX = 256;
+		maxComputeWorkgroupSizeY = 256;
+		maxComputeWorkgroupSizeZ = 64;
+		maxComputeWorkgroupsPerDimension = 65535;
+	}
+
 	protected int sizeInBytes() {
 		return 144;
 	}
