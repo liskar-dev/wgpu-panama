@@ -38,6 +38,13 @@ public class Color extends WGPUStruct {
 		return this;
 	}
 
+	public Color(double r, double g, double b, double a) {
+		this.r = r;
+		this.g = g;
+		this.b = b;
+		this.a = a;
+	}
+
 	public Color() {}
 
 	public Color(MemorySegment from) {
