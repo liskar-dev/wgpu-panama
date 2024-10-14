@@ -608,12 +608,12 @@ public class WebGPU {
 	}
 
 	private static final MethodHandle wgpuComputePassEncoderSetBindGroup = lookup(null, "wgpuComputePassEncoderSetBindGroup", POINTER, JAVA_INT, POINTER, JAVA_LONG, POINTER);
-	public static void wgpuComputePassEncoderSetBindGroup(final WGPUComputePassEncoder computePassEncoder, final int groupIndex, @Nullable final WGPUBindGroup group, final long dynamicOffsetCount, final int[] dynamicOffsets) {
+	public static void wgpuComputePassEncoderSetBindGroup(final WGPUComputePassEncoder computePassEncoder, final int groupIndex, @Nullable final WGPUBindGroup group, final int[] dynamicOffsets) {
 		try(var arena = Arena.ofConfined()) {
 			var _computePassEncoder = pointer(arena, computePassEncoder);
 			var _groupIndex = value(arena, groupIndex);
 			var _group = pointer(arena, group);
-			var _dynamicOffsetCount = value(arena, dynamicOffsetCount);
+			var _dynamicOffsetCount = value(arena, (long) (dynamicOffsets == null ? 0 : dynamicOffsets.length));
 			var _dynamicOffsets = pointer(arena, dynamicOffsets);
 			wgpuComputePassEncoderSetBindGroup.invoke(_computePassEncoder, _groupIndex, _group, _dynamicOffsetCount, _dynamicOffsets);
 		} catch (Throwable e) {
@@ -1179,10 +1179,10 @@ public class WebGPU {
 	}
 
 	private static final MethodHandle wgpuQueueSubmit = lookup(null, "wgpuQueueSubmit", POINTER, JAVA_LONG, POINTER);
-	public static void wgpuQueueSubmit(final WGPUQueue queue, final long commandCount, final WGPUCommandBuffer[] commands) {
+	public static void wgpuQueueSubmit(final WGPUQueue queue, final WGPUCommandBuffer[] commands) {
 		try(var arena = Arena.ofConfined()) {
 			var _queue = pointer(arena, queue);
-			var _commandCount = value(arena, commandCount);
+			var _commandCount = value(arena, (long) (commands == null ? 0 : commands.length));
 			var _commands = pointer(arena, commands);
 			wgpuQueueSubmit.invoke(_queue, _commandCount, _commands);
 		} catch (Throwable e) {
@@ -1205,12 +1205,12 @@ public class WebGPU {
 	}
 
 	private static final MethodHandle wgpuQueueWriteTexture = lookup(null, "wgpuQueueWriteTexture", POINTER, POINTER, POINTER, JAVA_LONG, POINTER, POINTER);
-	public static void wgpuQueueWriteTexture(final WGPUQueue queue, final ImageCopyTexture destination, final MemorySegment data, final long dataSize, final TextureDataLayout dataLayout, final Extent3D writeSize) {
+	public static void wgpuQueueWriteTexture(final WGPUQueue queue, final ImageCopyTexture destination, final MemorySegment data, final TextureDataLayout dataLayout, final Extent3D writeSize) {
 		try(var arena = Arena.ofConfined()) {
 			var _queue = pointer(arena, queue);
 			var _destination = pointer(arena, destination);
 			var _data = pointer(arena, data);
-			var _dataSize = value(arena, dataSize);
+			var _dataSize = value(arena, (long) (data == null ? 0 : data.byteSize()));
 			var _dataLayout = pointer(arena, dataLayout);
 			var _writeSize = pointer(arena, writeSize);
 			wgpuQueueWriteTexture.invoke(_queue, _destination, _data, _dataSize, _dataLayout, _writeSize);
@@ -1368,12 +1368,12 @@ public class WebGPU {
 	}
 
 	private static final MethodHandle wgpuRenderBundleEncoderSetBindGroup = lookup(null, "wgpuRenderBundleEncoderSetBindGroup", POINTER, JAVA_INT, POINTER, JAVA_LONG, POINTER);
-	public static void wgpuRenderBundleEncoderSetBindGroup(final WGPURenderBundleEncoder renderBundleEncoder, final int groupIndex, @Nullable final WGPUBindGroup group, final long dynamicOffsetCount, final int[] dynamicOffsets) {
+	public static void wgpuRenderBundleEncoderSetBindGroup(final WGPURenderBundleEncoder renderBundleEncoder, final int groupIndex, @Nullable final WGPUBindGroup group, final int[] dynamicOffsets) {
 		try(var arena = Arena.ofConfined()) {
 			var _renderBundleEncoder = pointer(arena, renderBundleEncoder);
 			var _groupIndex = value(arena, groupIndex);
 			var _group = pointer(arena, group);
-			var _dynamicOffsetCount = value(arena, dynamicOffsetCount);
+			var _dynamicOffsetCount = value(arena, (long) (dynamicOffsets == null ? 0 : dynamicOffsets.length));
 			var _dynamicOffsets = pointer(arena, dynamicOffsets);
 			wgpuRenderBundleEncoderSetBindGroup.invoke(_renderBundleEncoder, _groupIndex, _group, _dynamicOffsetCount, _dynamicOffsets);
 		} catch (Throwable e) {
@@ -1536,10 +1536,10 @@ public class WebGPU {
 	}
 
 	private static final MethodHandle wgpuRenderPassEncoderExecuteBundles = lookup(null, "wgpuRenderPassEncoderExecuteBundles", POINTER, JAVA_LONG, POINTER);
-	public static void wgpuRenderPassEncoderExecuteBundles(final WGPURenderPassEncoder renderPassEncoder, final long bundleCount, final WGPURenderBundle[] bundles) {
+	public static void wgpuRenderPassEncoderExecuteBundles(final WGPURenderPassEncoder renderPassEncoder, final WGPURenderBundle[] bundles) {
 		try(var arena = Arena.ofConfined()) {
 			var _renderPassEncoder = pointer(arena, renderPassEncoder);
-			var _bundleCount = value(arena, bundleCount);
+			var _bundleCount = value(arena, (long) (bundles == null ? 0 : bundles.length));
 			var _bundles = pointer(arena, bundles);
 			wgpuRenderPassEncoderExecuteBundles.invoke(_renderPassEncoder, _bundleCount, _bundles);
 		} catch (Throwable e) {
@@ -1580,12 +1580,12 @@ public class WebGPU {
 	}
 
 	private static final MethodHandle wgpuRenderPassEncoderSetBindGroup = lookup(null, "wgpuRenderPassEncoderSetBindGroup", POINTER, JAVA_INT, POINTER, JAVA_LONG, POINTER);
-	public static void wgpuRenderPassEncoderSetBindGroup(final WGPURenderPassEncoder renderPassEncoder, final int groupIndex, @Nullable final WGPUBindGroup group, final long dynamicOffsetCount, final int[] dynamicOffsets) {
+	public static void wgpuRenderPassEncoderSetBindGroup(final WGPURenderPassEncoder renderPassEncoder, final int groupIndex, @Nullable final WGPUBindGroup group, final int[] dynamicOffsets) {
 		try(var arena = Arena.ofConfined()) {
 			var _renderPassEncoder = pointer(arena, renderPassEncoder);
 			var _groupIndex = value(arena, groupIndex);
 			var _group = pointer(arena, group);
-			var _dynamicOffsetCount = value(arena, dynamicOffsetCount);
+			var _dynamicOffsetCount = value(arena, (long) (dynamicOffsets == null ? 0 : dynamicOffsets.length));
 			var _dynamicOffsets = pointer(arena, dynamicOffsets);
 			wgpuRenderPassEncoderSetBindGroup.invoke(_renderPassEncoder, _groupIndex, _group, _dynamicOffsetCount, _dynamicOffsets);
 		} catch (Throwable e) {
@@ -2126,10 +2126,10 @@ public class WebGPU {
 	}
 
 	private static final MethodHandle wgpuQueueSubmitForIndex = lookup(JAVA_LONG, "wgpuQueueSubmitForIndex", POINTER, JAVA_LONG, POINTER);
-	public static long wgpuQueueSubmitForIndex(final WGPUQueue queue, final long commandCount, final WGPUCommandBuffer[] commands) {
+	public static long wgpuQueueSubmitForIndex(final WGPUQueue queue, final WGPUCommandBuffer[] commands) {
 		try(var arena = Arena.ofConfined()) {
 			var _queue = pointer(arena, queue);
-			var _commandCount = value(arena, commandCount);
+			var _commandCount = value(arena, (long) (commands == null ? 0 : commands.length));
 			var _commands = pointer(arena, commands);
 			var ret = (long) wgpuQueueSubmitForIndex.invoke(_queue, _commandCount, _commands);
 			return ret;
