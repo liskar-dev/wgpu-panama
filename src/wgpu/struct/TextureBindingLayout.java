@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -20,31 +20,28 @@ public class TextureBindingLayout extends WGPUStruct {
 	public boolean multisampled;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 24;
+	protected static final int byteSize = 24;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.write(sampleType);
-		out.write(viewDimension);
-		out.write(multisampled);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, sampleType == null ? 0 : sampleType.bits );
+		put_value(address+12, viewDimension == null ? 0 : viewDimension.bits );
+		put_value(address+16, (boolean) multisampled);
+		// padding 4
+		return address;
 	}
 
-	protected TextureBindingLayout readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		sampleType = TextureSampleType.from(in.read_int());
-		viewDimension = TextureViewDimension.from(in.read_int());
-		multisampled = in.read_boolean();
-		in.padding(4);
+	protected TextureBindingLayout load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		sampleType = TextureSampleType.from(get_int(address+8));
+		viewDimension = TextureViewDimension.from(get_int(address+12));
+		multisampled = get_boolean(address+16);
+		// padding 4
+		// padding 4
 		return this;
 	}
-
 	public TextureBindingLayout() {}
-
-	public TextureBindingLayout(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

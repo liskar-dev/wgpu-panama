@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -26,40 +26,46 @@ public class BindGroupEntry extends WGPUStruct {
 	@Nullable
 	public WGPUTextureView textureView;
 
-	protected int sizeInBytes() {
-		return 56;
+	protected static final int byteSize = 56;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.write(binding);
-		out.padding(4);
-		out.pointer(buffer);
-		out.write(offset);
-		out.write(size);
-		out.pointer(sampler);
-		out.pointer(textureView);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, (int) binding);
+		// padding 4
+		put_value(address+16, buffer == null ? 0L : buffer.handle );
+		put_value(address+24, (long) offset);
+		put_value(address+32, (long) size);
+		put_value(address+40, sampler == null ? 0L : sampler.handle );
+		put_value(address+48, textureView == null ? 0L : textureView.handle );
+		return address;
 	}
 
-	protected BindGroupEntry readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		binding = in.read_int();
-		in.padding(4);
-		var _buffer = in.read_pointer();
-		buffer = isNull(_buffer) ? null : new WGPUBuffer(_buffer);
-		offset = in.read_long();
-		size = in.read_long();
-		var _sampler = in.read_pointer();
-		sampler = isNull(_sampler) ? null : new WGPUSampler(_sampler);
-		var _textureView = in.read_pointer();
-		textureView = isNull(_textureView) ? null : new WGPUTextureView(_textureView);
+	protected BindGroupEntry load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		binding = get_int(address+8);
+		// padding 4
+		if(buffer != null) {
+			buffer.handle = get_long(address+16);
+		} else {
+			buffer = new WGPUBuffer(get_long(address+16));
+		}
+		offset = get_long(address+24);
+		size = get_long(address+32);
+		if(sampler != null) {
+			sampler.handle = get_long(address+40);
+		} else {
+			sampler = new WGPUSampler(get_long(address+40));
+		}
+		if(textureView != null) {
+			textureView.handle = get_long(address+48);
+		} else {
+			textureView = new WGPUTextureView(get_long(address+48));
+		}
+		// padding 4
 		return this;
 	}
-
 	public BindGroupEntry() {}
-
-	public BindGroupEntry(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

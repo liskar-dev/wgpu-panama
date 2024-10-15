@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -18,31 +18,28 @@ public class SurfaceDescriptorFromWindowsHWND extends ChainedStruct {
 	public long hinstance;
 	public long hwnd;
 
-	protected int sizeInBytes() {
-		return 32;
+	protected static final int byteSize = 32;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(super.next);
-		out.write(SType.SurfaceDescriptorFromWindowsHWND);
-		out.padding(4);
-		out.write(hinstance);
-		out.write(hwnd);
+	protected long store(Stack stack, long address) {
+		put_value(address + 0, stack.alloc(next));
+		put_value(address + 8, (int) SType.SurfaceDescriptorFromWindowsHWND);
+		// padding 4
+		put_value(address+16, (long) hinstance);
+		put_value(address+24, (long) hwnd);
+		return address;
 	}
 
-	protected SurfaceDescriptorFromWindowsHWND readFrom(WGPUReader in) {
-		super.next = ChainedStruct.from(in.read_pointer());
-		var sType = in.read_int();
-		in.padding(4);
-		hinstance = in.read_long();
-		hwnd = in.read_long();
+	protected SurfaceDescriptorFromWindowsHWND load(long address) {
+		var _next = get_long(address + 0);
+		// unit32_t sType
+		// padding 4
+		hinstance = get_long(address+16);
+		hwnd = get_long(address+24);
+		super.next = ChainedStruct.from(_next);
 		return this;
 	}
-
 	public SurfaceDescriptorFromWindowsHWND() {}
-
-	public SurfaceDescriptorFromWindowsHWND(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

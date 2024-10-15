@@ -34,4 +34,6 @@ public interface WGPUCallback {
 		var bound = handle.bindTo(callback);
 		return Linker.nativeLinker().upcallStub(bound, desc, Arena.ofAuto());
 	}
+	
+
 }

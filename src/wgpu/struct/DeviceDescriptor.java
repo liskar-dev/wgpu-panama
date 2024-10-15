@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -17,7 +17,7 @@ public class DeviceDescriptor extends WGPUStruct {
 	public ChainedStruct nextInChain;
 	@Nullable
 	public String label;
-	// [requiredFeatureCount]
+	// size_t requiredFeatureCount
 	public FeatureName[] requiredFeatures;
 	@Nullable
 	public RequiredLimits requiredLimits;
@@ -26,47 +26,45 @@ public class DeviceDescriptor extends WGPUStruct {
 	public long deviceLostUserdata;
 	public UncapturedErrorCallbackInfo uncapturedErrorCallbackInfo;
 
-	protected int sizeInBytes() {
-		return 96;
+	protected static final int byteSize = 96;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(label);
-		out.write((long) (requiredFeatures == null ? 0 : requiredFeatures.length));
-		out.pointer(requiredFeatures);
-		out.pointer(requiredLimits);
-		out.write(defaultQueue);
-		out.pointer(WGPUCallback.createStub(deviceLostCallback, deviceLostCallback.handle, deviceLostCallback.desc));
-		out.write(deviceLostUserdata);
-		out.write(uncapturedErrorCallbackInfo);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, stack.alloc(label));
+		put_value(address+16, (long) (requiredFeatures == null ? 0 : requiredFeatures.length));
+		put_value(address+24, stack.alloc(requiredFeatures));
+		put_value(address+32, stack.alloc(requiredLimits));
+		defaultQueue.store(stack, address+40);
+		put_pointer(address+56, WGPUCallback.createStub(deviceLostCallback, deviceLostCallback.handle, deviceLostCallback.desc));
+		put_value(address+64, (long) deviceLostUserdata);
+		uncapturedErrorCallbackInfo.store(stack, address+72);
+		return address;
 	}
 
-	protected DeviceDescriptor readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		label = in.read_string();
-		var requiredFeatureCount = (int) in.read_long();
-		var _requiredFeatures = in.read_pointer();
-		var _requiredLimits = in.read_pointer();
-		requiredLimits = isNull(_requiredLimits) ? null : new RequiredLimits().readFrom(new WGPUReader(_requiredLimits));
-		defaultQueue = new QueueDescriptor().readFrom(in);
-		 in.read_pointer(); // TODO UNSOPPORTED:deviceLostCallback = new Callback();
-		deviceLostUserdata = in.read_long();
-		uncapturedErrorCallbackInfo = new UncapturedErrorCallbackInfo().readFrom(in);
-		if(!isNull(_requiredFeatures)) {
-			requiredFeatures = new FeatureName[requiredFeatureCount];
-			var rin = new WGPUReader(_requiredFeatures);
+	protected DeviceDescriptor load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		label = get_string(get_long(address+8));
+		var requiredFeatureCount = (int) get_long(address+16);
+		var _requiredFeatures = get_long(address+24);
+		var _requiredLimits = get_long(address+32);
+		requiredLimits = _requiredLimits == 0 ? null : (requiredLimits != null ? requiredLimits : new RequiredLimits()).load(_requiredLimits);
+		defaultQueue = (defaultQueue != null ? defaultQueue : new QueueDescriptor()).load(address+40);
+		// unsupported DeviceLostCallback * deviceLostCallback
+		deviceLostUserdata = get_long(address+64);
+		uncapturedErrorCallbackInfo = (uncapturedErrorCallbackInfo != null ? uncapturedErrorCallbackInfo : new UncapturedErrorCallbackInfo()).load(address+72);
+		if(_requiredFeatures != 0L) {
+			requiredFeatures = requiredFeatures != null && requiredFeatures.length == requiredFeatureCount ? requiredFeatures : new FeatureName[requiredFeatureCount];
 			for(int i=0; i<requiredFeatures.length; i++) {
-				requiredFeatures[i] = FeatureName.from(rin.read_int());
+				requiredFeatures[i] = FeatureName.from(get_int(_requiredFeatures + i*4));
 			}
+		} else {
+			requiredFeatures= null;
 		}
+		requiredLimits = _requiredLimits == 0 ? null : (requiredLimits != null ? requiredLimits : new RequiredLimits()).load(_requiredLimits);
 		return this;
 	}
-
 	public DeviceDescriptor() {}
-
-	public DeviceDescriptor(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

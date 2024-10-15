@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -23,34 +23,33 @@ public class ColorTargetState extends WGPUStruct {
 	public int writeMask;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 32;
+	protected static final int byteSize = 32;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.write(format);
-		out.padding(4);
-		out.pointer(blend);
-		out.write(writeMask);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, format == null ? 0 : format.bits );
+		// padding 4
+		put_value(address+16, stack.alloc(blend));
+		put_value(address+24, (int) writeMask);
+		// padding 4
+		return address;
 	}
 
-	protected ColorTargetState readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		format = TextureFormat.from(in.read_int());
-		in.padding(4);
-		var _blend = in.read_pointer();
-		blend = isNull(_blend) ? null : new BlendState().readFrom(new WGPUReader(_blend));
-		writeMask = in.read_int();
-		in.padding(4);
+	protected ColorTargetState load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		format = TextureFormat.from(get_int(address+8));
+		// padding 4
+		var _blend = get_long(address+16);
+		blend = _blend == 0 ? null : (blend != null ? blend : new BlendState()).load(_blend);
+		writeMask = get_int(address+24);
+		// padding 4
+		// padding 4
+		blend = _blend == 0 ? null : (blend != null ? blend : new BlendState()).load(_blend);
+		// padding 4
 		return this;
 	}
-
 	public ColorTargetState() {}
-
-	public ColorTargetState(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

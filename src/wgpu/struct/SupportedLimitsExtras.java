@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -17,29 +17,26 @@ public class SupportedLimitsExtras extends ChainedStructOut {
 	// ChainedStructOut chain;
 	public NativeLimits limits;
 
-	protected int sizeInBytes() {
-		return 24;
+	protected static final int byteSize = 24;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(super.next);
-		out.write(SType.SupportedLimitsExtras);
-		out.padding(4);
-		out.write(limits);
+	protected long store(Stack stack, long address) {
+		put_value(address + 0, stack.alloc(next));
+		put_value(address + 8, (int) SType.SupportedLimitsExtras);
+		// padding 4
+		limits.store(stack, address+16);
+		return address;
 	}
 
-	protected SupportedLimitsExtras readFrom(WGPUReader in) {
-		super.next = ChainedStructOut.from(in.read_pointer());
-		var sType = in.read_int();
-		in.padding(4);
-		limits = new NativeLimits().readFrom(in);
+	protected SupportedLimitsExtras load(long address) {
+		var _next = get_long(address + 0);
+		// unit32_t sType
+		// padding 4
+		limits = (limits != null ? limits : new NativeLimits()).load(address+16);
+		super.next = ChainedStructOut.from(_next);
 		return this;
 	}
-
 	public SupportedLimitsExtras() {}
-
-	public SupportedLimitsExtras(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

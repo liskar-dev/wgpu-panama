@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -26,41 +26,38 @@ public class TextureViewDescriptor extends WGPUStruct {
 	public TextureAspect aspect;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 48;
+	protected static final int byteSize = 48;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(label);
-		out.write(format);
-		out.write(dimension);
-		out.write(baseMipLevel);
-		out.write(mipLevelCount);
-		out.write(baseArrayLayer);
-		out.write(arrayLayerCount);
-		out.write(aspect);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, stack.alloc(label));
+		put_value(address+16, format == null ? 0 : format.bits );
+		put_value(address+20, dimension == null ? 0 : dimension.bits );
+		put_value(address+24, (int) baseMipLevel);
+		put_value(address+28, (int) mipLevelCount);
+		put_value(address+32, (int) baseArrayLayer);
+		put_value(address+36, (int) arrayLayerCount);
+		put_value(address+40, aspect == null ? 0 : aspect.bits );
+		// padding 4
+		return address;
 	}
 
-	protected TextureViewDescriptor readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		label = in.read_string();
-		format = TextureFormat.from(in.read_int());
-		dimension = TextureViewDimension.from(in.read_int());
-		baseMipLevel = in.read_int();
-		mipLevelCount = in.read_int();
-		baseArrayLayer = in.read_int();
-		arrayLayerCount = in.read_int();
-		aspect = TextureAspect.from(in.read_int());
-		in.padding(4);
+	protected TextureViewDescriptor load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		label = get_string(get_long(address+8));
+		format = TextureFormat.from(get_int(address+16));
+		dimension = TextureViewDimension.from(get_int(address+20));
+		baseMipLevel = get_int(address+24);
+		mipLevelCount = get_int(address+28);
+		baseArrayLayer = get_int(address+32);
+		arrayLayerCount = get_int(address+36);
+		aspect = TextureAspect.from(get_int(address+40));
+		// padding 4
+		// padding 4
 		return this;
 	}
-
 	public TextureViewDescriptor() {}
-
-	public TextureViewDescriptor(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

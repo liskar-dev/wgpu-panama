@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -16,66 +16,66 @@ import static java.lang.foreign.MemoryLayout.*;
 public class BindGroupEntryExtras extends ChainedStruct {
 	// ChainedStruct chain;
 	public WGPUBuffer[] buffers;
-	// [bufferCount]
+	// size_t bufferCount
 	public WGPUSampler[] samplers;
-	// [samplerCount]
+	// size_t samplerCount
 	public WGPUTextureView[] textureViews;
-	// [textureViewCount]
+	// size_t textureViewCount
 
-	protected int sizeInBytes() {
-		return 64;
+	protected static final int byteSize = 64;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(super.next);
-		out.write(SType.BindGroupEntryExtras);
-		out.padding(4);
-		out.pointer(buffers);
-		out.write((long) (buffers == null ? 0 : buffers.length));
-		out.pointer(samplers);
-		out.write((long) (samplers == null ? 0 : samplers.length));
-		out.pointer(textureViews);
-		out.write((long) (textureViews == null ? 0 : textureViews.length));
+	protected long store(Stack stack, long address) {
+		put_value(address + 0, stack.alloc(next));
+		put_value(address + 8, (int) SType.BindGroupEntryExtras);
+		// padding 4
+		put_value(address+16, stack.alloc(buffers));
+		put_value(address+24, (long) (buffers == null ? 0 : buffers.length));
+		put_value(address+32, stack.alloc(samplers));
+		put_value(address+40, (long) (samplers == null ? 0 : samplers.length));
+		put_value(address+48, stack.alloc(textureViews));
+		put_value(address+56, (long) (textureViews == null ? 0 : textureViews.length));
+		return address;
 	}
 
-	protected BindGroupEntryExtras readFrom(WGPUReader in) {
-		super.next = ChainedStruct.from(in.read_pointer());
-		var sType = in.read_int();
-		in.padding(4);
-		var _buffers = in.read_pointer();
-		var bufferCount = (int) in.read_long();
-		var _samplers = in.read_pointer();
-		var samplerCount = (int) in.read_long();
-		var _textureViews = in.read_pointer();
-		var textureViewCount = (int) in.read_long();
-		if(!isNull(_buffers)) {
-			buffers = new WGPUBuffer[bufferCount];
-			var rin = new WGPUReader(_buffers);
+	protected BindGroupEntryExtras load(long address) {
+		var _next = get_long(address + 0);
+		// unit32_t sType
+		// padding 4
+		var _buffers = get_long(address+16);
+		var bufferCount = (int) get_long(address+24);
+		var _samplers = get_long(address+32);
+		var samplerCount = (int) get_long(address+40);
+		var _textureViews = get_long(address+48);
+		var textureViewCount = (int) get_long(address+56);
+		super.next = ChainedStruct.from(_next);
+		if(_buffers != 0L) {
+			buffers = buffers != null && buffers.length == bufferCount ? buffers : new WGPUBuffer[bufferCount];
 			for(int i=0; i<buffers.length; i++) {
-				buffers[i] = new WGPUBuffer(rin.read_pointer());
+				buffers[i] = new WGPUBuffer(get_int(_buffers + i*8));
 			}
+		} else {
+			buffers= null;
 		}
-		if(!isNull(_samplers)) {
-			samplers = new WGPUSampler[samplerCount];
-			var rin = new WGPUReader(_samplers);
+		if(_samplers != 0L) {
+			samplers = samplers != null && samplers.length == samplerCount ? samplers : new WGPUSampler[samplerCount];
 			for(int i=0; i<samplers.length; i++) {
-				samplers[i] = new WGPUSampler(rin.read_pointer());
+				samplers[i] = new WGPUSampler(get_int(_samplers + i*8));
 			}
+		} else {
+			samplers= null;
 		}
-		if(!isNull(_textureViews)) {
-			textureViews = new WGPUTextureView[textureViewCount];
-			var rin = new WGPUReader(_textureViews);
+		if(_textureViews != 0L) {
+			textureViews = textureViews != null && textureViews.length == textureViewCount ? textureViews : new WGPUTextureView[textureViewCount];
 			for(int i=0; i<textureViews.length; i++) {
-				textureViews[i] = new WGPUTextureView(rin.read_pointer());
+				textureViews[i] = new WGPUTextureView(get_int(_textureViews + i*8));
 			}
+		} else {
+			textureViews= null;
 		}
 		return this;
 	}
-
 	public BindGroupEntryExtras() {}
-
-	public BindGroupEntryExtras(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

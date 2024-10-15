@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -24,40 +24,39 @@ public class RenderPassDepthStencilAttachment extends WGPUStruct {
 	public int stencilClearValue;
 	public boolean stencilReadOnly;
 
-	protected int sizeInBytes() {
-		return 40;
+	protected static final int byteSize = 40;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(view);
-		out.write(depthLoadOp);
-		out.write(depthStoreOp);
-		out.write(depthClearValue);
-		out.write(depthReadOnly);
-		out.write(stencilLoadOp);
-		out.write(stencilStoreOp);
-		out.write(stencilClearValue);
-		out.write(stencilReadOnly);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, view == null ? 0L : view.handle );
+		put_value(address+8, depthLoadOp == null ? 0 : depthLoadOp.bits );
+		put_value(address+12, depthStoreOp == null ? 0 : depthStoreOp.bits );
+		put_value(address+16, (float) depthClearValue);
+		put_value(address+20, (boolean) depthReadOnly);
+		put_value(address+24, stencilLoadOp == null ? 0 : stencilLoadOp.bits );
+		put_value(address+28, stencilStoreOp == null ? 0 : stencilStoreOp.bits );
+		put_value(address+32, (int) stencilClearValue);
+		put_value(address+36, (boolean) stencilReadOnly);
+		return address;
 	}
 
-	protected RenderPassDepthStencilAttachment readFrom(WGPUReader in) {
-		var _view = in.read_pointer();
-		view = isNull(_view) ? null : new WGPUTextureView(_view);
-		depthLoadOp = LoadOp.from(in.read_int());
-		depthStoreOp = StoreOp.from(in.read_int());
-		depthClearValue = in.read_float();
-		depthReadOnly = in.read_boolean();
-		stencilLoadOp = LoadOp.from(in.read_int());
-		stencilStoreOp = StoreOp.from(in.read_int());
-		stencilClearValue = in.read_int();
-		stencilReadOnly = in.read_boolean();
+	protected RenderPassDepthStencilAttachment load(long address) {
+		if(view != null) {
+			view.handle = get_long(address+0);
+		} else {
+			view = new WGPUTextureView(get_long(address+0));
+		}
+		depthLoadOp = LoadOp.from(get_int(address+8));
+		depthStoreOp = StoreOp.from(get_int(address+12));
+		depthClearValue = get_float(address+16);
+		depthReadOnly = get_boolean(address+20);
+		stencilLoadOp = LoadOp.from(get_int(address+24));
+		stencilStoreOp = StoreOp.from(get_int(address+28));
+		stencilClearValue = get_int(address+32);
+		stencilReadOnly = get_boolean(address+36);
 		return this;
 	}
-
 	public RenderPassDepthStencilAttachment() {}
-
-	public RenderPassDepthStencilAttachment(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

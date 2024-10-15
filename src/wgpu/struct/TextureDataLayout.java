@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -19,29 +19,25 @@ public class TextureDataLayout extends WGPUStruct {
 	public int bytesPerRow;
 	public int rowsPerImage;
 
-	protected int sizeInBytes() {
-		return 24;
+	protected static final int byteSize = 24;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.write(offset);
-		out.write(bytesPerRow);
-		out.write(rowsPerImage);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, (long) offset);
+		put_value(address+16, (int) bytesPerRow);
+		put_value(address+20, (int) rowsPerImage);
+		return address;
 	}
 
-	protected TextureDataLayout readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		offset = in.read_long();
-		bytesPerRow = in.read_int();
-		rowsPerImage = in.read_int();
+	protected TextureDataLayout load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		offset = get_long(address+8);
+		bytesPerRow = get_int(address+16);
+		rowsPerImage = get_int(address+20);
 		return this;
 	}
-
 	public TextureDataLayout() {}
-
-	public TextureDataLayout(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

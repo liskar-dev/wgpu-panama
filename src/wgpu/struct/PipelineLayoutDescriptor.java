@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -17,39 +17,36 @@ public class PipelineLayoutDescriptor extends WGPUStruct {
 	public ChainedStruct nextInChain;
 	@Nullable
 	public String label;
-	// [bindGroupLayoutCount]
+	// size_t bindGroupLayoutCount
 	public WGPUBindGroupLayout[] bindGroupLayouts;
 
-	protected int sizeInBytes() {
-		return 32;
+	protected static final int byteSize = 32;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(label);
-		out.write((long) (bindGroupLayouts == null ? 0 : bindGroupLayouts.length));
-		out.pointer(bindGroupLayouts);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, stack.alloc(label));
+		put_value(address+16, (long) (bindGroupLayouts == null ? 0 : bindGroupLayouts.length));
+		put_value(address+24, stack.alloc(bindGroupLayouts));
+		return address;
 	}
 
-	protected PipelineLayoutDescriptor readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		label = in.read_string();
-		var bindGroupLayoutCount = (int) in.read_long();
-		var _bindGroupLayouts = in.read_pointer();
-		if(!isNull(_bindGroupLayouts)) {
-			bindGroupLayouts = new WGPUBindGroupLayout[bindGroupLayoutCount];
-			var rin = new WGPUReader(_bindGroupLayouts);
+	protected PipelineLayoutDescriptor load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		label = get_string(get_long(address+8));
+		var bindGroupLayoutCount = (int) get_long(address+16);
+		var _bindGroupLayouts = get_long(address+24);
+		if(_bindGroupLayouts != 0L) {
+			bindGroupLayouts = bindGroupLayouts != null && bindGroupLayouts.length == bindGroupLayoutCount ? bindGroupLayouts : new WGPUBindGroupLayout[bindGroupLayoutCount];
 			for(int i=0; i<bindGroupLayouts.length; i++) {
-				bindGroupLayouts[i] = new WGPUBindGroupLayout(rin.read_pointer());
+				bindGroupLayouts[i] = new WGPUBindGroupLayout(get_int(_bindGroupLayouts + i*8));
 			}
+		} else {
+			bindGroupLayouts= null;
 		}
 		return this;
 	}
-
 	public PipelineLayoutDescriptor() {}
-
-	public PipelineLayoutDescriptor(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

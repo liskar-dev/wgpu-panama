@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -18,28 +18,27 @@ public class SurfaceTexture extends WGPUStruct {
 	public boolean suboptimal;
 	public SurfaceGetCurrentTextureStatus status;
 
-	protected int sizeInBytes() {
-		return 16;
+	protected static final int byteSize = 16;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(texture);
-		out.write(suboptimal);
-		out.write(status);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, texture == null ? 0L : texture.handle );
+		put_value(address+8, (boolean) suboptimal);
+		put_value(address+12, status == null ? 0 : status.bits );
+		return address;
 	}
 
-	protected SurfaceTexture readFrom(WGPUReader in) {
-		var _texture = in.read_pointer();
-		texture = isNull(_texture) ? null : new WGPUTexture(_texture);
-		suboptimal = in.read_boolean();
-		status = SurfaceGetCurrentTextureStatus.from(in.read_int());
+	protected SurfaceTexture load(long address) {
+		if(texture != null) {
+			texture.handle = get_long(address+0);
+		} else {
+			texture = new WGPUTexture(get_long(address+0));
+		}
+		suboptimal = get_boolean(address+8);
+		status = SurfaceGetCurrentTextureStatus.from(get_int(address+12));
 		return this;
 	}
-
 	public SurfaceTexture() {}
-
-	public SurfaceTexture(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -27,40 +27,41 @@ public class RenderPipelineDescriptor extends WGPUStruct {
 	@Nullable
 	public FragmentState fragment;
 
-	protected int sizeInBytes() {
-		return 144;
+	protected static final int byteSize = 144;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(label);
-		out.pointer(layout);
-		out.write(vertex);
-		out.write(primitive);
-		out.pointer(depthStencil);
-		out.write(multisample);
-		out.pointer(fragment);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, stack.alloc(label));
+		put_value(address+16, layout == null ? 0L : layout.handle );
+		vertex.store(stack, address+24);
+		primitive.store(stack, address+80);
+		put_value(address+104, stack.alloc(depthStencil));
+		multisample.store(stack, address+112);
+		put_value(address+136, stack.alloc(fragment));
+		return address;
 	}
 
-	protected RenderPipelineDescriptor readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		label = in.read_string();
-		var _layout = in.read_pointer();
-		layout = isNull(_layout) ? null : new WGPUPipelineLayout(_layout);
-		vertex = new VertexState().readFrom(in);
-		primitive = new PrimitiveState().readFrom(in);
-		var _depthStencil = in.read_pointer();
-		depthStencil = isNull(_depthStencil) ? null : new DepthStencilState().readFrom(new WGPUReader(_depthStencil));
-		multisample = new MultisampleState().readFrom(in);
-		var _fragment = in.read_pointer();
-		fragment = isNull(_fragment) ? null : new FragmentState().readFrom(new WGPUReader(_fragment));
+	protected RenderPipelineDescriptor load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		label = get_string(get_long(address+8));
+		if(layout != null) {
+			layout.handle = get_long(address+16);
+		} else {
+			layout = new WGPUPipelineLayout(get_long(address+16));
+		}
+		vertex = (vertex != null ? vertex : new VertexState()).load(address+24);
+		primitive = (primitive != null ? primitive : new PrimitiveState()).load(address+80);
+		var _depthStencil = get_long(address+104);
+		depthStencil = _depthStencil == 0 ? null : (depthStencil != null ? depthStencil : new DepthStencilState()).load(_depthStencil);
+		multisample = (multisample != null ? multisample : new MultisampleState()).load(address+112);
+		var _fragment = get_long(address+136);
+		fragment = _fragment == 0 ? null : (fragment != null ? fragment : new FragmentState()).load(_fragment);
+		depthStencil = _depthStencil == 0 ? null : (depthStencil != null ? depthStencil : new DepthStencilState()).load(_depthStencil);
+		fragment = _fragment == 0 ? null : (fragment != null ? fragment : new FragmentState()).load(_fragment);
 		return this;
 	}
-
 	public RenderPipelineDescriptor() {}
-
-	public RenderPipelineDescriptor(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

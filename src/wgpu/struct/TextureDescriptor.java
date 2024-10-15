@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -25,53 +25,51 @@ public class TextureDescriptor extends WGPUStruct {
 	public int mipLevelCount;
 	public int sampleCount;
 	// padding 4
-	// [viewFormatCount]
+	// size_t viewFormatCount
 	public TextureFormat[] viewFormats;
 
-	protected int sizeInBytes() {
-		return 72;
+	protected static final int byteSize = 72;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(label);
-		out.write(usage);
-		out.write(dimension);
-		out.write(size);
-		out.write(format);
-		out.write(mipLevelCount);
-		out.write(sampleCount);
-		out.padding(4);
-		out.write((long) (viewFormats == null ? 0 : viewFormats.length));
-		out.pointer(viewFormats);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, stack.alloc(label));
+		put_value(address+16, (int) usage);
+		put_value(address+20, dimension == null ? 0 : dimension.bits );
+		size.store(stack, address+24);
+		put_value(address+40, format == null ? 0 : format.bits );
+		put_value(address+44, (int) mipLevelCount);
+		put_value(address+48, (int) sampleCount);
+		// padding 4
+		put_value(address+56, (long) (viewFormats == null ? 0 : viewFormats.length));
+		put_value(address+64, stack.alloc(viewFormats));
+		return address;
 	}
 
-	protected TextureDescriptor readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		label = in.read_string();
-		usage = in.read_int();
-		dimension = TextureDimension.from(in.read_int());
-		size = new Extent3D().readFrom(in);
-		format = TextureFormat.from(in.read_int());
-		mipLevelCount = in.read_int();
-		sampleCount = in.read_int();
-		in.padding(4);
-		var viewFormatCount = (int) in.read_long();
-		var _viewFormats = in.read_pointer();
-		if(!isNull(_viewFormats)) {
-			viewFormats = new TextureFormat[viewFormatCount];
-			var rin = new WGPUReader(_viewFormats);
+	protected TextureDescriptor load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		label = get_string(get_long(address+8));
+		usage = get_int(address+16);
+		dimension = TextureDimension.from(get_int(address+20));
+		size = (size != null ? size : new Extent3D()).load(address+24);
+		format = TextureFormat.from(get_int(address+40));
+		mipLevelCount = get_int(address+44);
+		sampleCount = get_int(address+48);
+		// padding 4
+		var viewFormatCount = (int) get_long(address+56);
+		var _viewFormats = get_long(address+64);
+		// padding 4
+		if(_viewFormats != 0L) {
+			viewFormats = viewFormats != null && viewFormats.length == viewFormatCount ? viewFormats : new TextureFormat[viewFormatCount];
 			for(int i=0; i<viewFormats.length; i++) {
-				viewFormats[i] = TextureFormat.from(rin.read_int());
+				viewFormats[i] = TextureFormat.from(get_int(_viewFormats + i*4));
 			}
+		} else {
+			viewFormats= null;
 		}
 		return this;
 	}
-
 	public TextureDescriptor() {}
-
-	public TextureDescriptor(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

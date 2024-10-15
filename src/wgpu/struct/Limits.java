@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -83,87 +83,84 @@ public class Limits extends WGPUStruct {
 		maxComputeWorkgroupsPerDimension = 65535;
 	}
 
-	protected int sizeInBytes() {
-		return 144;
+	protected static final int byteSize = 144;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.write(maxTextureDimension1D);
-		out.write(maxTextureDimension2D);
-		out.write(maxTextureDimension3D);
-		out.write(maxTextureArrayLayers);
-		out.write(maxBindGroups);
-		out.write(maxBindGroupsPlusVertexBuffers);
-		out.write(maxBindingsPerBindGroup);
-		out.write(maxDynamicUniformBuffersPerPipelineLayout);
-		out.write(maxDynamicStorageBuffersPerPipelineLayout);
-		out.write(maxSampledTexturesPerShaderStage);
-		out.write(maxSamplersPerShaderStage);
-		out.write(maxStorageBuffersPerShaderStage);
-		out.write(maxStorageTexturesPerShaderStage);
-		out.write(maxUniformBuffersPerShaderStage);
-		out.write(maxUniformBufferBindingSize);
-		out.write(maxStorageBufferBindingSize);
-		out.write(minUniformBufferOffsetAlignment);
-		out.write(minStorageBufferOffsetAlignment);
-		out.write(maxVertexBuffers);
-		out.padding(4);
-		out.write(maxBufferSize);
-		out.write(maxVertexAttributes);
-		out.write(maxVertexBufferArrayStride);
-		out.write(maxInterStageShaderComponents);
-		out.write(maxInterStageShaderVariables);
-		out.write(maxColorAttachments);
-		out.write(maxColorAttachmentBytesPerSample);
-		out.write(maxComputeWorkgroupStorageSize);
-		out.write(maxComputeInvocationsPerWorkgroup);
-		out.write(maxComputeWorkgroupSizeX);
-		out.write(maxComputeWorkgroupSizeY);
-		out.write(maxComputeWorkgroupSizeZ);
-		out.write(maxComputeWorkgroupsPerDimension);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, (int) maxTextureDimension1D);
+		put_value(address+4, (int) maxTextureDimension2D);
+		put_value(address+8, (int) maxTextureDimension3D);
+		put_value(address+12, (int) maxTextureArrayLayers);
+		put_value(address+16, (int) maxBindGroups);
+		put_value(address+20, (int) maxBindGroupsPlusVertexBuffers);
+		put_value(address+24, (int) maxBindingsPerBindGroup);
+		put_value(address+28, (int) maxDynamicUniformBuffersPerPipelineLayout);
+		put_value(address+32, (int) maxDynamicStorageBuffersPerPipelineLayout);
+		put_value(address+36, (int) maxSampledTexturesPerShaderStage);
+		put_value(address+40, (int) maxSamplersPerShaderStage);
+		put_value(address+44, (int) maxStorageBuffersPerShaderStage);
+		put_value(address+48, (int) maxStorageTexturesPerShaderStage);
+		put_value(address+52, (int) maxUniformBuffersPerShaderStage);
+		put_value(address+56, (long) maxUniformBufferBindingSize);
+		put_value(address+64, (long) maxStorageBufferBindingSize);
+		put_value(address+72, (int) minUniformBufferOffsetAlignment);
+		put_value(address+76, (int) minStorageBufferOffsetAlignment);
+		put_value(address+80, (int) maxVertexBuffers);
+		// padding 4
+		put_value(address+88, (long) maxBufferSize);
+		put_value(address+96, (int) maxVertexAttributes);
+		put_value(address+100, (int) maxVertexBufferArrayStride);
+		put_value(address+104, (int) maxInterStageShaderComponents);
+		put_value(address+108, (int) maxInterStageShaderVariables);
+		put_value(address+112, (int) maxColorAttachments);
+		put_value(address+116, (int) maxColorAttachmentBytesPerSample);
+		put_value(address+120, (int) maxComputeWorkgroupStorageSize);
+		put_value(address+124, (int) maxComputeInvocationsPerWorkgroup);
+		put_value(address+128, (int) maxComputeWorkgroupSizeX);
+		put_value(address+132, (int) maxComputeWorkgroupSizeY);
+		put_value(address+136, (int) maxComputeWorkgroupSizeZ);
+		put_value(address+140, (int) maxComputeWorkgroupsPerDimension);
+		return address;
 	}
 
-	protected Limits readFrom(WGPUReader in) {
-		maxTextureDimension1D = in.read_int();
-		maxTextureDimension2D = in.read_int();
-		maxTextureDimension3D = in.read_int();
-		maxTextureArrayLayers = in.read_int();
-		maxBindGroups = in.read_int();
-		maxBindGroupsPlusVertexBuffers = in.read_int();
-		maxBindingsPerBindGroup = in.read_int();
-		maxDynamicUniformBuffersPerPipelineLayout = in.read_int();
-		maxDynamicStorageBuffersPerPipelineLayout = in.read_int();
-		maxSampledTexturesPerShaderStage = in.read_int();
-		maxSamplersPerShaderStage = in.read_int();
-		maxStorageBuffersPerShaderStage = in.read_int();
-		maxStorageTexturesPerShaderStage = in.read_int();
-		maxUniformBuffersPerShaderStage = in.read_int();
-		maxUniformBufferBindingSize = in.read_long();
-		maxStorageBufferBindingSize = in.read_long();
-		minUniformBufferOffsetAlignment = in.read_int();
-		minStorageBufferOffsetAlignment = in.read_int();
-		maxVertexBuffers = in.read_int();
-		in.padding(4);
-		maxBufferSize = in.read_long();
-		maxVertexAttributes = in.read_int();
-		maxVertexBufferArrayStride = in.read_int();
-		maxInterStageShaderComponents = in.read_int();
-		maxInterStageShaderVariables = in.read_int();
-		maxColorAttachments = in.read_int();
-		maxColorAttachmentBytesPerSample = in.read_int();
-		maxComputeWorkgroupStorageSize = in.read_int();
-		maxComputeInvocationsPerWorkgroup = in.read_int();
-		maxComputeWorkgroupSizeX = in.read_int();
-		maxComputeWorkgroupSizeY = in.read_int();
-		maxComputeWorkgroupSizeZ = in.read_int();
-		maxComputeWorkgroupsPerDimension = in.read_int();
+	protected Limits load(long address) {
+		maxTextureDimension1D = get_int(address+0);
+		maxTextureDimension2D = get_int(address+4);
+		maxTextureDimension3D = get_int(address+8);
+		maxTextureArrayLayers = get_int(address+12);
+		maxBindGroups = get_int(address+16);
+		maxBindGroupsPlusVertexBuffers = get_int(address+20);
+		maxBindingsPerBindGroup = get_int(address+24);
+		maxDynamicUniformBuffersPerPipelineLayout = get_int(address+28);
+		maxDynamicStorageBuffersPerPipelineLayout = get_int(address+32);
+		maxSampledTexturesPerShaderStage = get_int(address+36);
+		maxSamplersPerShaderStage = get_int(address+40);
+		maxStorageBuffersPerShaderStage = get_int(address+44);
+		maxStorageTexturesPerShaderStage = get_int(address+48);
+		maxUniformBuffersPerShaderStage = get_int(address+52);
+		maxUniformBufferBindingSize = get_long(address+56);
+		maxStorageBufferBindingSize = get_long(address+64);
+		minUniformBufferOffsetAlignment = get_int(address+72);
+		minStorageBufferOffsetAlignment = get_int(address+76);
+		maxVertexBuffers = get_int(address+80);
+		// padding 4
+		maxBufferSize = get_long(address+88);
+		maxVertexAttributes = get_int(address+96);
+		maxVertexBufferArrayStride = get_int(address+100);
+		maxInterStageShaderComponents = get_int(address+104);
+		maxInterStageShaderVariables = get_int(address+108);
+		maxColorAttachments = get_int(address+112);
+		maxColorAttachmentBytesPerSample = get_int(address+116);
+		maxComputeWorkgroupStorageSize = get_int(address+120);
+		maxComputeInvocationsPerWorkgroup = get_int(address+124);
+		maxComputeWorkgroupSizeX = get_int(address+128);
+		maxComputeWorkgroupSizeY = get_int(address+132);
+		maxComputeWorkgroupSizeZ = get_int(address+136);
+		maxComputeWorkgroupsPerDimension = get_int(address+140);
+		// padding 4
 		return this;
 	}
-
 	public Limits() {}
-
-	public Limits(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

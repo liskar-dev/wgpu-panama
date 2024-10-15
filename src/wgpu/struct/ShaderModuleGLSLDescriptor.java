@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -19,50 +19,50 @@ public class ShaderModuleGLSLDescriptor extends ChainedStruct {
 	public int stage;
 	// padding 4
 	public String code;
-	// [defineCount]
+	// uint32_t defineCount
 	// padding 4
 	public ShaderDefine[] defines;
 
-	protected int sizeInBytes() {
-		return 48;
+	protected static final int byteSize = 48;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(super.next);
-		out.write(SType.ShaderModuleGLSLDescriptor);
-		out.padding(4);
-		out.write(stage);
-		out.padding(4);
-		out.pointer(code);
-		out.write((int) (defines == null ? 0 : defines.length));
-		out.padding(4);
-		out.pointer(defines);
+	protected long store(Stack stack, long address) {
+		put_value(address + 0, stack.alloc(next));
+		put_value(address + 8, (int) SType.ShaderModuleGLSLDescriptor);
+		// padding 4
+		put_value(address+16, (int) stage);
+		// padding 4
+		put_value(address+24, stack.alloc(code));
+		put_value(address+32, (int) (defines == null ? 0 : defines.length));
+		// padding 4
+		put_value(address+40, stack.alloc(defines));
+		return address;
 	}
 
-	protected ShaderModuleGLSLDescriptor readFrom(WGPUReader in) {
-		super.next = ChainedStruct.from(in.read_pointer());
-		var sType = in.read_int();
-		in.padding(4);
-		stage = in.read_int();
-		in.padding(4);
-		code = in.read_string();
-		var defineCount = (int) in.read_int();
-		in.padding(4);
-		var _defines = in.read_pointer();
-		if(!isNull(_defines)) {
-			defines = new ShaderDefine[defineCount];
-			var rin = new WGPUReader(_defines);
+	protected ShaderModuleGLSLDescriptor load(long address) {
+		var _next = get_long(address + 0);
+		// unit32_t sType
+		// padding 4
+		stage = get_int(address+16);
+		// padding 4
+		code = get_string(get_long(address+24));
+		var defineCount = (int) get_int(address+32);
+		// padding 4
+		var _defines = get_long(address+40);
+		super.next = ChainedStruct.from(_next);
+		// padding 4
+		// padding 4
+		if(_defines != 0L) {
+			defines = defines != null && defines.length == defineCount ? defines : new ShaderDefine[defineCount];
 			for(int i=0; i<defines.length; i++) {
-				defines[i] = new ShaderDefine().readFrom(rin);
+				defines[i] = new ShaderDefine().load(_defines + i*ShaderDefine.byteSize);
 			}
+		} else {
+			defines= null;
 		}
 		return this;
 	}
-
 	public ShaderModuleGLSLDescriptor() {}
-
-	public ShaderModuleGLSLDescriptor(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

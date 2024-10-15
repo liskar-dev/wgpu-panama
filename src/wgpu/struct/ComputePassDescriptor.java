@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -20,28 +20,25 @@ public class ComputePassDescriptor extends WGPUStruct {
 	@Nullable
 	public ComputePassTimestampWrites timestampWrites;
 
-	protected int sizeInBytes() {
-		return 24;
+	protected static final int byteSize = 24;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(label);
-		out.pointer(timestampWrites);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, stack.alloc(label));
+		put_value(address+16, stack.alloc(timestampWrites));
+		return address;
 	}
 
-	protected ComputePassDescriptor readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		label = in.read_string();
-		var _timestampWrites = in.read_pointer();
-		timestampWrites = isNull(_timestampWrites) ? null : new ComputePassTimestampWrites().readFrom(new WGPUReader(_timestampWrites));
+	protected ComputePassDescriptor load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		label = get_string(get_long(address+8));
+		var _timestampWrites = get_long(address+16);
+		timestampWrites = _timestampWrites == 0 ? null : (timestampWrites != null ? timestampWrites : new ComputePassTimestampWrites()).load(_timestampWrites);
+		timestampWrites = _timestampWrites == 0 ? null : (timestampWrites != null ? timestampWrites : new ComputePassTimestampWrites()).load(_timestampWrites);
 		return this;
 	}
-
 	public ComputePassDescriptor() {}
-
-	public ComputePassDescriptor(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

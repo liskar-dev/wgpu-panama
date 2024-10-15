@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -17,41 +17,39 @@ public class VertexBufferLayout extends WGPUStruct {
 	public long arrayStride;
 	public VertexStepMode stepMode;
 	// padding 4
-	// [attributeCount]
+	// size_t attributeCount
 	public VertexAttribute[] attributes;
 
-	protected int sizeInBytes() {
-		return 32;
+	protected static final int byteSize = 32;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.write(arrayStride);
-		out.write(stepMode);
-		out.padding(4);
-		out.write((long) (attributes == null ? 0 : attributes.length));
-		out.pointer(attributes);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, (long) arrayStride);
+		put_value(address+8, stepMode == null ? 0 : stepMode.bits );
+		// padding 4
+		put_value(address+16, (long) (attributes == null ? 0 : attributes.length));
+		put_value(address+24, stack.alloc(attributes));
+		return address;
 	}
 
-	protected VertexBufferLayout readFrom(WGPUReader in) {
-		arrayStride = in.read_long();
-		stepMode = VertexStepMode.from(in.read_int());
-		in.padding(4);
-		var attributeCount = (int) in.read_long();
-		var _attributes = in.read_pointer();
-		if(!isNull(_attributes)) {
-			attributes = new VertexAttribute[attributeCount];
-			var rin = new WGPUReader(_attributes);
+	protected VertexBufferLayout load(long address) {
+		arrayStride = get_long(address+0);
+		stepMode = VertexStepMode.from(get_int(address+8));
+		// padding 4
+		var attributeCount = (int) get_long(address+16);
+		var _attributes = get_long(address+24);
+		// padding 4
+		if(_attributes != 0L) {
+			attributes = attributes != null && attributes.length == attributeCount ? attributes : new VertexAttribute[attributeCount];
 			for(int i=0; i<attributes.length; i++) {
-				attributes[i] = new VertexAttribute().readFrom(rin);
+				attributes[i] = new VertexAttribute().load(_attributes + i*VertexAttribute.byteSize);
 			}
+		} else {
+			attributes= null;
 		}
 		return this;
 	}
-
 	public VertexBufferLayout() {}
-
-	public VertexBufferLayout(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

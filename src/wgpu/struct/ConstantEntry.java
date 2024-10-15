@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -18,27 +18,23 @@ public class ConstantEntry extends WGPUStruct {
 	public String key;
 	public double value;
 
-	protected int sizeInBytes() {
-		return 24;
+	protected static final int byteSize = 24;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(key);
-		out.write(value);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, stack.alloc(key));
+		put_value(address+16, (double) value);
+		return address;
 	}
 
-	protected ConstantEntry readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		key = in.read_string();
-		value = in.read_double();
+	protected ConstantEntry load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		key = get_string(get_long(address+8));
+		value = get_double(address+16);
 		return this;
 	}
-
 	public ConstantEntry() {}
-
-	public ConstantEntry(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

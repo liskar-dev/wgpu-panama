@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -24,39 +24,36 @@ public class InstanceExtras extends ChainedStruct {
 	public String dxilPath;
 	public String dxcPath;
 
-	protected int sizeInBytes() {
-		return 48;
+	protected static final int byteSize = 48;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(super.next);
-		out.write(SType.InstanceExtras);
-		out.padding(4);
-		out.write(backends);
-		out.write(flags);
-		out.write(dx12ShaderCompiler);
-		out.write(gles3MinorVersion);
-		out.pointer(dxilPath);
-		out.pointer(dxcPath);
+	protected long store(Stack stack, long address) {
+		put_value(address + 0, stack.alloc(next));
+		put_value(address + 8, (int) SType.InstanceExtras);
+		// padding 4
+		put_value(address+16, (int) backends);
+		put_value(address+20, (int) flags);
+		put_value(address+24, dx12ShaderCompiler == null ? 0 : dx12ShaderCompiler.bits );
+		put_value(address+28, gles3MinorVersion == null ? 0 : gles3MinorVersion.bits );
+		put_value(address+32, stack.alloc(dxilPath));
+		put_value(address+40, stack.alloc(dxcPath));
+		return address;
 	}
 
-	protected InstanceExtras readFrom(WGPUReader in) {
-		super.next = ChainedStruct.from(in.read_pointer());
-		var sType = in.read_int();
-		in.padding(4);
-		backends = in.read_int();
-		flags = in.read_int();
-		dx12ShaderCompiler = Dx12Compiler.from(in.read_int());
-		gles3MinorVersion = Gles3MinorVersion.from(in.read_int());
-		dxilPath = in.read_string();
-		dxcPath = in.read_string();
+	protected InstanceExtras load(long address) {
+		var _next = get_long(address + 0);
+		// unit32_t sType
+		// padding 4
+		backends = get_int(address+16);
+		flags = get_int(address+20);
+		dx12ShaderCompiler = Dx12Compiler.from(get_int(address+24));
+		gles3MinorVersion = Gles3MinorVersion.from(get_int(address+28));
+		dxilPath = get_string(get_long(address+32));
+		dxcPath = get_string(get_long(address+40));
+		super.next = ChainedStruct.from(_next);
 		return this;
 	}
-
 	public InstanceExtras() {}
-
-	public InstanceExtras(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

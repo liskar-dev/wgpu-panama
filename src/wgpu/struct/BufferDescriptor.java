@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -24,35 +24,33 @@ public class BufferDescriptor extends WGPUStruct {
 	public boolean mappedAtCreation;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 40;
+	protected static final int byteSize = 40;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(label);
-		out.write(usage);
-		out.padding(4);
-		out.write(size);
-		out.write(mappedAtCreation);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, stack.alloc(label));
+		put_value(address+16, (int) usage);
+		// padding 4
+		put_value(address+24, (long) size);
+		put_value(address+32, (boolean) mappedAtCreation);
+		// padding 4
+		return address;
 	}
 
-	protected BufferDescriptor readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		label = in.read_string();
-		usage = in.read_int();
-		in.padding(4);
-		size = in.read_long();
-		mappedAtCreation = in.read_boolean();
-		in.padding(4);
+	protected BufferDescriptor load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		label = get_string(get_long(address+8));
+		usage = get_int(address+16);
+		// padding 4
+		size = get_long(address+24);
+		mappedAtCreation = get_boolean(address+32);
+		// padding 4
+		// padding 4
+		// padding 4
 		return this;
 	}
-
 	public BufferDescriptor() {}
-
-	public BufferDescriptor(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

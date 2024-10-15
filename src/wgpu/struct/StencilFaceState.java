@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -19,29 +19,25 @@ public class StencilFaceState extends WGPUStruct {
 	public StencilOperation depthFailOp;
 	public StencilOperation passOp;
 
-	protected int sizeInBytes() {
-		return 16;
+	protected static final int byteSize = 16;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.write(compare);
-		out.write(failOp);
-		out.write(depthFailOp);
-		out.write(passOp);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, compare == null ? 0 : compare.bits );
+		put_value(address+4, failOp == null ? 0 : failOp.bits );
+		put_value(address+8, depthFailOp == null ? 0 : depthFailOp.bits );
+		put_value(address+12, passOp == null ? 0 : passOp.bits );
+		return address;
 	}
 
-	protected StencilFaceState readFrom(WGPUReader in) {
-		compare = CompareFunction.from(in.read_int());
-		failOp = StencilOperation.from(in.read_int());
-		depthFailOp = StencilOperation.from(in.read_int());
-		passOp = StencilOperation.from(in.read_int());
+	protected StencilFaceState load(long address) {
+		compare = CompareFunction.from(get_int(address+0));
+		failOp = StencilOperation.from(get_int(address+4));
+		depthFailOp = StencilOperation.from(get_int(address+8));
+		passOp = StencilOperation.from(get_int(address+12));
 		return this;
 	}
-
 	public StencilFaceState() {}
-
-	public StencilFaceState(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

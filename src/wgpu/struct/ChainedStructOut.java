@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -25,11 +25,10 @@ public abstract class ChainedStructOut extends WGPUStruct {
 		};
 	}
 
-	public static ChainedStructOut from(MemorySegment mem) {
-		if(mem == null || mem.equals(MemorySegment.NULL))
-			return null;
-		var struct = from(mem.get(JAVA_INT, 8));
-		struct.readFrom(new WGPUReader(mem));
+	protected static ChainedStructOut from(long address) {
+		if(address == 0L) return null;
+		var struct = from(get_int(address + 8));
+		struct.load(address);
 		return struct;
 	}
 

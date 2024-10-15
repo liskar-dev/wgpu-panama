@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -31,53 +31,49 @@ public class HubReport extends WGPUStruct {
 	public RegistryReport textureViews;
 	public RegistryReport samplers;
 
-	protected int sizeInBytes() {
-		return 640;
+	protected static final int byteSize = 640;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.write(adapters);
-		out.write(devices);
-		out.write(queues);
-		out.write(pipelineLayouts);
-		out.write(shaderModules);
-		out.write(bindGroupLayouts);
-		out.write(bindGroups);
-		out.write(commandBuffers);
-		out.write(renderBundles);
-		out.write(renderPipelines);
-		out.write(computePipelines);
-		out.write(querySets);
-		out.write(buffers);
-		out.write(textures);
-		out.write(textureViews);
-		out.write(samplers);
+	protected long store(Stack stack, long address) {
+		adapters.store(stack, address+0);
+		devices.store(stack, address+40);
+		queues.store(stack, address+80);
+		pipelineLayouts.store(stack, address+120);
+		shaderModules.store(stack, address+160);
+		bindGroupLayouts.store(stack, address+200);
+		bindGroups.store(stack, address+240);
+		commandBuffers.store(stack, address+280);
+		renderBundles.store(stack, address+320);
+		renderPipelines.store(stack, address+360);
+		computePipelines.store(stack, address+400);
+		querySets.store(stack, address+440);
+		buffers.store(stack, address+480);
+		textures.store(stack, address+520);
+		textureViews.store(stack, address+560);
+		samplers.store(stack, address+600);
+		return address;
 	}
 
-	protected HubReport readFrom(WGPUReader in) {
-		adapters = new RegistryReport().readFrom(in);
-		devices = new RegistryReport().readFrom(in);
-		queues = new RegistryReport().readFrom(in);
-		pipelineLayouts = new RegistryReport().readFrom(in);
-		shaderModules = new RegistryReport().readFrom(in);
-		bindGroupLayouts = new RegistryReport().readFrom(in);
-		bindGroups = new RegistryReport().readFrom(in);
-		commandBuffers = new RegistryReport().readFrom(in);
-		renderBundles = new RegistryReport().readFrom(in);
-		renderPipelines = new RegistryReport().readFrom(in);
-		computePipelines = new RegistryReport().readFrom(in);
-		querySets = new RegistryReport().readFrom(in);
-		buffers = new RegistryReport().readFrom(in);
-		textures = new RegistryReport().readFrom(in);
-		textureViews = new RegistryReport().readFrom(in);
-		samplers = new RegistryReport().readFrom(in);
+	protected HubReport load(long address) {
+		adapters = (adapters != null ? adapters : new RegistryReport()).load(address+0);
+		devices = (devices != null ? devices : new RegistryReport()).load(address+40);
+		queues = (queues != null ? queues : new RegistryReport()).load(address+80);
+		pipelineLayouts = (pipelineLayouts != null ? pipelineLayouts : new RegistryReport()).load(address+120);
+		shaderModules = (shaderModules != null ? shaderModules : new RegistryReport()).load(address+160);
+		bindGroupLayouts = (bindGroupLayouts != null ? bindGroupLayouts : new RegistryReport()).load(address+200);
+		bindGroups = (bindGroups != null ? bindGroups : new RegistryReport()).load(address+240);
+		commandBuffers = (commandBuffers != null ? commandBuffers : new RegistryReport()).load(address+280);
+		renderBundles = (renderBundles != null ? renderBundles : new RegistryReport()).load(address+320);
+		renderPipelines = (renderPipelines != null ? renderPipelines : new RegistryReport()).load(address+360);
+		computePipelines = (computePipelines != null ? computePipelines : new RegistryReport()).load(address+400);
+		querySets = (querySets != null ? querySets : new RegistryReport()).load(address+440);
+		buffers = (buffers != null ? buffers : new RegistryReport()).load(address+480);
+		textures = (textures != null ? textures : new RegistryReport()).load(address+520);
+		textureViews = (textureViews != null ? textureViews : new RegistryReport()).load(address+560);
+		samplers = (samplers != null ? samplers : new RegistryReport()).load(address+600);
 		return this;
 	}
-
 	public HubReport() {}
-
-	public HubReport(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

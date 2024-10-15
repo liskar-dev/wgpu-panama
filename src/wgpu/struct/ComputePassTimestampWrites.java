@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -18,28 +18,27 @@ public class ComputePassTimestampWrites extends WGPUStruct {
 	public int beginningOfPassWriteIndex;
 	public int endOfPassWriteIndex;
 
-	protected int sizeInBytes() {
-		return 16;
+	protected static final int byteSize = 16;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(querySet);
-		out.write(beginningOfPassWriteIndex);
-		out.write(endOfPassWriteIndex);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, querySet == null ? 0L : querySet.handle );
+		put_value(address+8, (int) beginningOfPassWriteIndex);
+		put_value(address+12, (int) endOfPassWriteIndex);
+		return address;
 	}
 
-	protected ComputePassTimestampWrites readFrom(WGPUReader in) {
-		var _querySet = in.read_pointer();
-		querySet = isNull(_querySet) ? null : new WGPUQuerySet(_querySet);
-		beginningOfPassWriteIndex = in.read_int();
-		endOfPassWriteIndex = in.read_int();
+	protected ComputePassTimestampWrites load(long address) {
+		if(querySet != null) {
+			querySet.handle = get_long(address+0);
+		} else {
+			querySet = new WGPUQuerySet(get_long(address+0));
+		}
+		beginningOfPassWriteIndex = get_int(address+8);
+		endOfPassWriteIndex = get_int(address+12);
 		return this;
 	}
-
 	public ComputePassTimestampWrites() {}
-
-	public ComputePassTimestampWrites(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

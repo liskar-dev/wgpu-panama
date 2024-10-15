@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -18,28 +18,27 @@ public class ShaderModuleCompilationHint extends WGPUStruct {
 	public String entryPoint;
 	public WGPUPipelineLayout layout;
 
-	protected int sizeInBytes() {
-		return 24;
+	protected static final int byteSize = 24;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(entryPoint);
-		out.pointer(layout);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, stack.alloc(entryPoint));
+		put_value(address+16, layout == null ? 0L : layout.handle );
+		return address;
 	}
 
-	protected ShaderModuleCompilationHint readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		entryPoint = in.read_string();
-		var _layout = in.read_pointer();
-		layout = isNull(_layout) ? null : new WGPUPipelineLayout(_layout);
+	protected ShaderModuleCompilationHint load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		entryPoint = get_string(get_long(address+8));
+		if(layout != null) {
+			layout.handle = get_long(address+16);
+		} else {
+			layout = new WGPUPipelineLayout(get_long(address+16));
+		}
 		return this;
 	}
-
 	public ShaderModuleCompilationHint() {}
-
-	public ShaderModuleCompilationHint(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -18,42 +18,42 @@ public class ProgrammableStageDescriptor extends WGPUStruct {
 	public WGPUShaderModule module;
 	@Nullable
 	public String entryPoint;
-	// [constantCount]
+	// size_t constantCount
 	public ConstantEntry[] constants;
 
-	protected int sizeInBytes() {
-		return 40;
+	protected static final int byteSize = 40;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(module);
-		out.pointer(entryPoint);
-		out.write((long) (constants == null ? 0 : constants.length));
-		out.pointer(constants);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, module == null ? 0L : module.handle );
+		put_value(address+16, stack.alloc(entryPoint));
+		put_value(address+24, (long) (constants == null ? 0 : constants.length));
+		put_value(address+32, stack.alloc(constants));
+		return address;
 	}
 
-	protected ProgrammableStageDescriptor readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		var _module = in.read_pointer();
-		module = isNull(_module) ? null : new WGPUShaderModule(_module);
-		entryPoint = in.read_string();
-		var constantCount = (int) in.read_long();
-		var _constants = in.read_pointer();
-		if(!isNull(_constants)) {
-			constants = new ConstantEntry[constantCount];
-			var rin = new WGPUReader(_constants);
+	protected ProgrammableStageDescriptor load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		if(module != null) {
+			module.handle = get_long(address+8);
+		} else {
+			module = new WGPUShaderModule(get_long(address+8));
+		}
+		entryPoint = get_string(get_long(address+16));
+		var constantCount = (int) get_long(address+24);
+		var _constants = get_long(address+32);
+		if(_constants != 0L) {
+			constants = constants != null && constants.length == constantCount ? constants : new ConstantEntry[constantCount];
 			for(int i=0; i<constants.length; i++) {
-				constants[i] = new ConstantEntry().readFrom(rin);
+				constants[i] = new ConstantEntry().load(_constants + i*ConstantEntry.byteSize);
 			}
+		} else {
+			constants= null;
 		}
 		return this;
 	}
-
 	public ProgrammableStageDescriptor() {}
-
-	public ProgrammableStageDescriptor(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

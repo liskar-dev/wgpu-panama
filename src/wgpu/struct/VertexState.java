@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -18,55 +18,56 @@ public class VertexState extends WGPUStruct {
 	public WGPUShaderModule module;
 	@Nullable
 	public String entryPoint;
-	// [constantCount]
+	// size_t constantCount
 	public ConstantEntry[] constants;
-	// [bufferCount]
+	// size_t bufferCount
 	public VertexBufferLayout[] buffers;
 
-	protected int sizeInBytes() {
-		return 56;
+	protected static final int byteSize = 56;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(module);
-		out.pointer(entryPoint);
-		out.write((long) (constants == null ? 0 : constants.length));
-		out.pointer(constants);
-		out.write((long) (buffers == null ? 0 : buffers.length));
-		out.pointer(buffers);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, module == null ? 0L : module.handle );
+		put_value(address+16, stack.alloc(entryPoint));
+		put_value(address+24, (long) (constants == null ? 0 : constants.length));
+		put_value(address+32, stack.alloc(constants));
+		put_value(address+40, (long) (buffers == null ? 0 : buffers.length));
+		put_value(address+48, stack.alloc(buffers));
+		return address;
 	}
 
-	protected VertexState readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		var _module = in.read_pointer();
-		module = isNull(_module) ? null : new WGPUShaderModule(_module);
-		entryPoint = in.read_string();
-		var constantCount = (int) in.read_long();
-		var _constants = in.read_pointer();
-		var bufferCount = (int) in.read_long();
-		var _buffers = in.read_pointer();
-		if(!isNull(_constants)) {
-			constants = new ConstantEntry[constantCount];
-			var rin = new WGPUReader(_constants);
-			for(int i=0; i<constants.length; i++) {
-				constants[i] = new ConstantEntry().readFrom(rin);
-			}
+	protected VertexState load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		if(module != null) {
+			module.handle = get_long(address+8);
+		} else {
+			module = new WGPUShaderModule(get_long(address+8));
 		}
-		if(!isNull(_buffers)) {
-			buffers = new VertexBufferLayout[bufferCount];
-			var rin = new WGPUReader(_buffers);
-			for(int i=0; i<buffers.length; i++) {
-				buffers[i] = new VertexBufferLayout().readFrom(rin);
+		entryPoint = get_string(get_long(address+16));
+		var constantCount = (int) get_long(address+24);
+		var _constants = get_long(address+32);
+		var bufferCount = (int) get_long(address+40);
+		var _buffers = get_long(address+48);
+		if(_constants != 0L) {
+			constants = constants != null && constants.length == constantCount ? constants : new ConstantEntry[constantCount];
+			for(int i=0; i<constants.length; i++) {
+				constants[i] = new ConstantEntry().load(_constants + i*ConstantEntry.byteSize);
 			}
+		} else {
+			constants= null;
+		}
+		if(_buffers != 0L) {
+			buffers = buffers != null && buffers.length == bufferCount ? buffers : new VertexBufferLayout[bufferCount];
+			for(int i=0; i<buffers.length; i++) {
+				buffers[i] = new VertexBufferLayout().load(_buffers + i*VertexBufferLayout.byteSize);
+			}
+		} else {
+			buffers= null;
 		}
 		return this;
 	}
-
 	public VertexState() {}
-
-	public VertexState(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

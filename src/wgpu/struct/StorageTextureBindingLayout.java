@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -20,31 +20,28 @@ public class StorageTextureBindingLayout extends WGPUStruct {
 	public TextureViewDimension viewDimension;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 24;
+	protected static final int byteSize = 24;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.write(access);
-		out.write(format);
-		out.write(viewDimension);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, access == null ? 0 : access.bits );
+		put_value(address+12, format == null ? 0 : format.bits );
+		put_value(address+16, viewDimension == null ? 0 : viewDimension.bits );
+		// padding 4
+		return address;
 	}
 
-	protected StorageTextureBindingLayout readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		access = StorageTextureAccess.from(in.read_int());
-		format = TextureFormat.from(in.read_int());
-		viewDimension = TextureViewDimension.from(in.read_int());
-		in.padding(4);
+	protected StorageTextureBindingLayout load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		access = StorageTextureAccess.from(get_int(address+8));
+		format = TextureFormat.from(get_int(address+12));
+		viewDimension = TextureViewDimension.from(get_int(address+16));
+		// padding 4
+		// padding 4
 		return this;
 	}
-
 	public StorageTextureBindingLayout() {}
-
-	public StorageTextureBindingLayout(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

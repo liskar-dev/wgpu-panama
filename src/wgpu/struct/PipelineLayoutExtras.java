@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -15,41 +15,39 @@ import static java.lang.foreign.MemoryLayout.*;
 
 public class PipelineLayoutExtras extends ChainedStruct {
 	// ChainedStruct chain;
-	// [pushConstantRangeCount]
+	// size_t pushConstantRangeCount
 	public PushConstantRange[] pushConstantRanges;
 
-	protected int sizeInBytes() {
-		return 32;
+	protected static final int byteSize = 32;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(super.next);
-		out.write(SType.PipelineLayoutExtras);
-		out.padding(4);
-		out.write((long) (pushConstantRanges == null ? 0 : pushConstantRanges.length));
-		out.pointer(pushConstantRanges);
+	protected long store(Stack stack, long address) {
+		put_value(address + 0, stack.alloc(next));
+		put_value(address + 8, (int) SType.PipelineLayoutExtras);
+		// padding 4
+		put_value(address+16, (long) (pushConstantRanges == null ? 0 : pushConstantRanges.length));
+		put_value(address+24, stack.alloc(pushConstantRanges));
+		return address;
 	}
 
-	protected PipelineLayoutExtras readFrom(WGPUReader in) {
-		super.next = ChainedStruct.from(in.read_pointer());
-		var sType = in.read_int();
-		in.padding(4);
-		var pushConstantRangeCount = (int) in.read_long();
-		var _pushConstantRanges = in.read_pointer();
-		if(!isNull(_pushConstantRanges)) {
-			pushConstantRanges = new PushConstantRange[pushConstantRangeCount];
-			var rin = new WGPUReader(_pushConstantRanges);
+	protected PipelineLayoutExtras load(long address) {
+		var _next = get_long(address + 0);
+		// unit32_t sType
+		// padding 4
+		var pushConstantRangeCount = (int) get_long(address+16);
+		var _pushConstantRanges = get_long(address+24);
+		super.next = ChainedStruct.from(_next);
+		if(_pushConstantRanges != 0L) {
+			pushConstantRanges = pushConstantRanges != null && pushConstantRanges.length == pushConstantRangeCount ? pushConstantRanges : new PushConstantRange[pushConstantRangeCount];
 			for(int i=0; i<pushConstantRanges.length; i++) {
-				pushConstantRanges[i] = new PushConstantRange().readFrom(rin);
+				pushConstantRanges[i] = new PushConstantRange().load(_pushConstantRanges + i*PushConstantRange.byteSize);
 			}
+		} else {
+			pushConstantRanges= null;
 		}
 		return this;
 	}
-
 	public PipelineLayoutExtras() {}
-
-	public PipelineLayoutExtras(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

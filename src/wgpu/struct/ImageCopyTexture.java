@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -22,36 +22,37 @@ public class ImageCopyTexture extends WGPUStruct {
 	public TextureAspect aspect;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 48;
+	protected static final int byteSize = 48;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(texture);
-		out.write(mipLevel);
-		out.padding(4);
-		out.write(origin);
-		out.write(aspect);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, texture == null ? 0L : texture.handle );
+		put_value(address+16, (int) mipLevel);
+		// padding 4
+		origin.store(stack, address+24);
+		put_value(address+40, aspect == null ? 0 : aspect.bits );
+		// padding 4
+		return address;
 	}
 
-	protected ImageCopyTexture readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		var _texture = in.read_pointer();
-		texture = isNull(_texture) ? null : new WGPUTexture(_texture);
-		mipLevel = in.read_int();
-		in.padding(4);
-		origin = new Origin3D().readFrom(in);
-		aspect = TextureAspect.from(in.read_int());
-		in.padding(4);
+	protected ImageCopyTexture load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		if(texture != null) {
+			texture.handle = get_long(address+8);
+		} else {
+			texture = new WGPUTexture(get_long(address+8));
+		}
+		mipLevel = get_int(address+16);
+		// padding 4
+		origin = (origin != null ? origin : new Origin3D()).load(address+24);
+		aspect = TextureAspect.from(get_int(address+40));
+		// padding 4
+		// padding 4
+		// padding 4
 		return this;
 	}
-
 	public ImageCopyTexture() {}
-
-	public ImageCopyTexture(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -19,29 +19,26 @@ public class Origin3D extends WGPUStruct {
 	public int z;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 16;
+	protected static final int byteSize = 16;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.write(x);
-		out.write(y);
-		out.write(z);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, (int) x);
+		put_value(address+4, (int) y);
+		put_value(address+8, (int) z);
+		// padding 4
+		return address;
 	}
 
-	protected Origin3D readFrom(WGPUReader in) {
-		x = in.read_int();
-		y = in.read_int();
-		z = in.read_int();
-		in.padding(4);
+	protected Origin3D load(long address) {
+		x = get_int(address+0);
+		y = get_int(address+4);
+		z = get_int(address+8);
+		// padding 4
+		// padding 4
 		return this;
 	}
-
 	public Origin3D() {}
-
-	public Origin3D(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

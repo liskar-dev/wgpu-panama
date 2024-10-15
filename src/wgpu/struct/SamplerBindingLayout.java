@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -18,27 +18,24 @@ public class SamplerBindingLayout extends WGPUStruct {
 	public SamplerBindingType type;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 16;
+	protected static final int byteSize = 16;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.write(type);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, type == null ? 0 : type.bits );
+		// padding 4
+		return address;
 	}
 
-	protected SamplerBindingLayout readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		type = SamplerBindingType.from(in.read_int());
-		in.padding(4);
+	protected SamplerBindingLayout load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		type = SamplerBindingType.from(get_int(address+8));
+		// padding 4
+		// padding 4
 		return this;
 	}
-
 	public SamplerBindingLayout() {}
-
-	public SamplerBindingLayout(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

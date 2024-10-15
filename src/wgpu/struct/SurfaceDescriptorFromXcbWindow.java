@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -19,33 +19,31 @@ public class SurfaceDescriptorFromXcbWindow extends ChainedStruct {
 	public int window;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 32;
+	protected static final int byteSize = 32;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(super.next);
-		out.write(SType.SurfaceDescriptorFromXcbWindow);
-		out.padding(4);
-		out.write(connection);
-		out.write(window);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address + 0, stack.alloc(next));
+		put_value(address + 8, (int) SType.SurfaceDescriptorFromXcbWindow);
+		// padding 4
+		put_value(address+16, (long) connection);
+		put_value(address+24, (int) window);
+		// padding 4
+		return address;
 	}
 
-	protected SurfaceDescriptorFromXcbWindow readFrom(WGPUReader in) {
-		super.next = ChainedStruct.from(in.read_pointer());
-		var sType = in.read_int();
-		in.padding(4);
-		connection = in.read_long();
-		window = in.read_int();
-		in.padding(4);
+	protected SurfaceDescriptorFromXcbWindow load(long address) {
+		var _next = get_long(address + 0);
+		// unit32_t sType
+		// padding 4
+		connection = get_long(address+16);
+		window = get_int(address+24);
+		// padding 4
+		super.next = ChainedStruct.from(_next);
+		// padding 4
 		return this;
 	}
-
 	public SurfaceDescriptorFromXcbWindow() {}
-
-	public SurfaceDescriptorFromXcbWindow(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -19,29 +19,26 @@ public class Extent3D extends WGPUStruct {
 	public int depthOrArrayLayers;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 16;
+	protected static final int byteSize = 16;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.write(width);
-		out.write(height);
-		out.write(depthOrArrayLayers);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, (int) width);
+		put_value(address+4, (int) height);
+		put_value(address+8, (int) depthOrArrayLayers);
+		// padding 4
+		return address;
 	}
 
-	protected Extent3D readFrom(WGPUReader in) {
-		width = in.read_int();
-		height = in.read_int();
-		depthOrArrayLayers = in.read_int();
-		in.padding(4);
+	protected Extent3D load(long address) {
+		width = get_int(address+0);
+		height = get_int(address+4);
+		depthOrArrayLayers = get_int(address+8);
+		// padding 4
+		// padding 4
 		return this;
 	}
-
 	public Extent3D() {}
-
-	public Extent3D(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

@@ -1,10 +1,12 @@
 package wgpu;
 
-import java.lang.foreign.MemorySegment;
-
 public class WGPUImpl {
-	protected MemorySegment handle;
-	protected WGPUImpl(MemorySegment handle) {
+	public long handle;
+	protected WGPUImpl(long handle) {
+		this.handle = handle;
+	}
+	
+	public void set(long handle) {
 		this.handle = handle;
 	}
 }

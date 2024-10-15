@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -19,29 +19,26 @@ public class BlendComponent extends WGPUStruct {
 	public BlendFactor dstFactor;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 16;
+	protected static final int byteSize = 16;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.write(operation);
-		out.write(srcFactor);
-		out.write(dstFactor);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, operation == null ? 0 : operation.bits );
+		put_value(address+4, srcFactor == null ? 0 : srcFactor.bits );
+		put_value(address+8, dstFactor == null ? 0 : dstFactor.bits );
+		// padding 4
+		return address;
 	}
 
-	protected BlendComponent readFrom(WGPUReader in) {
-		operation = BlendOperation.from(in.read_int());
-		srcFactor = BlendFactor.from(in.read_int());
-		dstFactor = BlendFactor.from(in.read_int());
-		in.padding(4);
+	protected BlendComponent load(long address) {
+		operation = BlendOperation.from(get_int(address+0));
+		srcFactor = BlendFactor.from(get_int(address+4));
+		dstFactor = BlendFactor.from(get_int(address+8));
+		// padding 4
+		// padding 4
 		return this;
 	}
-
 	public BlendComponent() {}
-
-	public BlendComponent(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

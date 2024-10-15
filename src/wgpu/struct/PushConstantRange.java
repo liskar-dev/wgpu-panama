@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -20,29 +20,26 @@ public class PushConstantRange extends WGPUStruct {
 	public int end;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 16;
+	protected static final int byteSize = 16;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.write(stages);
-		out.write(start);
-		out.write(end);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, (int) stages);
+		put_value(address+4, (int) start);
+		put_value(address+8, (int) end);
+		// padding 4
+		return address;
 	}
 
-	protected PushConstantRange readFrom(WGPUReader in) {
-		stages = in.read_int();
-		start = in.read_int();
-		end = in.read_int();
-		in.padding(4);
+	protected PushConstantRange load(long address) {
+		stages = get_int(address+0);
+		start = get_int(address+4);
+		end = get_int(address+8);
+		// padding 4
+		// padding 4
 		return this;
 	}
-
 	public PushConstantRange() {}
-
-	public PushConstantRange(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

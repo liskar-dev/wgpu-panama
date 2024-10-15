@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -17,25 +17,21 @@ public class BlendState extends WGPUStruct {
 	public BlendComponent color;
 	public BlendComponent alpha;
 
-	protected int sizeInBytes() {
-		return 32;
+	protected static final int byteSize = 32;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.write(color);
-		out.write(alpha);
+	protected long store(Stack stack, long address) {
+		color.store(stack, address+0);
+		alpha.store(stack, address+16);
+		return address;
 	}
 
-	protected BlendState readFrom(WGPUReader in) {
-		color = new BlendComponent().readFrom(in);
-		alpha = new BlendComponent().readFrom(in);
+	protected BlendState load(long address) {
+		color = (color != null ? color : new BlendComponent()).load(address+0);
+		alpha = (alpha != null ? alpha : new BlendComponent()).load(address+16);
 		return this;
 	}
-
 	public BlendState() {}
-
-	public BlendState(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

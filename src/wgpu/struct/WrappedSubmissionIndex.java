@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -17,26 +17,25 @@ public class WrappedSubmissionIndex extends WGPUStruct {
 	public WGPUQueue queue;
 	public long submissionIndex;
 
-	protected int sizeInBytes() {
-		return 16;
+	protected static final int byteSize = 16;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(queue);
-		out.write(submissionIndex);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, queue == null ? 0L : queue.handle );
+		put_value(address+8, (long) submissionIndex);
+		return address;
 	}
 
-	protected WrappedSubmissionIndex readFrom(WGPUReader in) {
-		var _queue = in.read_pointer();
-		queue = isNull(_queue) ? null : new WGPUQueue(_queue);
-		submissionIndex = in.read_long();
+	protected WrappedSubmissionIndex load(long address) {
+		if(queue != null) {
+			queue.handle = get_long(address+0);
+		} else {
+			queue = new WGPUQueue(get_long(address+0));
+		}
+		submissionIndex = get_long(address+8);
 		return this;
 	}
-
 	public WrappedSubmissionIndex() {}
-
-	public WrappedSubmissionIndex(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

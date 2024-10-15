@@ -1,7 +1,7 @@
 package wgpu;
 
 public abstract class WGPUEnum {
-	protected final int bits;
+	public final int bits;
 	protected final String name;
 	protected WGPUEnum(int bits, String name) {
 		this.bits = bits;

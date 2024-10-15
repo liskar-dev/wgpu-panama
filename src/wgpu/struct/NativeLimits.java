@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -17,25 +17,21 @@ public class NativeLimits extends WGPUStruct {
 	public int maxPushConstantSize;
 	public int maxNonSamplerBindings;
 
-	protected int sizeInBytes() {
-		return 8;
+	protected static final int byteSize = 8;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.write(maxPushConstantSize);
-		out.write(maxNonSamplerBindings);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, (int) maxPushConstantSize);
+		put_value(address+4, (int) maxNonSamplerBindings);
+		return address;
 	}
 
-	protected NativeLimits readFrom(WGPUReader in) {
-		maxPushConstantSize = in.read_int();
-		maxNonSamplerBindings = in.read_int();
+	protected NativeLimits load(long address) {
+		maxPushConstantSize = get_int(address+0);
+		maxNonSamplerBindings = get_int(address+4);
 		return this;
 	}
-
 	public NativeLimits() {}
-
-	public NativeLimits(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

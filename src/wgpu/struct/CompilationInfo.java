@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -15,37 +15,34 @@ import static java.lang.foreign.MemoryLayout.*;
 
 public class CompilationInfo extends WGPUStruct {
 	public ChainedStruct nextInChain;
-	// [messageCount]
+	// size_t messageCount
 	public CompilationMessage[] messages;
 
-	protected int sizeInBytes() {
-		return 24;
+	protected static final int byteSize = 24;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.write((long) (messages == null ? 0 : messages.length));
-		out.pointer(messages);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, (long) (messages == null ? 0 : messages.length));
+		put_value(address+16, stack.alloc(messages));
+		return address;
 	}
 
-	protected CompilationInfo readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		var messageCount = (int) in.read_long();
-		var _messages = in.read_pointer();
-		if(!isNull(_messages)) {
-			messages = new CompilationMessage[messageCount];
-			var rin = new WGPUReader(_messages);
+	protected CompilationInfo load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		var messageCount = (int) get_long(address+8);
+		var _messages = get_long(address+16);
+		if(_messages != 0L) {
+			messages = messages != null && messages.length == messageCount ? messages : new CompilationMessage[messageCount];
 			for(int i=0; i<messages.length; i++) {
-				messages[i] = new CompilationMessage().readFrom(rin);
+				messages[i] = new CompilationMessage().load(_messages + i*CompilationMessage.byteSize);
 			}
+		} else {
+			messages= null;
 		}
 		return this;
 	}
-
 	public CompilationInfo() {}
-
-	public CompilationInfo(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

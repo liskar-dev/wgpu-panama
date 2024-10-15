@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -24,39 +24,35 @@ public class AdapterInfo extends WGPUStruct {
 	public int vendorID;
 	public int deviceID;
 
-	protected int sizeInBytes() {
-		return 56;
+	protected static final int byteSize = 56;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(vendor);
-		out.pointer(architecture);
-		out.pointer(device);
-		out.pointer(description);
-		out.write(backendType);
-		out.write(adapterType);
-		out.write(vendorID);
-		out.write(deviceID);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, stack.alloc(vendor));
+		put_value(address+16, stack.alloc(architecture));
+		put_value(address+24, stack.alloc(device));
+		put_value(address+32, stack.alloc(description));
+		put_value(address+40, backendType == null ? 0 : backendType.bits );
+		put_value(address+44, adapterType == null ? 0 : adapterType.bits );
+		put_value(address+48, (int) vendorID);
+		put_value(address+52, (int) deviceID);
+		return address;
 	}
 
-	protected AdapterInfo readFrom(WGPUReader in) {
-		nextInChain = ChainedStructOut.from(in.read_pointer());
-		vendor = in.read_string();
-		architecture = in.read_string();
-		device = in.read_string();
-		description = in.read_string();
-		backendType = BackendType.from(in.read_int());
-		adapterType = AdapterType.from(in.read_int());
-		vendorID = in.read_int();
-		deviceID = in.read_int();
+	protected AdapterInfo load(long address) {
+		nextInChain = ChainedStructOut.from(get_long(address+0));
+		vendor = get_string(get_long(address+8));
+		architecture = get_string(get_long(address+16));
+		device = get_string(get_long(address+24));
+		description = get_string(get_long(address+32));
+		backendType = BackendType.from(get_int(address+40));
+		adapterType = AdapterType.from(get_int(address+44));
+		vendorID = get_int(address+48);
+		deviceID = get_int(address+52);
 		return this;
 	}
-
 	public AdapterInfo() {}
-
-	public AdapterInfo(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

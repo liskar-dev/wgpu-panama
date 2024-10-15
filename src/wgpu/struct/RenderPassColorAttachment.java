@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -25,39 +25,42 @@ public class RenderPassColorAttachment extends WGPUStruct {
 	public StoreOp storeOp;
 	public Color clearValue;
 
-	protected int sizeInBytes() {
-		return 72;
+	protected static final int byteSize = 72;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(view);
-		out.write(depthSlice);
-		out.padding(4);
-		out.pointer(resolveTarget);
-		out.write(loadOp);
-		out.write(storeOp);
-		out.write(clearValue);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, view == null ? 0L : view.handle );
+		put_value(address+16, (int) depthSlice);
+		// padding 4
+		put_value(address+24, resolveTarget == null ? 0L : resolveTarget.handle );
+		put_value(address+32, loadOp == null ? 0 : loadOp.bits );
+		put_value(address+36, storeOp == null ? 0 : storeOp.bits );
+		clearValue.store(stack, address+40);
+		return address;
 	}
 
-	protected RenderPassColorAttachment readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		var _view = in.read_pointer();
-		view = isNull(_view) ? null : new WGPUTextureView(_view);
-		depthSlice = in.read_int();
-		in.padding(4);
-		var _resolveTarget = in.read_pointer();
-		resolveTarget = isNull(_resolveTarget) ? null : new WGPUTextureView(_resolveTarget);
-		loadOp = LoadOp.from(in.read_int());
-		storeOp = StoreOp.from(in.read_int());
-		clearValue = new Color().readFrom(in);
+	protected RenderPassColorAttachment load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		if(view != null) {
+			view.handle = get_long(address+8);
+		} else {
+			view = new WGPUTextureView(get_long(address+8));
+		}
+		depthSlice = get_int(address+16);
+		// padding 4
+		if(resolveTarget != null) {
+			resolveTarget.handle = get_long(address+24);
+		} else {
+			resolveTarget = new WGPUTextureView(get_long(address+24));
+		}
+		loadOp = LoadOp.from(get_int(address+32));
+		storeOp = StoreOp.from(get_int(address+36));
+		clearValue = (clearValue != null ? clearValue : new Color()).load(address+40);
+		// padding 4
 		return this;
 	}
-
 	public RenderPassColorAttachment() {}
-
-	public RenderPassColorAttachment(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

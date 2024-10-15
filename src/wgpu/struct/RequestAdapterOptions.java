@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -22,34 +22,34 @@ public class RequestAdapterOptions extends WGPUStruct {
 	public boolean forceFallbackAdapter;
 	// padding 4
 
-	protected int sizeInBytes() {
-		return 32;
+	protected static final int byteSize = 32;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(nextInChain);
-		out.pointer(compatibleSurface);
-		out.write(powerPreference);
-		out.write(backendType);
-		out.write(forceFallbackAdapter);
-		out.padding(4);
+	protected long store(Stack stack, long address) {
+		put_value(address+0, stack.alloc(nextInChain));
+		put_value(address+8, compatibleSurface == null ? 0L : compatibleSurface.handle );
+		put_value(address+16, powerPreference == null ? 0 : powerPreference.bits );
+		put_value(address+20, backendType == null ? 0 : backendType.bits );
+		put_value(address+24, (boolean) forceFallbackAdapter);
+		// padding 4
+		return address;
 	}
 
-	protected RequestAdapterOptions readFrom(WGPUReader in) {
-		nextInChain = ChainedStruct.from(in.read_pointer());
-		var _compatibleSurface = in.read_pointer();
-		compatibleSurface = isNull(_compatibleSurface) ? null : new WGPUSurface(_compatibleSurface);
-		powerPreference = PowerPreference.from(in.read_int());
-		backendType = BackendType.from(in.read_int());
-		forceFallbackAdapter = in.read_boolean();
-		in.padding(4);
+	protected RequestAdapterOptions load(long address) {
+		nextInChain = ChainedStruct.from(get_long(address+0));
+		if(compatibleSurface != null) {
+			compatibleSurface.handle = get_long(address+8);
+		} else {
+			compatibleSurface = new WGPUSurface(get_long(address+8));
+		}
+		powerPreference = PowerPreference.from(get_int(address+16));
+		backendType = BackendType.from(get_int(address+20));
+		forceFallbackAdapter = get_boolean(address+24);
+		// padding 4
+		// padding 4
 		return this;
 	}
-
 	public RequestAdapterOptions() {}
-
-	public RequestAdapterOptions(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }

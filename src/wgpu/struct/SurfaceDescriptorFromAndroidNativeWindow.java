@@ -5,7 +5,7 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.Statics.*;
+import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -17,29 +17,26 @@ public class SurfaceDescriptorFromAndroidNativeWindow extends ChainedStruct {
 	// ChainedStruct chain;
 	public long window;
 
-	protected int sizeInBytes() {
-		return 24;
+	protected static final int byteSize = 24;
+	protected int byteSize() {
+		return byteSize;
 	}
 
-	protected void writeTo(WGPUWriter out) {
-		out.pointer(super.next);
-		out.write(SType.SurfaceDescriptorFromAndroidNativeWindow);
-		out.padding(4);
-		out.write(window);
+	protected long store(Stack stack, long address) {
+		put_value(address + 0, stack.alloc(next));
+		put_value(address + 8, (int) SType.SurfaceDescriptorFromAndroidNativeWindow);
+		// padding 4
+		put_value(address+16, (long) window);
+		return address;
 	}
 
-	protected SurfaceDescriptorFromAndroidNativeWindow readFrom(WGPUReader in) {
-		super.next = ChainedStruct.from(in.read_pointer());
-		var sType = in.read_int();
-		in.padding(4);
-		window = in.read_long();
+	protected SurfaceDescriptorFromAndroidNativeWindow load(long address) {
+		var _next = get_long(address + 0);
+		// unit32_t sType
+		// padding 4
+		window = get_long(address+16);
+		super.next = ChainedStruct.from(_next);
 		return this;
 	}
-
 	public SurfaceDescriptorFromAndroidNativeWindow() {}
-
-	public SurfaceDescriptorFromAndroidNativeWindow(MemorySegment from) {
-		readFrom(new WGPUReader(from));
-	}
-
 }
