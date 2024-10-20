@@ -15,7 +15,7 @@ import static java.lang.foreign.MemoryLayout.*;
 
 public class SupportedLimits extends WGPUStruct {
 	public ChainedStructOut nextInChain;
-	public Limits limits;
+	public Limits limits = new Limits();
 
 	protected static final int byteSize = 152;
 	protected int byteSize() {
@@ -30,7 +30,7 @@ public class SupportedLimits extends WGPUStruct {
 
 	protected SupportedLimits load(long address) {
 		nextInChain = ChainedStructOut.from(get_long(address+0));
-		limits = (limits != null ? limits : new Limits()).load(address+8);
+		limits = limits.load(address+8);
 		return this;
 	}
 	public SupportedLimits() {}

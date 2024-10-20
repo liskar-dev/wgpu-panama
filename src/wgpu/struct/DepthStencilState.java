@@ -19,8 +19,8 @@ public class DepthStencilState extends WGPUStruct {
 	public boolean depthWriteEnabled;
 	public CompareFunction depthCompare;
 	// padding 4
-	public StencilFaceState stencilFront;
-	public StencilFaceState stencilBack;
+	public StencilFaceState stencilFront = new StencilFaceState();
+	public StencilFaceState stencilBack = new StencilFaceState();
 	public int stencilReadMask;
 	public int stencilWriteMask;
 	public int depthBias;
@@ -56,8 +56,8 @@ public class DepthStencilState extends WGPUStruct {
 		depthWriteEnabled = get_boolean(address+12);
 		depthCompare = CompareFunction.from(get_int(address+16));
 		// padding 4
-		stencilFront = (stencilFront != null ? stencilFront : new StencilFaceState()).load(address+24);
-		stencilBack = (stencilBack != null ? stencilBack : new StencilFaceState()).load(address+40);
+		stencilFront = stencilFront.load(address+24);
+		stencilBack = stencilBack.load(address+40);
 		stencilReadMask = get_int(address+56);
 		stencilWriteMask = get_int(address+60);
 		depthBias = get_int(address+64);

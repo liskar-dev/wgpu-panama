@@ -20,7 +20,7 @@ public class TextureDescriptor extends WGPUStruct {
 	/** @see TextureUsage */
 	public int usage;
 	public TextureDimension dimension;
-	public Extent3D size;
+	public Extent3D size = new Extent3D();
 	public TextureFormat format;
 	public int mipLevelCount;
 	public int sampleCount;
@@ -53,7 +53,7 @@ public class TextureDescriptor extends WGPUStruct {
 		label = get_string(get_long(address+8));
 		usage = get_int(address+16);
 		dimension = TextureDimension.from(get_int(address+20));
-		size = (size != null ? size : new Extent3D()).load(address+24);
+		size = size.load(address+24);
 		format = TextureFormat.from(get_int(address+40));
 		mipLevelCount = get_int(address+44);
 		sampleCount = get_int(address+48);

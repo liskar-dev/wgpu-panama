@@ -15,7 +15,7 @@ import static java.lang.foreign.MemoryLayout.*;
 
 public class ImageCopyBuffer extends WGPUStruct {
 	public ChainedStruct nextInChain;
-	public TextureDataLayout layout;
+	public TextureDataLayout layout = new TextureDataLayout();
 	public WGPUBuffer buffer = new WGPUBuffer(0);
 
 	protected static final int byteSize = 40;
@@ -32,7 +32,7 @@ public class ImageCopyBuffer extends WGPUStruct {
 
 	protected ImageCopyBuffer load(long address) {
 		nextInChain = ChainedStruct.from(get_long(address+0));
-		layout = (layout != null ? layout : new TextureDataLayout()).load(address+8);
+		layout = layout.load(address+8);
 		buffer.handle = get_long(address+32);
 		return this;
 	}

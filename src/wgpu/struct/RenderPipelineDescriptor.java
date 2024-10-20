@@ -18,11 +18,11 @@ public class RenderPipelineDescriptor extends WGPUStruct {
 	@Nullable
 	public String label;
 	public WGPUPipelineLayout layout = new WGPUPipelineLayout(0);
-	public VertexState vertex;
-	public PrimitiveState primitive;
+	public VertexState vertex = new VertexState();
+	public PrimitiveState primitive = new PrimitiveState();
 	@Nullable
 	public DepthStencilState depthStencil;
-	public MultisampleState multisample;
+	public MultisampleState multisample = new MultisampleState();
 	@Nullable
 	public FragmentState fragment;
 
@@ -47,11 +47,11 @@ public class RenderPipelineDescriptor extends WGPUStruct {
 		nextInChain = ChainedStruct.from(get_long(address+0));
 		label = get_string(get_long(address+8));
 		layout.handle = get_long(address+16);
-		vertex = (vertex != null ? vertex : new VertexState()).load(address+24);
-		primitive = (primitive != null ? primitive : new PrimitiveState()).load(address+80);
+		vertex = vertex.load(address+24);
+		primitive = primitive.load(address+80);
 		var _depthStencil = get_long(address+104);
 		depthStencil = _depthStencil == 0 ? null : (depthStencil != null ? depthStencil : new DepthStencilState()).load(_depthStencil);
-		multisample = (multisample != null ? multisample : new MultisampleState()).load(address+112);
+		multisample = multisample.load(address+112);
 		var _fragment = get_long(address+136);
 		fragment = _fragment == 0 ? null : (fragment != null ? fragment : new FragmentState()).load(_fragment);
 		depthStencil = _depthStencil == 0 ? null : (depthStencil != null ? depthStencil : new DepthStencilState()).load(_depthStencil);

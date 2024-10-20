@@ -21,10 +21,10 @@ public class DeviceDescriptor extends WGPUStruct {
 	public FeatureName[] requiredFeatures;
 	@Nullable
 	public RequiredLimits requiredLimits;
-	public QueueDescriptor defaultQueue;
+	public QueueDescriptor defaultQueue = new QueueDescriptor();
 	public DeviceLostCallback deviceLostCallback;
 	public long deviceLostUserdata;
-	public UncapturedErrorCallbackInfo uncapturedErrorCallbackInfo;
+	public UncapturedErrorCallbackInfo uncapturedErrorCallbackInfo = new UncapturedErrorCallbackInfo();
 
 	protected static final int byteSize = 96;
 	protected int byteSize() {
@@ -51,10 +51,10 @@ public class DeviceDescriptor extends WGPUStruct {
 		var _requiredFeatures = get_long(address+24);
 		var _requiredLimits = get_long(address+32);
 		requiredLimits = _requiredLimits == 0 ? null : (requiredLimits != null ? requiredLimits : new RequiredLimits()).load(_requiredLimits);
-		defaultQueue = (defaultQueue != null ? defaultQueue : new QueueDescriptor()).load(address+40);
+		defaultQueue = defaultQueue.load(address+40);
 		// unsupported DeviceLostCallback * deviceLostCallback
 		deviceLostUserdata = get_long(address+64);
-		uncapturedErrorCallbackInfo = (uncapturedErrorCallbackInfo != null ? uncapturedErrorCallbackInfo : new UncapturedErrorCallbackInfo()).load(address+72);
+		uncapturedErrorCallbackInfo = uncapturedErrorCallbackInfo.load(address+72);
 		if(_requiredFeatures != 0L) {
 			requiredFeatures = requiredFeatures != null && requiredFeatures.length == requiredFeatureCount ? requiredFeatures : new FeatureName[requiredFeatureCount];
 			for(int i=0; i<requiredFeatures.length; i++) {

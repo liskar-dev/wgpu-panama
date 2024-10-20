@@ -18,7 +18,7 @@ public class ImageCopyTexture extends WGPUStruct {
 	public WGPUTexture texture = new WGPUTexture(0);
 	public int mipLevel;
 	// padding 4
-	public Origin3D origin;
+	public Origin3D origin = new Origin3D();
 	public TextureAspect aspect;
 	// padding 4
 
@@ -43,7 +43,7 @@ public class ImageCopyTexture extends WGPUStruct {
 		texture.handle = get_long(address+8);
 		mipLevel = get_int(address+16);
 		// padding 4
-		origin = (origin != null ? origin : new Origin3D()).load(address+24);
+		origin = origin.load(address+24);
 		aspect = TextureAspect.from(get_int(address+40));
 		// padding 4
 		// padding 4

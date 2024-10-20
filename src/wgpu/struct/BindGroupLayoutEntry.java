@@ -18,10 +18,10 @@ public class BindGroupLayoutEntry extends WGPUStruct {
 	public int binding;
 	/** @see ShaderStage */
 	public int visibility;
-	public BufferBindingLayout buffer;
-	public SamplerBindingLayout sampler;
-	public TextureBindingLayout texture;
-	public StorageTextureBindingLayout storageTexture;
+	public BufferBindingLayout buffer = new BufferBindingLayout();
+	public SamplerBindingLayout sampler = new SamplerBindingLayout();
+	public TextureBindingLayout texture = new TextureBindingLayout();
+	public StorageTextureBindingLayout storageTexture = new StorageTextureBindingLayout();
 
 	protected static final int byteSize = 104;
 	protected int byteSize() {
@@ -43,10 +43,10 @@ public class BindGroupLayoutEntry extends WGPUStruct {
 		nextInChain = ChainedStruct.from(get_long(address+0));
 		binding = get_int(address+8);
 		visibility = get_int(address+12);
-		buffer = (buffer != null ? buffer : new BufferBindingLayout()).load(address+16);
-		sampler = (sampler != null ? sampler : new SamplerBindingLayout()).load(address+40);
-		texture = (texture != null ? texture : new TextureBindingLayout()).load(address+56);
-		storageTexture = (storageTexture != null ? storageTexture : new StorageTextureBindingLayout()).load(address+80);
+		buffer = buffer.load(address+16);
+		sampler = sampler.load(address+40);
+		texture = texture.load(address+56);
+		storageTexture = storageTexture.load(address+80);
 		return this;
 	}
 	public BindGroupLayoutEntry() {}

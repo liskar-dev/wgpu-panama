@@ -21,7 +21,7 @@ public class RenderPassColorAttachment extends WGPUStruct {
 	public WGPUTextureView resolveTarget = new WGPUTextureView(0);
 	public LoadOp loadOp;
 	public StoreOp storeOp;
-	public Color clearValue;
+	public Color clearValue = new Color();
 
 	protected static final int byteSize = 72;
 	protected int byteSize() {
@@ -48,7 +48,7 @@ public class RenderPassColorAttachment extends WGPUStruct {
 		resolveTarget.handle = get_long(address+24);
 		loadOp = LoadOp.from(get_int(address+32));
 		storeOp = StoreOp.from(get_int(address+36));
-		clearValue = (clearValue != null ? clearValue : new Color()).load(address+40);
+		clearValue = clearValue.load(address+40);
 		// padding 4
 		return this;
 	}

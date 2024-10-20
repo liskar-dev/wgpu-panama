@@ -14,22 +14,22 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 public class HubReport extends WGPUStruct {
-	public RegistryReport adapters;
-	public RegistryReport devices;
-	public RegistryReport queues;
-	public RegistryReport pipelineLayouts;
-	public RegistryReport shaderModules;
-	public RegistryReport bindGroupLayouts;
-	public RegistryReport bindGroups;
-	public RegistryReport commandBuffers;
-	public RegistryReport renderBundles;
-	public RegistryReport renderPipelines;
-	public RegistryReport computePipelines;
-	public RegistryReport querySets;
-	public RegistryReport buffers;
-	public RegistryReport textures;
-	public RegistryReport textureViews;
-	public RegistryReport samplers;
+	public RegistryReport adapters = new RegistryReport();
+	public RegistryReport devices = new RegistryReport();
+	public RegistryReport queues = new RegistryReport();
+	public RegistryReport pipelineLayouts = new RegistryReport();
+	public RegistryReport shaderModules = new RegistryReport();
+	public RegistryReport bindGroupLayouts = new RegistryReport();
+	public RegistryReport bindGroups = new RegistryReport();
+	public RegistryReport commandBuffers = new RegistryReport();
+	public RegistryReport renderBundles = new RegistryReport();
+	public RegistryReport renderPipelines = new RegistryReport();
+	public RegistryReport computePipelines = new RegistryReport();
+	public RegistryReport querySets = new RegistryReport();
+	public RegistryReport buffers = new RegistryReport();
+	public RegistryReport textures = new RegistryReport();
+	public RegistryReport textureViews = new RegistryReport();
+	public RegistryReport samplers = new RegistryReport();
 
 	protected static final int byteSize = 640;
 	protected int byteSize() {
@@ -57,22 +57,22 @@ public class HubReport extends WGPUStruct {
 	}
 
 	protected HubReport load(long address) {
-		adapters = (adapters != null ? adapters : new RegistryReport()).load(address+0);
-		devices = (devices != null ? devices : new RegistryReport()).load(address+40);
-		queues = (queues != null ? queues : new RegistryReport()).load(address+80);
-		pipelineLayouts = (pipelineLayouts != null ? pipelineLayouts : new RegistryReport()).load(address+120);
-		shaderModules = (shaderModules != null ? shaderModules : new RegistryReport()).load(address+160);
-		bindGroupLayouts = (bindGroupLayouts != null ? bindGroupLayouts : new RegistryReport()).load(address+200);
-		bindGroups = (bindGroups != null ? bindGroups : new RegistryReport()).load(address+240);
-		commandBuffers = (commandBuffers != null ? commandBuffers : new RegistryReport()).load(address+280);
-		renderBundles = (renderBundles != null ? renderBundles : new RegistryReport()).load(address+320);
-		renderPipelines = (renderPipelines != null ? renderPipelines : new RegistryReport()).load(address+360);
-		computePipelines = (computePipelines != null ? computePipelines : new RegistryReport()).load(address+400);
-		querySets = (querySets != null ? querySets : new RegistryReport()).load(address+440);
-		buffers = (buffers != null ? buffers : new RegistryReport()).load(address+480);
-		textures = (textures != null ? textures : new RegistryReport()).load(address+520);
-		textureViews = (textureViews != null ? textureViews : new RegistryReport()).load(address+560);
-		samplers = (samplers != null ? samplers : new RegistryReport()).load(address+600);
+		adapters = adapters.load(address+0);
+		devices = devices.load(address+40);
+		queues = queues.load(address+80);
+		pipelineLayouts = pipelineLayouts.load(address+120);
+		shaderModules = shaderModules.load(address+160);
+		bindGroupLayouts = bindGroupLayouts.load(address+200);
+		bindGroups = bindGroups.load(address+240);
+		commandBuffers = commandBuffers.load(address+280);
+		renderBundles = renderBundles.load(address+320);
+		renderPipelines = renderPipelines.load(address+360);
+		computePipelines = computePipelines.load(address+400);
+		querySets = querySets.load(address+440);
+		buffers = buffers.load(address+480);
+		textures = textures.load(address+520);
+		textureViews = textureViews.load(address+560);
+		samplers = samplers.load(address+600);
 		return this;
 	}
 	public HubReport() {}

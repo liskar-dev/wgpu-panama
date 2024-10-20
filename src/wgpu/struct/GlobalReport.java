@@ -14,13 +14,13 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 public class GlobalReport extends WGPUStruct {
-	public RegistryReport surfaces;
+	public RegistryReport surfaces = new RegistryReport();
 	public BackendType backendType;
 	// padding 4
-	public HubReport vulkan;
-	public HubReport metal;
-	public HubReport dx12;
-	public HubReport gl;
+	public HubReport vulkan = new HubReport();
+	public HubReport metal = new HubReport();
+	public HubReport dx12 = new HubReport();
+	public HubReport gl = new HubReport();
 
 	protected static final int byteSize = 2608;
 	protected int byteSize() {
@@ -39,13 +39,13 @@ public class GlobalReport extends WGPUStruct {
 	}
 
 	protected GlobalReport load(long address) {
-		surfaces = (surfaces != null ? surfaces : new RegistryReport()).load(address+0);
+		surfaces = surfaces.load(address+0);
 		backendType = BackendType.from(get_int(address+40));
 		// padding 4
-		vulkan = (vulkan != null ? vulkan : new HubReport()).load(address+48);
-		metal = (metal != null ? metal : new HubReport()).load(address+688);
-		dx12 = (dx12 != null ? dx12 : new HubReport()).load(address+1328);
-		gl = (gl != null ? gl : new HubReport()).load(address+1968);
+		vulkan = vulkan.load(address+48);
+		metal = metal.load(address+688);
+		dx12 = dx12.load(address+1328);
+		gl = gl.load(address+1968);
 		// padding 4
 		return this;
 	}

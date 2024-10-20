@@ -15,7 +15,7 @@ import static java.lang.foreign.MemoryLayout.*;
 
 public class RequiredLimitsExtras extends ChainedStruct {
 	// ChainedStruct chain;
-	public NativeLimits limits;
+	public NativeLimits limits = new NativeLimits();
 
 	protected static final int byteSize = 24;
 	protected int byteSize() {
@@ -34,7 +34,7 @@ public class RequiredLimitsExtras extends ChainedStruct {
 		var _next = get_long(address + 0);
 		// unit32_t sType
 		// padding 4
-		limits = (limits != null ? limits : new NativeLimits()).load(address+16);
+		limits = limits.load(address+16);
 		super.next = ChainedStruct.from(_next);
 		return this;
 	}

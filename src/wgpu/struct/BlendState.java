@@ -14,8 +14,8 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 public class BlendState extends WGPUStruct {
-	public BlendComponent color;
-	public BlendComponent alpha;
+	public BlendComponent color = new BlendComponent();
+	public BlendComponent alpha = new BlendComponent();
 
 	protected static final int byteSize = 32;
 	protected int byteSize() {
@@ -29,8 +29,8 @@ public class BlendState extends WGPUStruct {
 	}
 
 	protected BlendState load(long address) {
-		color = (color != null ? color : new BlendComponent()).load(address+0);
-		alpha = (alpha != null ? alpha : new BlendComponent()).load(address+16);
+		color = color.load(address+0);
+		alpha = alpha.load(address+16);
 		return this;
 	}
 	public BlendState() {}

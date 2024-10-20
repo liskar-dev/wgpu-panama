@@ -18,7 +18,7 @@ public class ComputePipelineDescriptor extends WGPUStruct {
 	@Nullable
 	public String label;
 	public WGPUPipelineLayout layout = new WGPUPipelineLayout(0);
-	public ProgrammableStageDescriptor compute;
+	public ProgrammableStageDescriptor compute = new ProgrammableStageDescriptor();
 
 	protected static final int byteSize = 64;
 	protected int byteSize() {
@@ -37,7 +37,7 @@ public class ComputePipelineDescriptor extends WGPUStruct {
 		nextInChain = ChainedStruct.from(get_long(address+0));
 		label = get_string(get_long(address+8));
 		layout.handle = get_long(address+16);
-		compute = (compute != null ? compute : new ProgrammableStageDescriptor()).load(address+24);
+		compute = compute.load(address+24);
 		return this;
 	}
 	public ComputePipelineDescriptor() {}
