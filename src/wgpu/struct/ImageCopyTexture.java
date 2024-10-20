@@ -17,12 +17,11 @@ public class ImageCopyTexture extends WGPUStruct {
 	public ChainedStruct nextInChain;
 	public WGPUTexture texture = new WGPUTexture(0);
 	public int mipLevel;
-	// padding 4
 	public Origin3D origin = new Origin3D();
 	public TextureAspect aspect;
 	// padding 4
 
-	protected static final int byteSize = 48;
+	protected static final int byteSize = 40;
 	protected int byteSize() {
 		return byteSize;
 	}
@@ -31,9 +30,8 @@ public class ImageCopyTexture extends WGPUStruct {
 		put_value(address+0, stack.alloc(nextInChain));
 		put_value(address+8, texture.handle );
 		put_value(address+16, (int) mipLevel);
-		// padding 4
-		origin.store(stack, address+24);
-		put_value(address+40, aspect == null ? 0 : aspect.bits );
+		origin.store(stack, address+20);
+		put_value(address+32, aspect == null ? 0 : aspect.bits );
 		// padding 4
 		return address;
 	}
@@ -42,10 +40,8 @@ public class ImageCopyTexture extends WGPUStruct {
 		nextInChain = ChainedStruct.from(get_long(address+0));
 		texture.handle = get_long(address+8);
 		mipLevel = get_int(address+16);
-		// padding 4
-		origin = origin.load(address+24);
-		aspect = TextureAspect.from(get_int(address+40));
-		// padding 4
+		origin = origin.load(address+20);
+		aspect = TextureAspect.from(get_int(address+32));
 		// padding 4
 		// padding 4
 		return this;

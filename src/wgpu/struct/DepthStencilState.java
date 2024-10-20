@@ -18,7 +18,6 @@ public class DepthStencilState extends WGPUStruct {
 	public TextureFormat format;
 	public boolean depthWriteEnabled;
 	public CompareFunction depthCompare;
-	// padding 4
 	public StencilFaceState stencilFront = new StencilFaceState();
 	public StencilFaceState stencilBack = new StencilFaceState();
 	public int stencilReadMask;
@@ -26,9 +25,8 @@ public class DepthStencilState extends WGPUStruct {
 	public int depthBias;
 	public float depthBiasSlopeScale;
 	public float depthBiasClamp;
-	// padding 4
 
-	protected static final int byteSize = 80;
+	protected static final int byteSize = 72;
 	protected int byteSize() {
 		return byteSize;
 	}
@@ -38,15 +36,13 @@ public class DepthStencilState extends WGPUStruct {
 		put_value(address+8, format == null ? 0 : format.bits );
 		put_value(address+12, (boolean) depthWriteEnabled);
 		put_value(address+16, depthCompare == null ? 0 : depthCompare.bits );
-		// padding 4
-		stencilFront.store(stack, address+24);
-		stencilBack.store(stack, address+40);
-		put_value(address+56, (int) stencilReadMask);
-		put_value(address+60, (int) stencilWriteMask);
-		put_value(address+64, (int) depthBias);
-		put_value(address+68, (float) depthBiasSlopeScale);
-		put_value(address+72, (float) depthBiasClamp);
-		// padding 4
+		stencilFront.store(stack, address+20);
+		stencilBack.store(stack, address+36);
+		put_value(address+52, (int) stencilReadMask);
+		put_value(address+56, (int) stencilWriteMask);
+		put_value(address+60, (int) depthBias);
+		put_value(address+64, (float) depthBiasSlopeScale);
+		put_value(address+68, (float) depthBiasClamp);
 		return address;
 	}
 
@@ -55,17 +51,13 @@ public class DepthStencilState extends WGPUStruct {
 		format = TextureFormat.from(get_int(address+8));
 		depthWriteEnabled = get_boolean(address+12);
 		depthCompare = CompareFunction.from(get_int(address+16));
-		// padding 4
-		stencilFront = stencilFront.load(address+24);
-		stencilBack = stencilBack.load(address+40);
-		stencilReadMask = get_int(address+56);
-		stencilWriteMask = get_int(address+60);
-		depthBias = get_int(address+64);
-		depthBiasSlopeScale = get_float(address+68);
-		depthBiasClamp = get_float(address+72);
-		// padding 4
-		// padding 4
-		// padding 4
+		stencilFront = stencilFront.load(address+20);
+		stencilBack = stencilBack.load(address+36);
+		stencilReadMask = get_int(address+52);
+		stencilWriteMask = get_int(address+56);
+		depthBias = get_int(address+60);
+		depthBiasSlopeScale = get_float(address+64);
+		depthBiasClamp = get_float(address+68);
 		return this;
 	}
 	public DepthStencilState() {}

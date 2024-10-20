@@ -17,9 +17,8 @@ public class BlendComponent extends WGPUStruct {
 	public BlendOperation operation;
 	public BlendFactor srcFactor;
 	public BlendFactor dstFactor;
-	// padding 4
 
-	protected static final int byteSize = 16;
+	protected static final int byteSize = 12;
 	protected int byteSize() {
 		return byteSize;
 	}
@@ -28,7 +27,6 @@ public class BlendComponent extends WGPUStruct {
 		put_value(address+0, operation == null ? 0 : operation.bits );
 		put_value(address+4, srcFactor == null ? 0 : srcFactor.bits );
 		put_value(address+8, dstFactor == null ? 0 : dstFactor.bits );
-		// padding 4
 		return address;
 	}
 
@@ -36,8 +34,6 @@ public class BlendComponent extends WGPUStruct {
 		operation = BlendOperation.from(get_int(address+0));
 		srcFactor = BlendFactor.from(get_int(address+4));
 		dstFactor = BlendFactor.from(get_int(address+8));
-		// padding 4
-		// padding 4
 		return this;
 	}
 	public BlendComponent() {}

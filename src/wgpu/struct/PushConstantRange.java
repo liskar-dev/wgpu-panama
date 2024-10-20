@@ -18,9 +18,8 @@ public class PushConstantRange extends WGPUStruct {
 	public int stages;
 	public int start;
 	public int end;
-	// padding 4
 
-	protected static final int byteSize = 16;
+	protected static final int byteSize = 12;
 	protected int byteSize() {
 		return byteSize;
 	}
@@ -29,7 +28,6 @@ public class PushConstantRange extends WGPUStruct {
 		put_value(address+0, (int) stages);
 		put_value(address+4, (int) start);
 		put_value(address+8, (int) end);
-		// padding 4
 		return address;
 	}
 
@@ -37,8 +35,6 @@ public class PushConstantRange extends WGPUStruct {
 		stages = get_int(address+0);
 		start = get_int(address+4);
 		end = get_int(address+8);
-		// padding 4
-		// padding 4
 		return this;
 	}
 	public PushConstantRange() {}

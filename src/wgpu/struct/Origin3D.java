@@ -17,9 +17,8 @@ public class Origin3D extends WGPUStruct {
 	public int x;
 	public int y;
 	public int z;
-	// padding 4
 
-	protected static final int byteSize = 16;
+	protected static final int byteSize = 12;
 	protected int byteSize() {
 		return byteSize;
 	}
@@ -28,7 +27,6 @@ public class Origin3D extends WGPUStruct {
 		put_value(address+0, (int) x);
 		put_value(address+4, (int) y);
 		put_value(address+8, (int) z);
-		// padding 4
 		return address;
 	}
 
@@ -36,8 +34,6 @@ public class Origin3D extends WGPUStruct {
 		x = get_int(address+0);
 		y = get_int(address+4);
 		z = get_int(address+8);
-		// padding 4
-		// padding 4
 		return this;
 	}
 	public Origin3D() {}

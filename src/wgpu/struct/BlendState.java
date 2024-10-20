@@ -17,20 +17,20 @@ public class BlendState extends WGPUStruct {
 	public BlendComponent color = new BlendComponent();
 	public BlendComponent alpha = new BlendComponent();
 
-	protected static final int byteSize = 32;
+	protected static final int byteSize = 24;
 	protected int byteSize() {
 		return byteSize;
 	}
 
 	protected long store(Stack stack, long address) {
 		color.store(stack, address+0);
-		alpha.store(stack, address+16);
+		alpha.store(stack, address+12);
 		return address;
 	}
 
 	protected BlendState load(long address) {
 		color = color.load(address+0);
-		alpha = alpha.load(address+16);
+		alpha = alpha.load(address+12);
 		return this;
 	}
 	public BlendState() {}
