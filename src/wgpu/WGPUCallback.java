@@ -8,6 +8,7 @@ import java.lang.foreign.MemorySegment;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.WeakHashMap;
 
 public interface WGPUCallback {
 	static FunctionDescriptor functionDescriptor(MemoryLayout ret, MemoryLayout...args) {
@@ -30,9 +31,13 @@ public interface WGPUCallback {
 		}
 	}
 	
+	static final WeakHashMap<WGPUCallback, Arena> weakMap = new WeakHashMap<>();
+	
 	public static MemorySegment createStub(WGPUCallback callback, MethodHandle handle, FunctionDescriptor desc) {
 		var bound = handle.bindTo(callback);
-		return Linker.nativeLinker().upcallStub(bound, desc, Arena.ofAuto());
+		var arena = Arena.ofAuto();
+		weakMap.put(callback, arena);
+		return Linker.nativeLinker().upcallStub(bound, desc, arena);
 	}
 	
 
