@@ -16,7 +16,7 @@ import static java.lang.foreign.MemoryLayout.*;
 public class ShaderModuleCompilationHint extends WGPUStruct {
 	public ChainedStruct nextInChain;
 	public String entryPoint;
-	public WGPUPipelineLayout layout;
+	public WGPUPipelineLayout layout = new WGPUPipelineLayout(0);
 
 	protected static final int byteSize = 24;
 	protected int byteSize() {
@@ -26,18 +26,14 @@ public class ShaderModuleCompilationHint extends WGPUStruct {
 	protected long store(Stack stack, long address) {
 		put_value(address+0, stack.alloc(nextInChain));
 		put_value(address+8, stack.alloc(entryPoint));
-		put_value(address+16, layout == null ? 0L : layout.handle );
+		put_value(address+16, layout.handle );
 		return address;
 	}
 
 	protected ShaderModuleCompilationHint load(long address) {
 		nextInChain = ChainedStruct.from(get_long(address+0));
 		entryPoint = get_string(get_long(address+8));
-		if(layout != null) {
-			layout.handle = get_long(address+16);
-		} else {
-			layout = new WGPUPipelineLayout(get_long(address+16));
-		}
+		layout.handle = get_long(address+16);
 		return this;
 	}
 	public ShaderModuleCompilationHint() {}

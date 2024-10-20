@@ -17,8 +17,7 @@ public class RenderPipelineDescriptor extends WGPUStruct {
 	public ChainedStruct nextInChain;
 	@Nullable
 	public String label;
-	@Nullable
-	public WGPUPipelineLayout layout;
+	public WGPUPipelineLayout layout = new WGPUPipelineLayout(0);
 	public VertexState vertex;
 	public PrimitiveState primitive;
 	@Nullable
@@ -35,7 +34,7 @@ public class RenderPipelineDescriptor extends WGPUStruct {
 	protected long store(Stack stack, long address) {
 		put_value(address+0, stack.alloc(nextInChain));
 		put_value(address+8, stack.alloc(label));
-		put_value(address+16, layout == null ? 0L : layout.handle );
+		put_value(address+16, layout.handle );
 		vertex.store(stack, address+24);
 		primitive.store(stack, address+80);
 		put_value(address+104, stack.alloc(depthStencil));
@@ -47,11 +46,7 @@ public class RenderPipelineDescriptor extends WGPUStruct {
 	protected RenderPipelineDescriptor load(long address) {
 		nextInChain = ChainedStruct.from(get_long(address+0));
 		label = get_string(get_long(address+8));
-		if(layout != null) {
-			layout.handle = get_long(address+16);
-		} else {
-			layout = new WGPUPipelineLayout(get_long(address+16));
-		}
+		layout.handle = get_long(address+16);
 		vertex = (vertex != null ? vertex : new VertexState()).load(address+24);
 		primitive = (primitive != null ? primitive : new PrimitiveState()).load(address+80);
 		var _depthStencil = get_long(address+104);

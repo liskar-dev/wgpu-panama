@@ -14,7 +14,7 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 public class SurfaceTexture extends WGPUStruct {
-	public WGPUTexture texture;
+	public WGPUTexture texture = new WGPUTexture(0);
 	public boolean suboptimal;
 	public SurfaceGetCurrentTextureStatus status;
 
@@ -24,18 +24,14 @@ public class SurfaceTexture extends WGPUStruct {
 	}
 
 	protected long store(Stack stack, long address) {
-		put_value(address+0, texture == null ? 0L : texture.handle );
+		put_value(address+0, texture.handle );
 		put_value(address+8, (boolean) suboptimal);
 		put_value(address+12, status == null ? 0 : status.bits );
 		return address;
 	}
 
 	protected SurfaceTexture load(long address) {
-		if(texture != null) {
-			texture.handle = get_long(address+0);
-		} else {
-			texture = new WGPUTexture(get_long(address+0));
-		}
+		texture.handle = get_long(address+0);
 		suboptimal = get_boolean(address+8);
 		status = SurfaceGetCurrentTextureStatus.from(get_int(address+12));
 		return this;

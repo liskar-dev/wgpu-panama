@@ -21,8 +21,7 @@ public class RenderPassDescriptor extends WGPUStruct {
 	public RenderPassColorAttachment[] colorAttachments;
 	@Nullable
 	public RenderPassDepthStencilAttachment depthStencilAttachment;
-	@Nullable
-	public WGPUQuerySet occlusionQuerySet;
+	public WGPUQuerySet occlusionQuerySet = new WGPUQuerySet(0);
 	@Nullable
 	public RenderPassTimestampWrites timestampWrites;
 
@@ -37,7 +36,7 @@ public class RenderPassDescriptor extends WGPUStruct {
 		put_value(address+16, (long) (colorAttachments == null ? 0 : colorAttachments.length));
 		put_value(address+24, stack.alloc(colorAttachments));
 		put_value(address+32, stack.alloc(depthStencilAttachment));
-		put_value(address+40, occlusionQuerySet == null ? 0L : occlusionQuerySet.handle );
+		put_value(address+40, occlusionQuerySet.handle );
 		put_value(address+48, stack.alloc(timestampWrites));
 		return address;
 	}
@@ -49,11 +48,7 @@ public class RenderPassDescriptor extends WGPUStruct {
 		var _colorAttachments = get_long(address+24);
 		var _depthStencilAttachment = get_long(address+32);
 		depthStencilAttachment = _depthStencilAttachment == 0 ? null : (depthStencilAttachment != null ? depthStencilAttachment : new RenderPassDepthStencilAttachment()).load(_depthStencilAttachment);
-		if(occlusionQuerySet != null) {
-			occlusionQuerySet.handle = get_long(address+40);
-		} else {
-			occlusionQuerySet = new WGPUQuerySet(get_long(address+40));
-		}
+		occlusionQuerySet.handle = get_long(address+40);
 		var _timestampWrites = get_long(address+48);
 		timestampWrites = _timestampWrites == 0 ? null : (timestampWrites != null ? timestampWrites : new RenderPassTimestampWrites()).load(_timestampWrites);
 		if(_colorAttachments != 0L) {

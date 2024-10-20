@@ -15,7 +15,7 @@ import static java.lang.foreign.MemoryLayout.*;
 
 public class SurfaceConfiguration extends WGPUStruct {
 	public ChainedStruct nextInChain;
-	public WGPUDevice device;
+	public WGPUDevice device = new WGPUDevice(0);
 	public TextureFormat format;
 	/** @see TextureUsage */
 	public int usage;
@@ -33,7 +33,7 @@ public class SurfaceConfiguration extends WGPUStruct {
 
 	protected long store(Stack stack, long address) {
 		put_value(address+0, stack.alloc(nextInChain));
-		put_value(address+8, device == null ? 0L : device.handle );
+		put_value(address+8, device.handle );
 		put_value(address+16, format == null ? 0 : format.bits );
 		put_value(address+20, (int) usage);
 		put_value(address+24, (long) (viewFormats == null ? 0 : viewFormats.length));
@@ -47,11 +47,7 @@ public class SurfaceConfiguration extends WGPUStruct {
 
 	protected SurfaceConfiguration load(long address) {
 		nextInChain = ChainedStruct.from(get_long(address+0));
-		if(device != null) {
-			device.handle = get_long(address+8);
-		} else {
-			device = new WGPUDevice(get_long(address+8));
-		}
+		device.handle = get_long(address+8);
 		format = TextureFormat.from(get_int(address+16));
 		usage = get_int(address+20);
 		var viewFormatCount = (int) get_long(address+24);

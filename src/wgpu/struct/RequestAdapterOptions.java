@@ -15,8 +15,7 @@ import static java.lang.foreign.MemoryLayout.*;
 
 public class RequestAdapterOptions extends WGPUStruct {
 	public ChainedStruct nextInChain;
-	@Nullable
-	public WGPUSurface compatibleSurface;
+	public WGPUSurface compatibleSurface = new WGPUSurface(0);
 	public PowerPreference powerPreference;
 	public BackendType backendType;
 	public boolean forceFallbackAdapter;
@@ -29,7 +28,7 @@ public class RequestAdapterOptions extends WGPUStruct {
 
 	protected long store(Stack stack, long address) {
 		put_value(address+0, stack.alloc(nextInChain));
-		put_value(address+8, compatibleSurface == null ? 0L : compatibleSurface.handle );
+		put_value(address+8, compatibleSurface.handle );
 		put_value(address+16, powerPreference == null ? 0 : powerPreference.bits );
 		put_value(address+20, backendType == null ? 0 : backendType.bits );
 		put_value(address+24, (boolean) forceFallbackAdapter);
@@ -39,11 +38,7 @@ public class RequestAdapterOptions extends WGPUStruct {
 
 	protected RequestAdapterOptions load(long address) {
 		nextInChain = ChainedStruct.from(get_long(address+0));
-		if(compatibleSurface != null) {
-			compatibleSurface.handle = get_long(address+8);
-		} else {
-			compatibleSurface = new WGPUSurface(get_long(address+8));
-		}
+		compatibleSurface.handle = get_long(address+8);
 		powerPreference = PowerPreference.from(get_int(address+16));
 		backendType = BackendType.from(get_int(address+20));
 		forceFallbackAdapter = get_boolean(address+24);

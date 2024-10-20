@@ -14,7 +14,7 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 public class RenderPassDepthStencilAttachment extends WGPUStruct {
-	public WGPUTextureView view;
+	public WGPUTextureView view = new WGPUTextureView(0);
 	public LoadOp depthLoadOp;
 	public StoreOp depthStoreOp;
 	public float depthClearValue;
@@ -30,7 +30,7 @@ public class RenderPassDepthStencilAttachment extends WGPUStruct {
 	}
 
 	protected long store(Stack stack, long address) {
-		put_value(address+0, view == null ? 0L : view.handle );
+		put_value(address+0, view.handle );
 		put_value(address+8, depthLoadOp == null ? 0 : depthLoadOp.bits );
 		put_value(address+12, depthStoreOp == null ? 0 : depthStoreOp.bits );
 		put_value(address+16, (float) depthClearValue);
@@ -43,11 +43,7 @@ public class RenderPassDepthStencilAttachment extends WGPUStruct {
 	}
 
 	protected RenderPassDepthStencilAttachment load(long address) {
-		if(view != null) {
-			view.handle = get_long(address+0);
-		} else {
-			view = new WGPUTextureView(get_long(address+0));
-		}
+		view.handle = get_long(address+0);
 		depthLoadOp = LoadOp.from(get_int(address+8));
 		depthStoreOp = StoreOp.from(get_int(address+12));
 		depthClearValue = get_float(address+16);

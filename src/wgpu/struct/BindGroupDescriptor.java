@@ -17,7 +17,7 @@ public class BindGroupDescriptor extends WGPUStruct {
 	public ChainedStruct nextInChain;
 	@Nullable
 	public String label;
-	public WGPUBindGroupLayout layout;
+	public WGPUBindGroupLayout layout = new WGPUBindGroupLayout(0);
 	// size_t entryCount
 	public BindGroupEntry[] entries;
 
@@ -29,7 +29,7 @@ public class BindGroupDescriptor extends WGPUStruct {
 	protected long store(Stack stack, long address) {
 		put_value(address+0, stack.alloc(nextInChain));
 		put_value(address+8, stack.alloc(label));
-		put_value(address+16, layout == null ? 0L : layout.handle );
+		put_value(address+16, layout.handle );
 		put_value(address+24, (long) (entries == null ? 0 : entries.length));
 		put_value(address+32, stack.alloc(entries));
 		return address;
@@ -38,11 +38,7 @@ public class BindGroupDescriptor extends WGPUStruct {
 	protected BindGroupDescriptor load(long address) {
 		nextInChain = ChainedStruct.from(get_long(address+0));
 		label = get_string(get_long(address+8));
-		if(layout != null) {
-			layout.handle = get_long(address+16);
-		} else {
-			layout = new WGPUBindGroupLayout(get_long(address+16));
-		}
+		layout.handle = get_long(address+16);
 		var entryCount = (int) get_long(address+24);
 		var _entries = get_long(address+32);
 		if(_entries != 0L) {

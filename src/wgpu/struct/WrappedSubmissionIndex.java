@@ -14,7 +14,7 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 public class WrappedSubmissionIndex extends WGPUStruct {
-	public WGPUQueue queue;
+	public WGPUQueue queue = new WGPUQueue(0);
 	public long submissionIndex;
 
 	protected static final int byteSize = 16;
@@ -23,17 +23,13 @@ public class WrappedSubmissionIndex extends WGPUStruct {
 	}
 
 	protected long store(Stack stack, long address) {
-		put_value(address+0, queue == null ? 0L : queue.handle );
+		put_value(address+0, queue.handle );
 		put_value(address+8, (long) submissionIndex);
 		return address;
 	}
 
 	protected WrappedSubmissionIndex load(long address) {
-		if(queue != null) {
-			queue.handle = get_long(address+0);
-		} else {
-			queue = new WGPUQueue(get_long(address+0));
-		}
+		queue.handle = get_long(address+0);
 		submissionIndex = get_long(address+8);
 		return this;
 	}
