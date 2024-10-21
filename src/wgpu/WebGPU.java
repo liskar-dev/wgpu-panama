@@ -20,7 +20,7 @@ public class WebGPU {
 	public static long wgpuCreateInstance(@Nullable final InstanceDescriptor descriptor) {
 		try(var stack = Stack.get()) {
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuCreateInstance.invoke(_descriptor);
+			var ret = (long) wgpuCreateInstance.invokeExact(_descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -32,7 +32,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _procName = stack.alloc(procName);
-			var ret = (long) wgpuGetProcAddress.invoke(_device, _procName);
+			var ret = (long) wgpuGetProcAddress.invokeExact(_device, _procName);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -44,7 +44,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _adapter = adapter;
 			var _features = stack.prealloc(features);
-			var ret = (long) wgpuAdapterEnumerateFeatures.invoke(_adapter, _features);
+			var ret = (long) wgpuAdapterEnumerateFeatures.invokeExact(_adapter, _features);
 			if(features != null) {
 				for(int i=0; i<features.length; i++) {
 					features[i] = FeatureName.from(get_int(_features + i*4));
@@ -61,7 +61,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _adapter = adapter;
 			var _info = stack.prealloc(info);
-			wgpuAdapterGetInfo.invoke(_adapter, _info);
+			wgpuAdapterGetInfo.invokeExact(_adapter, _info);
 			((WGPUStruct)info).load(_info);
 			wgpuAdapterInfoFreeMembers.invoke(wrap(_info, 56));
 		} catch (Throwable e) {
@@ -74,7 +74,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _adapter = adapter;
 			var _limits = stack.prealloc(limits);
-			var ret = (int) wgpuAdapterGetLimits.invoke(_adapter, _limits);
+			var ret = (int) wgpuAdapterGetLimits.invokeExact(_adapter, _limits);
 			((WGPUStruct)limits).load(_limits);
 			return ret != 0;
 		} catch (Throwable e) {
@@ -87,7 +87,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _adapter = adapter;
 			var _feature = feature == null ? 0 : feature.bits;
-			var ret = (int) wgpuAdapterHasFeature.invoke(_adapter, _feature);
+			var ret = (int) wgpuAdapterHasFeature.invokeExact(_adapter, _feature);
 			return ret != 0;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -101,7 +101,7 @@ public class WebGPU {
 			var _descriptor = stack.alloc(descriptor);
 			var _callback = WGPUCallback.createStub(callback, callback.handle, callback.desc);
 			var _userdata = (long) userdata;
-			wgpuAdapterRequestDevice.invoke(_adapter, _descriptor, _callback, _userdata);
+			wgpuAdapterRequestDevice.invokeExact(_adapter, _descriptor, _callback, _userdata);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -111,7 +111,7 @@ public class WebGPU {
 	public static void wgpuAdapterReference(final long adapter) {
 		try(var stack = Stack.get()) {
 			var _adapter = adapter;
-			wgpuAdapterReference.invoke(_adapter);
+			wgpuAdapterReference.invokeExact(_adapter);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -121,7 +121,7 @@ public class WebGPU {
 	public static void wgpuAdapterRelease(final long adapter) {
 		try(var stack = Stack.get()) {
 			var _adapter = adapter;
-			wgpuAdapterRelease.invoke(_adapter);
+			wgpuAdapterRelease.invokeExact(_adapter);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -134,7 +134,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _bindGroup = bindGroup;
 			var _label = stack.alloc(label);
-			wgpuBindGroupSetLabel.invoke(_bindGroup, _label);
+			wgpuBindGroupSetLabel.invokeExact(_bindGroup, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -144,7 +144,7 @@ public class WebGPU {
 	public static void wgpuBindGroupReference(final long bindGroup) {
 		try(var stack = Stack.get()) {
 			var _bindGroup = bindGroup;
-			wgpuBindGroupReference.invoke(_bindGroup);
+			wgpuBindGroupReference.invokeExact(_bindGroup);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -154,7 +154,7 @@ public class WebGPU {
 	public static void wgpuBindGroupRelease(final long bindGroup) {
 		try(var stack = Stack.get()) {
 			var _bindGroup = bindGroup;
-			wgpuBindGroupRelease.invoke(_bindGroup);
+			wgpuBindGroupRelease.invokeExact(_bindGroup);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -165,7 +165,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _bindGroupLayout = bindGroupLayout;
 			var _label = stack.alloc(label);
-			wgpuBindGroupLayoutSetLabel.invoke(_bindGroupLayout, _label);
+			wgpuBindGroupLayoutSetLabel.invokeExact(_bindGroupLayout, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -175,7 +175,7 @@ public class WebGPU {
 	public static void wgpuBindGroupLayoutReference(final long bindGroupLayout) {
 		try(var stack = Stack.get()) {
 			var _bindGroupLayout = bindGroupLayout;
-			wgpuBindGroupLayoutReference.invoke(_bindGroupLayout);
+			wgpuBindGroupLayoutReference.invokeExact(_bindGroupLayout);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -185,7 +185,7 @@ public class WebGPU {
 	public static void wgpuBindGroupLayoutRelease(final long bindGroupLayout) {
 		try(var stack = Stack.get()) {
 			var _bindGroupLayout = bindGroupLayout;
-			wgpuBindGroupLayoutRelease.invoke(_bindGroupLayout);
+			wgpuBindGroupLayoutRelease.invokeExact(_bindGroupLayout);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -195,7 +195,7 @@ public class WebGPU {
 	public static void wgpuBufferDestroy(final long buffer) {
 		try(var stack = Stack.get()) {
 			var _buffer = buffer;
-			wgpuBufferDestroy.invoke(_buffer);
+			wgpuBufferDestroy.invokeExact(_buffer);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -207,7 +207,7 @@ public class WebGPU {
 			var _buffer = buffer;
 			var _offset = (long) offset;
 			var _size = (long) size;
-			var ret = (long) wgpuBufferGetConstMappedRange.invoke(_buffer, _offset, _size);
+			var ret = (long) wgpuBufferGetConstMappedRange.invokeExact(_buffer, _offset, _size);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -217,7 +217,7 @@ public class WebGPU {
 	public static BufferMapState wgpuBufferGetMapState(final long buffer) {
 		try(var stack = Stack.get()) {
 			var _buffer = buffer;
-			var ret = (int) wgpuBufferGetMapState.invoke(_buffer);
+			var ret = (int) wgpuBufferGetMapState.invokeExact(_buffer);
 			return BufferMapState.from(ret);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -230,7 +230,7 @@ public class WebGPU {
 			var _buffer = buffer;
 			var _offset = (long) offset;
 			var _size = (long) size;
-			var ret = (long) wgpuBufferGetMappedRange.invoke(_buffer, _offset, _size);
+			var ret = (long) wgpuBufferGetMappedRange.invokeExact(_buffer, _offset, _size);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -240,7 +240,7 @@ public class WebGPU {
 	public static long wgpuBufferGetSize(final long buffer) {
 		try(var stack = Stack.get()) {
 			var _buffer = buffer;
-			var ret = (long) wgpuBufferGetSize.invoke(_buffer);
+			var ret = (long) wgpuBufferGetSize.invokeExact(_buffer);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -251,7 +251,7 @@ public class WebGPU {
 	public static int wgpuBufferGetUsage(final long buffer) {
 		try(var stack = Stack.get()) {
 			var _buffer = buffer;
-			var ret = (int) wgpuBufferGetUsage.invoke(_buffer);
+			var ret = (int) wgpuBufferGetUsage.invokeExact(_buffer);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -267,7 +267,7 @@ public class WebGPU {
 			var _size = (long) size;
 			var _callback = WGPUCallback.createStub(callback, callback.handle, callback.desc);
 			var _userdata = (long) userdata;
-			wgpuBufferMapAsync.invoke(_buffer, _mode, _offset, _size, _callback, _userdata);
+			wgpuBufferMapAsync.invokeExact(_buffer, _mode, _offset, _size, _callback, _userdata);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -278,7 +278,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _buffer = buffer;
 			var _label = stack.alloc(label);
-			wgpuBufferSetLabel.invoke(_buffer, _label);
+			wgpuBufferSetLabel.invokeExact(_buffer, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -288,7 +288,7 @@ public class WebGPU {
 	public static void wgpuBufferUnmap(final long buffer) {
 		try(var stack = Stack.get()) {
 			var _buffer = buffer;
-			wgpuBufferUnmap.invoke(_buffer);
+			wgpuBufferUnmap.invokeExact(_buffer);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -298,7 +298,7 @@ public class WebGPU {
 	public static void wgpuBufferReference(final long buffer) {
 		try(var stack = Stack.get()) {
 			var _buffer = buffer;
-			wgpuBufferReference.invoke(_buffer);
+			wgpuBufferReference.invokeExact(_buffer);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -308,7 +308,7 @@ public class WebGPU {
 	public static void wgpuBufferRelease(final long buffer) {
 		try(var stack = Stack.get()) {
 			var _buffer = buffer;
-			wgpuBufferRelease.invoke(_buffer);
+			wgpuBufferRelease.invokeExact(_buffer);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -319,7 +319,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _commandBuffer = commandBuffer;
 			var _label = stack.alloc(label);
-			wgpuCommandBufferSetLabel.invoke(_commandBuffer, _label);
+			wgpuCommandBufferSetLabel.invokeExact(_commandBuffer, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -329,7 +329,7 @@ public class WebGPU {
 	public static void wgpuCommandBufferReference(final long commandBuffer) {
 		try(var stack = Stack.get()) {
 			var _commandBuffer = commandBuffer;
-			wgpuCommandBufferReference.invoke(_commandBuffer);
+			wgpuCommandBufferReference.invokeExact(_commandBuffer);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -339,7 +339,7 @@ public class WebGPU {
 	public static void wgpuCommandBufferRelease(final long commandBuffer) {
 		try(var stack = Stack.get()) {
 			var _commandBuffer = commandBuffer;
-			wgpuCommandBufferRelease.invoke(_commandBuffer);
+			wgpuCommandBufferRelease.invokeExact(_commandBuffer);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -350,7 +350,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _commandEncoder = commandEncoder;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuCommandEncoderBeginComputePass.invoke(_commandEncoder, _descriptor);
+			var ret = (long) wgpuCommandEncoderBeginComputePass.invokeExact(_commandEncoder, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -362,7 +362,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _commandEncoder = commandEncoder;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuCommandEncoderBeginRenderPass.invoke(_commandEncoder, _descriptor);
+			var ret = (long) wgpuCommandEncoderBeginRenderPass.invokeExact(_commandEncoder, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -376,7 +376,7 @@ public class WebGPU {
 			var _buffer = buffer;
 			var _offset = (long) offset;
 			var _size = (long) size;
-			wgpuCommandEncoderClearBuffer.invoke(_commandEncoder, _buffer, _offset, _size);
+			wgpuCommandEncoderClearBuffer.invokeExact(_commandEncoder, _buffer, _offset, _size);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -391,7 +391,7 @@ public class WebGPU {
 			var _destination = destination;
 			var _destinationOffset = (long) destinationOffset;
 			var _size = (long) size;
-			wgpuCommandEncoderCopyBufferToBuffer.invoke(_commandEncoder, _source, _sourceOffset, _destination, _destinationOffset, _size);
+			wgpuCommandEncoderCopyBufferToBuffer.invokeExact(_commandEncoder, _source, _sourceOffset, _destination, _destinationOffset, _size);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -404,7 +404,7 @@ public class WebGPU {
 			var _source = stack.alloc(source);
 			var _destination = stack.alloc(destination);
 			var _copySize = stack.alloc(copySize);
-			wgpuCommandEncoderCopyBufferToTexture.invoke(_commandEncoder, _source, _destination, _copySize);
+			wgpuCommandEncoderCopyBufferToTexture.invokeExact(_commandEncoder, _source, _destination, _copySize);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -417,7 +417,7 @@ public class WebGPU {
 			var _source = stack.alloc(source);
 			var _destination = stack.alloc(destination);
 			var _copySize = stack.alloc(copySize);
-			wgpuCommandEncoderCopyTextureToBuffer.invoke(_commandEncoder, _source, _destination, _copySize);
+			wgpuCommandEncoderCopyTextureToBuffer.invokeExact(_commandEncoder, _source, _destination, _copySize);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -430,7 +430,7 @@ public class WebGPU {
 			var _source = stack.alloc(source);
 			var _destination = stack.alloc(destination);
 			var _copySize = stack.alloc(copySize);
-			wgpuCommandEncoderCopyTextureToTexture.invoke(_commandEncoder, _source, _destination, _copySize);
+			wgpuCommandEncoderCopyTextureToTexture.invokeExact(_commandEncoder, _source, _destination, _copySize);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -441,7 +441,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _commandEncoder = commandEncoder;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuCommandEncoderFinish.invoke(_commandEncoder, _descriptor);
+			var ret = (long) wgpuCommandEncoderFinish.invokeExact(_commandEncoder, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -453,7 +453,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _commandEncoder = commandEncoder;
 			var _markerLabel = stack.alloc(markerLabel);
-			wgpuCommandEncoderInsertDebugMarker.invoke(_commandEncoder, _markerLabel);
+			wgpuCommandEncoderInsertDebugMarker.invokeExact(_commandEncoder, _markerLabel);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -463,7 +463,7 @@ public class WebGPU {
 	public static void wgpuCommandEncoderPopDebugGroup(final long commandEncoder) {
 		try(var stack = Stack.get()) {
 			var _commandEncoder = commandEncoder;
-			wgpuCommandEncoderPopDebugGroup.invoke(_commandEncoder);
+			wgpuCommandEncoderPopDebugGroup.invokeExact(_commandEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -474,7 +474,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _commandEncoder = commandEncoder;
 			var _groupLabel = stack.alloc(groupLabel);
-			wgpuCommandEncoderPushDebugGroup.invoke(_commandEncoder, _groupLabel);
+			wgpuCommandEncoderPushDebugGroup.invokeExact(_commandEncoder, _groupLabel);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -489,7 +489,7 @@ public class WebGPU {
 			var _queryCount = (int) queryCount;
 			var _destination = destination;
 			var _destinationOffset = (long) destinationOffset;
-			wgpuCommandEncoderResolveQuerySet.invoke(_commandEncoder, _querySet, _firstQuery, _queryCount, _destination, _destinationOffset);
+			wgpuCommandEncoderResolveQuerySet.invokeExact(_commandEncoder, _querySet, _firstQuery, _queryCount, _destination, _destinationOffset);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -500,7 +500,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _commandEncoder = commandEncoder;
 			var _label = stack.alloc(label);
-			wgpuCommandEncoderSetLabel.invoke(_commandEncoder, _label);
+			wgpuCommandEncoderSetLabel.invokeExact(_commandEncoder, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -512,7 +512,7 @@ public class WebGPU {
 			var _commandEncoder = commandEncoder;
 			var _querySet = querySet;
 			var _queryIndex = (int) queryIndex;
-			wgpuCommandEncoderWriteTimestamp.invoke(_commandEncoder, _querySet, _queryIndex);
+			wgpuCommandEncoderWriteTimestamp.invokeExact(_commandEncoder, _querySet, _queryIndex);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -522,7 +522,7 @@ public class WebGPU {
 	public static void wgpuCommandEncoderReference(final long commandEncoder) {
 		try(var stack = Stack.get()) {
 			var _commandEncoder = commandEncoder;
-			wgpuCommandEncoderReference.invoke(_commandEncoder);
+			wgpuCommandEncoderReference.invokeExact(_commandEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -532,7 +532,7 @@ public class WebGPU {
 	public static void wgpuCommandEncoderRelease(final long commandEncoder) {
 		try(var stack = Stack.get()) {
 			var _commandEncoder = commandEncoder;
-			wgpuCommandEncoderRelease.invoke(_commandEncoder);
+			wgpuCommandEncoderRelease.invokeExact(_commandEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -545,7 +545,7 @@ public class WebGPU {
 			var _workgroupCountX = (int) workgroupCountX;
 			var _workgroupCountY = (int) workgroupCountY;
 			var _workgroupCountZ = (int) workgroupCountZ;
-			wgpuComputePassEncoderDispatchWorkgroups.invoke(_computePassEncoder, _workgroupCountX, _workgroupCountY, _workgroupCountZ);
+			wgpuComputePassEncoderDispatchWorkgroups.invokeExact(_computePassEncoder, _workgroupCountX, _workgroupCountY, _workgroupCountZ);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -557,7 +557,7 @@ public class WebGPU {
 			var _computePassEncoder = computePassEncoder;
 			var _indirectBuffer = indirectBuffer;
 			var _indirectOffset = (long) indirectOffset;
-			wgpuComputePassEncoderDispatchWorkgroupsIndirect.invoke(_computePassEncoder, _indirectBuffer, _indirectOffset);
+			wgpuComputePassEncoderDispatchWorkgroupsIndirect.invokeExact(_computePassEncoder, _indirectBuffer, _indirectOffset);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -567,7 +567,7 @@ public class WebGPU {
 	public static void wgpuComputePassEncoderEnd(final long computePassEncoder) {
 		try(var stack = Stack.get()) {
 			var _computePassEncoder = computePassEncoder;
-			wgpuComputePassEncoderEnd.invoke(_computePassEncoder);
+			wgpuComputePassEncoderEnd.invokeExact(_computePassEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -578,7 +578,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _computePassEncoder = computePassEncoder;
 			var _markerLabel = stack.alloc(markerLabel);
-			wgpuComputePassEncoderInsertDebugMarker.invoke(_computePassEncoder, _markerLabel);
+			wgpuComputePassEncoderInsertDebugMarker.invokeExact(_computePassEncoder, _markerLabel);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -588,7 +588,7 @@ public class WebGPU {
 	public static void wgpuComputePassEncoderPopDebugGroup(final long computePassEncoder) {
 		try(var stack = Stack.get()) {
 			var _computePassEncoder = computePassEncoder;
-			wgpuComputePassEncoderPopDebugGroup.invoke(_computePassEncoder);
+			wgpuComputePassEncoderPopDebugGroup.invokeExact(_computePassEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -599,7 +599,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _computePassEncoder = computePassEncoder;
 			var _groupLabel = stack.alloc(groupLabel);
-			wgpuComputePassEncoderPushDebugGroup.invoke(_computePassEncoder, _groupLabel);
+			wgpuComputePassEncoderPushDebugGroup.invokeExact(_computePassEncoder, _groupLabel);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -613,7 +613,7 @@ public class WebGPU {
 			var _group = group;
 			var _dynamicOffsetCount = (long) (dynamicOffsets == null ? 0 : dynamicOffsets.length);
 			var _dynamicOffsets = stack.alloc(dynamicOffsets);
-			wgpuComputePassEncoderSetBindGroup.invoke(_computePassEncoder, _groupIndex, _group, _dynamicOffsetCount, _dynamicOffsets);
+			wgpuComputePassEncoderSetBindGroup.invokeExact(_computePassEncoder, _groupIndex, _group, _dynamicOffsetCount, _dynamicOffsets);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -624,7 +624,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _computePassEncoder = computePassEncoder;
 			var _label = stack.alloc(label);
-			wgpuComputePassEncoderSetLabel.invoke(_computePassEncoder, _label);
+			wgpuComputePassEncoderSetLabel.invokeExact(_computePassEncoder, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -635,7 +635,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _computePassEncoder = computePassEncoder;
 			var _pipeline = pipeline;
-			wgpuComputePassEncoderSetPipeline.invoke(_computePassEncoder, _pipeline);
+			wgpuComputePassEncoderSetPipeline.invokeExact(_computePassEncoder, _pipeline);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -645,7 +645,7 @@ public class WebGPU {
 	public static void wgpuComputePassEncoderReference(final long computePassEncoder) {
 		try(var stack = Stack.get()) {
 			var _computePassEncoder = computePassEncoder;
-			wgpuComputePassEncoderReference.invoke(_computePassEncoder);
+			wgpuComputePassEncoderReference.invokeExact(_computePassEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -655,7 +655,7 @@ public class WebGPU {
 	public static void wgpuComputePassEncoderRelease(final long computePassEncoder) {
 		try(var stack = Stack.get()) {
 			var _computePassEncoder = computePassEncoder;
-			wgpuComputePassEncoderRelease.invoke(_computePassEncoder);
+			wgpuComputePassEncoderRelease.invokeExact(_computePassEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -666,7 +666,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _computePipeline = computePipeline;
 			var _groupIndex = (int) groupIndex;
-			var ret = (long) wgpuComputePipelineGetBindGroupLayout.invoke(_computePipeline, _groupIndex);
+			var ret = (long) wgpuComputePipelineGetBindGroupLayout.invokeExact(_computePipeline, _groupIndex);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -678,7 +678,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _computePipeline = computePipeline;
 			var _label = stack.alloc(label);
-			wgpuComputePipelineSetLabel.invoke(_computePipeline, _label);
+			wgpuComputePipelineSetLabel.invokeExact(_computePipeline, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -688,7 +688,7 @@ public class WebGPU {
 	public static void wgpuComputePipelineReference(final long computePipeline) {
 		try(var stack = Stack.get()) {
 			var _computePipeline = computePipeline;
-			wgpuComputePipelineReference.invoke(_computePipeline);
+			wgpuComputePipelineReference.invokeExact(_computePipeline);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -698,7 +698,7 @@ public class WebGPU {
 	public static void wgpuComputePipelineRelease(final long computePipeline) {
 		try(var stack = Stack.get()) {
 			var _computePipeline = computePipeline;
-			wgpuComputePipelineRelease.invoke(_computePipeline);
+			wgpuComputePipelineRelease.invokeExact(_computePipeline);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -709,7 +709,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuDeviceCreateBindGroup.invoke(_device, _descriptor);
+			var ret = (long) wgpuDeviceCreateBindGroup.invokeExact(_device, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -721,7 +721,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuDeviceCreateBindGroupLayout.invoke(_device, _descriptor);
+			var ret = (long) wgpuDeviceCreateBindGroupLayout.invokeExact(_device, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -733,7 +733,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuDeviceCreateBuffer.invoke(_device, _descriptor);
+			var ret = (long) wgpuDeviceCreateBuffer.invokeExact(_device, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -745,7 +745,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuDeviceCreateCommandEncoder.invoke(_device, _descriptor);
+			var ret = (long) wgpuDeviceCreateCommandEncoder.invokeExact(_device, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -757,7 +757,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuDeviceCreateComputePipeline.invoke(_device, _descriptor);
+			var ret = (long) wgpuDeviceCreateComputePipeline.invokeExact(_device, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -771,7 +771,7 @@ public class WebGPU {
 			var _descriptor = stack.alloc(descriptor);
 			var _callback = WGPUCallback.createStub(callback, callback.handle, callback.desc);
 			var _userdata = (long) userdata;
-			wgpuDeviceCreateComputePipelineAsync.invoke(_device, _descriptor, _callback, _userdata);
+			wgpuDeviceCreateComputePipelineAsync.invokeExact(_device, _descriptor, _callback, _userdata);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -782,7 +782,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuDeviceCreatePipelineLayout.invoke(_device, _descriptor);
+			var ret = (long) wgpuDeviceCreatePipelineLayout.invokeExact(_device, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -794,7 +794,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuDeviceCreateQuerySet.invoke(_device, _descriptor);
+			var ret = (long) wgpuDeviceCreateQuerySet.invokeExact(_device, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -806,7 +806,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuDeviceCreateRenderBundleEncoder.invoke(_device, _descriptor);
+			var ret = (long) wgpuDeviceCreateRenderBundleEncoder.invokeExact(_device, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -818,7 +818,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuDeviceCreateRenderPipeline.invoke(_device, _descriptor);
+			var ret = (long) wgpuDeviceCreateRenderPipeline.invokeExact(_device, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -832,7 +832,7 @@ public class WebGPU {
 			var _descriptor = stack.alloc(descriptor);
 			var _callback = WGPUCallback.createStub(callback, callback.handle, callback.desc);
 			var _userdata = (long) userdata;
-			wgpuDeviceCreateRenderPipelineAsync.invoke(_device, _descriptor, _callback, _userdata);
+			wgpuDeviceCreateRenderPipelineAsync.invokeExact(_device, _descriptor, _callback, _userdata);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -843,7 +843,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuDeviceCreateSampler.invoke(_device, _descriptor);
+			var ret = (long) wgpuDeviceCreateSampler.invokeExact(_device, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -855,7 +855,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuDeviceCreateShaderModule.invoke(_device, _descriptor);
+			var ret = (long) wgpuDeviceCreateShaderModule.invokeExact(_device, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -867,7 +867,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuDeviceCreateTexture.invoke(_device, _descriptor);
+			var ret = (long) wgpuDeviceCreateTexture.invokeExact(_device, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -878,7 +878,7 @@ public class WebGPU {
 	public static void wgpuDeviceDestroy(final long device) {
 		try(var stack = Stack.get()) {
 			var _device = device;
-			wgpuDeviceDestroy.invoke(_device);
+			wgpuDeviceDestroy.invokeExact(_device);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -889,7 +889,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _features = stack.prealloc(features);
-			var ret = (long) wgpuDeviceEnumerateFeatures.invoke(_device, _features);
+			var ret = (long) wgpuDeviceEnumerateFeatures.invokeExact(_device, _features);
 			if(features != null) {
 				for(int i=0; i<features.length; i++) {
 					features[i] = FeatureName.from(get_int(_features + i*4));
@@ -906,7 +906,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _limits = stack.prealloc(limits);
-			var ret = (int) wgpuDeviceGetLimits.invoke(_device, _limits);
+			var ret = (int) wgpuDeviceGetLimits.invokeExact(_device, _limits);
 			((WGPUStruct)limits).load(_limits);
 			return ret != 0;
 		} catch (Throwable e) {
@@ -918,7 +918,7 @@ public class WebGPU {
 	public static long wgpuDeviceGetQueue(final long device) {
 		try(var stack = Stack.get()) {
 			var _device = device;
-			var ret = (long) wgpuDeviceGetQueue.invoke(_device);
+			var ret = (long) wgpuDeviceGetQueue.invokeExact(_device);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -930,7 +930,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _feature = feature == null ? 0 : feature.bits;
-			var ret = (int) wgpuDeviceHasFeature.invoke(_device, _feature);
+			var ret = (int) wgpuDeviceHasFeature.invokeExact(_device, _feature);
 			return ret != 0;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -943,7 +943,7 @@ public class WebGPU {
 			var _device = device;
 			var _callback = WGPUCallback.createStub(callback, callback.handle, callback.desc);
 			var _userdata = (long) userdata;
-			wgpuDevicePopErrorScope.invoke(_device, _callback, _userdata);
+			wgpuDevicePopErrorScope.invokeExact(_device, _callback, _userdata);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -954,7 +954,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _filter = filter == null ? 0 : filter.bits;
-			wgpuDevicePushErrorScope.invoke(_device, _filter);
+			wgpuDevicePushErrorScope.invokeExact(_device, _filter);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -965,7 +965,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _device = device;
 			var _label = stack.alloc(label);
-			wgpuDeviceSetLabel.invoke(_device, _label);
+			wgpuDeviceSetLabel.invokeExact(_device, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -975,7 +975,7 @@ public class WebGPU {
 	public static void wgpuDeviceReference(final long device) {
 		try(var stack = Stack.get()) {
 			var _device = device;
-			wgpuDeviceReference.invoke(_device);
+			wgpuDeviceReference.invokeExact(_device);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -985,7 +985,7 @@ public class WebGPU {
 	public static void wgpuDeviceRelease(final long device) {
 		try(var stack = Stack.get()) {
 			var _device = device;
-			wgpuDeviceRelease.invoke(_device);
+			wgpuDeviceRelease.invokeExact(_device);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -996,7 +996,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _instance = instance;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuInstanceCreateSurface.invoke(_instance, _descriptor);
+			var ret = (long) wgpuInstanceCreateSurface.invokeExact(_instance, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1008,7 +1008,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _instance = instance;
 			var _feature = feature == null ? 0 : feature.bits;
-			var ret = (int) wgpuInstanceHasWGSLLanguageFeature.invoke(_instance, _feature);
+			var ret = (int) wgpuInstanceHasWGSLLanguageFeature.invokeExact(_instance, _feature);
 			return ret != 0;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1019,7 +1019,7 @@ public class WebGPU {
 	public static void wgpuInstanceProcessEvents(final long instance) {
 		try(var stack = Stack.get()) {
 			var _instance = instance;
-			wgpuInstanceProcessEvents.invoke(_instance);
+			wgpuInstanceProcessEvents.invokeExact(_instance);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1032,7 +1032,7 @@ public class WebGPU {
 			var _options = stack.alloc(options);
 			var _callback = WGPUCallback.createStub(callback, callback.handle, callback.desc);
 			var _userdata = (long) userdata;
-			wgpuInstanceRequestAdapter.invoke(_instance, _options, _callback, _userdata);
+			wgpuInstanceRequestAdapter.invokeExact(_instance, _options, _callback, _userdata);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1042,7 +1042,7 @@ public class WebGPU {
 	public static void wgpuInstanceReference(final long instance) {
 		try(var stack = Stack.get()) {
 			var _instance = instance;
-			wgpuInstanceReference.invoke(_instance);
+			wgpuInstanceReference.invokeExact(_instance);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1052,7 +1052,7 @@ public class WebGPU {
 	public static void wgpuInstanceRelease(final long instance) {
 		try(var stack = Stack.get()) {
 			var _instance = instance;
-			wgpuInstanceRelease.invoke(_instance);
+			wgpuInstanceRelease.invokeExact(_instance);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1063,7 +1063,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _pipelineLayout = pipelineLayout;
 			var _label = stack.alloc(label);
-			wgpuPipelineLayoutSetLabel.invoke(_pipelineLayout, _label);
+			wgpuPipelineLayoutSetLabel.invokeExact(_pipelineLayout, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1073,7 +1073,7 @@ public class WebGPU {
 	public static void wgpuPipelineLayoutReference(final long pipelineLayout) {
 		try(var stack = Stack.get()) {
 			var _pipelineLayout = pipelineLayout;
-			wgpuPipelineLayoutReference.invoke(_pipelineLayout);
+			wgpuPipelineLayoutReference.invokeExact(_pipelineLayout);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1083,7 +1083,7 @@ public class WebGPU {
 	public static void wgpuPipelineLayoutRelease(final long pipelineLayout) {
 		try(var stack = Stack.get()) {
 			var _pipelineLayout = pipelineLayout;
-			wgpuPipelineLayoutRelease.invoke(_pipelineLayout);
+			wgpuPipelineLayoutRelease.invokeExact(_pipelineLayout);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1093,7 +1093,7 @@ public class WebGPU {
 	public static void wgpuQuerySetDestroy(final long querySet) {
 		try(var stack = Stack.get()) {
 			var _querySet = querySet;
-			wgpuQuerySetDestroy.invoke(_querySet);
+			wgpuQuerySetDestroy.invokeExact(_querySet);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1103,7 +1103,7 @@ public class WebGPU {
 	public static int wgpuQuerySetGetCount(final long querySet) {
 		try(var stack = Stack.get()) {
 			var _querySet = querySet;
-			var ret = (int) wgpuQuerySetGetCount.invoke(_querySet);
+			var ret = (int) wgpuQuerySetGetCount.invokeExact(_querySet);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1114,7 +1114,7 @@ public class WebGPU {
 	public static QueryType wgpuQuerySetGetType(final long querySet) {
 		try(var stack = Stack.get()) {
 			var _querySet = querySet;
-			var ret = (int) wgpuQuerySetGetType.invoke(_querySet);
+			var ret = (int) wgpuQuerySetGetType.invokeExact(_querySet);
 			return QueryType.from(ret);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1126,7 +1126,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _querySet = querySet;
 			var _label = stack.alloc(label);
-			wgpuQuerySetSetLabel.invoke(_querySet, _label);
+			wgpuQuerySetSetLabel.invokeExact(_querySet, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1136,7 +1136,7 @@ public class WebGPU {
 	public static void wgpuQuerySetReference(final long querySet) {
 		try(var stack = Stack.get()) {
 			var _querySet = querySet;
-			wgpuQuerySetReference.invoke(_querySet);
+			wgpuQuerySetReference.invokeExact(_querySet);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1146,7 +1146,7 @@ public class WebGPU {
 	public static void wgpuQuerySetRelease(final long querySet) {
 		try(var stack = Stack.get()) {
 			var _querySet = querySet;
-			wgpuQuerySetRelease.invoke(_querySet);
+			wgpuQuerySetRelease.invokeExact(_querySet);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1158,7 +1158,7 @@ public class WebGPU {
 			var _queue = queue;
 			var _callback = WGPUCallback.createStub(callback, callback.handle, callback.desc);
 			var _userdata = (long) userdata;
-			wgpuQueueOnSubmittedWorkDone.invoke(_queue, _callback, _userdata);
+			wgpuQueueOnSubmittedWorkDone.invokeExact(_queue, _callback, _userdata);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1169,7 +1169,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _queue = queue;
 			var _label = stack.alloc(label);
-			wgpuQueueSetLabel.invoke(_queue, _label);
+			wgpuQueueSetLabel.invokeExact(_queue, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1181,7 +1181,7 @@ public class WebGPU {
 			var _queue = queue;
 			var _commandCount = (long) (commands == null ? 0 : commands.length);
 			var _commands = stack.alloc(commands);
-			wgpuQueueSubmit.invoke(_queue, _commandCount, _commands);
+			wgpuQueueSubmit.invokeExact(_queue, _commandCount, _commands);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1195,7 +1195,7 @@ public class WebGPU {
 			var _bufferOffset = (long) bufferOffset;
 			var _data = data;
 			var _size = (long) size;
-			wgpuQueueWriteBuffer.invoke(_queue, _buffer, _bufferOffset, _data, _size);
+			wgpuQueueWriteBuffer.invokeExact(_queue, _buffer, _bufferOffset, _data, _size);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1210,7 +1210,7 @@ public class WebGPU {
 			var _dataSize = (long) (null == null ? 0 : data.byteSize());
 			var _dataLayout = stack.alloc(dataLayout);
 			var _writeSize = stack.alloc(writeSize);
-			wgpuQueueWriteTexture.invoke(_queue, _destination, _data, _dataSize, _dataLayout, _writeSize);
+			wgpuQueueWriteTexture.invokeExact(_queue, _destination, _data, _dataSize, _dataLayout, _writeSize);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1220,7 +1220,7 @@ public class WebGPU {
 	public static void wgpuQueueReference(final long queue) {
 		try(var stack = Stack.get()) {
 			var _queue = queue;
-			wgpuQueueReference.invoke(_queue);
+			wgpuQueueReference.invokeExact(_queue);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1230,7 +1230,7 @@ public class WebGPU {
 	public static void wgpuQueueRelease(final long queue) {
 		try(var stack = Stack.get()) {
 			var _queue = queue;
-			wgpuQueueRelease.invoke(_queue);
+			wgpuQueueRelease.invokeExact(_queue);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1241,7 +1241,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderBundle = renderBundle;
 			var _label = stack.alloc(label);
-			wgpuRenderBundleSetLabel.invoke(_renderBundle, _label);
+			wgpuRenderBundleSetLabel.invokeExact(_renderBundle, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1251,7 +1251,7 @@ public class WebGPU {
 	public static void wgpuRenderBundleReference(final long renderBundle) {
 		try(var stack = Stack.get()) {
 			var _renderBundle = renderBundle;
-			wgpuRenderBundleReference.invoke(_renderBundle);
+			wgpuRenderBundleReference.invokeExact(_renderBundle);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1261,7 +1261,7 @@ public class WebGPU {
 	public static void wgpuRenderBundleRelease(final long renderBundle) {
 		try(var stack = Stack.get()) {
 			var _renderBundle = renderBundle;
-			wgpuRenderBundleRelease.invoke(_renderBundle);
+			wgpuRenderBundleRelease.invokeExact(_renderBundle);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1275,7 +1275,7 @@ public class WebGPU {
 			var _instanceCount = (int) instanceCount;
 			var _firstVertex = (int) firstVertex;
 			var _firstInstance = (int) firstInstance;
-			wgpuRenderBundleEncoderDraw.invoke(_renderBundleEncoder, _vertexCount, _instanceCount, _firstVertex, _firstInstance);
+			wgpuRenderBundleEncoderDraw.invokeExact(_renderBundleEncoder, _vertexCount, _instanceCount, _firstVertex, _firstInstance);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1290,7 +1290,7 @@ public class WebGPU {
 			var _firstIndex = (int) firstIndex;
 			var _baseVertex = (int) baseVertex;
 			var _firstInstance = (int) firstInstance;
-			wgpuRenderBundleEncoderDrawIndexed.invoke(_renderBundleEncoder, _indexCount, _instanceCount, _firstIndex, _baseVertex, _firstInstance);
+			wgpuRenderBundleEncoderDrawIndexed.invokeExact(_renderBundleEncoder, _indexCount, _instanceCount, _firstIndex, _baseVertex, _firstInstance);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1302,7 +1302,7 @@ public class WebGPU {
 			var _renderBundleEncoder = renderBundleEncoder;
 			var _indirectBuffer = indirectBuffer;
 			var _indirectOffset = (long) indirectOffset;
-			wgpuRenderBundleEncoderDrawIndexedIndirect.invoke(_renderBundleEncoder, _indirectBuffer, _indirectOffset);
+			wgpuRenderBundleEncoderDrawIndexedIndirect.invokeExact(_renderBundleEncoder, _indirectBuffer, _indirectOffset);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1314,7 +1314,7 @@ public class WebGPU {
 			var _renderBundleEncoder = renderBundleEncoder;
 			var _indirectBuffer = indirectBuffer;
 			var _indirectOffset = (long) indirectOffset;
-			wgpuRenderBundleEncoderDrawIndirect.invoke(_renderBundleEncoder, _indirectBuffer, _indirectOffset);
+			wgpuRenderBundleEncoderDrawIndirect.invokeExact(_renderBundleEncoder, _indirectBuffer, _indirectOffset);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1325,7 +1325,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderBundleEncoder = renderBundleEncoder;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuRenderBundleEncoderFinish.invoke(_renderBundleEncoder, _descriptor);
+			var ret = (long) wgpuRenderBundleEncoderFinish.invokeExact(_renderBundleEncoder, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1337,7 +1337,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderBundleEncoder = renderBundleEncoder;
 			var _markerLabel = stack.alloc(markerLabel);
-			wgpuRenderBundleEncoderInsertDebugMarker.invoke(_renderBundleEncoder, _markerLabel);
+			wgpuRenderBundleEncoderInsertDebugMarker.invokeExact(_renderBundleEncoder, _markerLabel);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1347,7 +1347,7 @@ public class WebGPU {
 	public static void wgpuRenderBundleEncoderPopDebugGroup(final long renderBundleEncoder) {
 		try(var stack = Stack.get()) {
 			var _renderBundleEncoder = renderBundleEncoder;
-			wgpuRenderBundleEncoderPopDebugGroup.invoke(_renderBundleEncoder);
+			wgpuRenderBundleEncoderPopDebugGroup.invokeExact(_renderBundleEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1358,7 +1358,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderBundleEncoder = renderBundleEncoder;
 			var _groupLabel = stack.alloc(groupLabel);
-			wgpuRenderBundleEncoderPushDebugGroup.invoke(_renderBundleEncoder, _groupLabel);
+			wgpuRenderBundleEncoderPushDebugGroup.invokeExact(_renderBundleEncoder, _groupLabel);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1372,7 +1372,7 @@ public class WebGPU {
 			var _group = group;
 			var _dynamicOffsetCount = (long) (dynamicOffsets == null ? 0 : dynamicOffsets.length);
 			var _dynamicOffsets = stack.alloc(dynamicOffsets);
-			wgpuRenderBundleEncoderSetBindGroup.invoke(_renderBundleEncoder, _groupIndex, _group, _dynamicOffsetCount, _dynamicOffsets);
+			wgpuRenderBundleEncoderSetBindGroup.invokeExact(_renderBundleEncoder, _groupIndex, _group, _dynamicOffsetCount, _dynamicOffsets);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1386,7 +1386,7 @@ public class WebGPU {
 			var _format = format == null ? 0 : format.bits;
 			var _offset = (long) offset;
 			var _size = (long) size;
-			wgpuRenderBundleEncoderSetIndexBuffer.invoke(_renderBundleEncoder, _buffer, _format, _offset, _size);
+			wgpuRenderBundleEncoderSetIndexBuffer.invokeExact(_renderBundleEncoder, _buffer, _format, _offset, _size);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1397,7 +1397,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderBundleEncoder = renderBundleEncoder;
 			var _label = stack.alloc(label);
-			wgpuRenderBundleEncoderSetLabel.invoke(_renderBundleEncoder, _label);
+			wgpuRenderBundleEncoderSetLabel.invokeExact(_renderBundleEncoder, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1408,7 +1408,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderBundleEncoder = renderBundleEncoder;
 			var _pipeline = pipeline;
-			wgpuRenderBundleEncoderSetPipeline.invoke(_renderBundleEncoder, _pipeline);
+			wgpuRenderBundleEncoderSetPipeline.invokeExact(_renderBundleEncoder, _pipeline);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1422,7 +1422,7 @@ public class WebGPU {
 			var _buffer = buffer;
 			var _offset = (long) offset;
 			var _size = (long) size;
-			wgpuRenderBundleEncoderSetVertexBuffer.invoke(_renderBundleEncoder, _slot, _buffer, _offset, _size);
+			wgpuRenderBundleEncoderSetVertexBuffer.invokeExact(_renderBundleEncoder, _slot, _buffer, _offset, _size);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1432,7 +1432,7 @@ public class WebGPU {
 	public static void wgpuRenderBundleEncoderReference(final long renderBundleEncoder) {
 		try(var stack = Stack.get()) {
 			var _renderBundleEncoder = renderBundleEncoder;
-			wgpuRenderBundleEncoderReference.invoke(_renderBundleEncoder);
+			wgpuRenderBundleEncoderReference.invokeExact(_renderBundleEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1442,7 +1442,7 @@ public class WebGPU {
 	public static void wgpuRenderBundleEncoderRelease(final long renderBundleEncoder) {
 		try(var stack = Stack.get()) {
 			var _renderBundleEncoder = renderBundleEncoder;
-			wgpuRenderBundleEncoderRelease.invoke(_renderBundleEncoder);
+			wgpuRenderBundleEncoderRelease.invokeExact(_renderBundleEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1453,7 +1453,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
 			var _queryIndex = (int) queryIndex;
-			wgpuRenderPassEncoderBeginOcclusionQuery.invoke(_renderPassEncoder, _queryIndex);
+			wgpuRenderPassEncoderBeginOcclusionQuery.invokeExact(_renderPassEncoder, _queryIndex);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1467,7 +1467,7 @@ public class WebGPU {
 			var _instanceCount = (int) instanceCount;
 			var _firstVertex = (int) firstVertex;
 			var _firstInstance = (int) firstInstance;
-			wgpuRenderPassEncoderDraw.invoke(_renderPassEncoder, _vertexCount, _instanceCount, _firstVertex, _firstInstance);
+			wgpuRenderPassEncoderDraw.invokeExact(_renderPassEncoder, _vertexCount, _instanceCount, _firstVertex, _firstInstance);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1482,7 +1482,7 @@ public class WebGPU {
 			var _firstIndex = (int) firstIndex;
 			var _baseVertex = (int) baseVertex;
 			var _firstInstance = (int) firstInstance;
-			wgpuRenderPassEncoderDrawIndexed.invoke(_renderPassEncoder, _indexCount, _instanceCount, _firstIndex, _baseVertex, _firstInstance);
+			wgpuRenderPassEncoderDrawIndexed.invokeExact(_renderPassEncoder, _indexCount, _instanceCount, _firstIndex, _baseVertex, _firstInstance);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1494,7 +1494,7 @@ public class WebGPU {
 			var _renderPassEncoder = renderPassEncoder;
 			var _indirectBuffer = indirectBuffer;
 			var _indirectOffset = (long) indirectOffset;
-			wgpuRenderPassEncoderDrawIndexedIndirect.invoke(_renderPassEncoder, _indirectBuffer, _indirectOffset);
+			wgpuRenderPassEncoderDrawIndexedIndirect.invokeExact(_renderPassEncoder, _indirectBuffer, _indirectOffset);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1506,7 +1506,7 @@ public class WebGPU {
 			var _renderPassEncoder = renderPassEncoder;
 			var _indirectBuffer = indirectBuffer;
 			var _indirectOffset = (long) indirectOffset;
-			wgpuRenderPassEncoderDrawIndirect.invoke(_renderPassEncoder, _indirectBuffer, _indirectOffset);
+			wgpuRenderPassEncoderDrawIndirect.invokeExact(_renderPassEncoder, _indirectBuffer, _indirectOffset);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1516,7 +1516,7 @@ public class WebGPU {
 	public static void wgpuRenderPassEncoderEnd(final long renderPassEncoder) {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
-			wgpuRenderPassEncoderEnd.invoke(_renderPassEncoder);
+			wgpuRenderPassEncoderEnd.invokeExact(_renderPassEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1526,7 +1526,7 @@ public class WebGPU {
 	public static void wgpuRenderPassEncoderEndOcclusionQuery(final long renderPassEncoder) {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
-			wgpuRenderPassEncoderEndOcclusionQuery.invoke(_renderPassEncoder);
+			wgpuRenderPassEncoderEndOcclusionQuery.invokeExact(_renderPassEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1538,7 +1538,7 @@ public class WebGPU {
 			var _renderPassEncoder = renderPassEncoder;
 			var _bundleCount = (long) (bundles == null ? 0 : bundles.length);
 			var _bundles = stack.alloc(bundles);
-			wgpuRenderPassEncoderExecuteBundles.invoke(_renderPassEncoder, _bundleCount, _bundles);
+			wgpuRenderPassEncoderExecuteBundles.invokeExact(_renderPassEncoder, _bundleCount, _bundles);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1549,7 +1549,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
 			var _markerLabel = stack.alloc(markerLabel);
-			wgpuRenderPassEncoderInsertDebugMarker.invoke(_renderPassEncoder, _markerLabel);
+			wgpuRenderPassEncoderInsertDebugMarker.invokeExact(_renderPassEncoder, _markerLabel);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1559,7 +1559,7 @@ public class WebGPU {
 	public static void wgpuRenderPassEncoderPopDebugGroup(final long renderPassEncoder) {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
-			wgpuRenderPassEncoderPopDebugGroup.invoke(_renderPassEncoder);
+			wgpuRenderPassEncoderPopDebugGroup.invokeExact(_renderPassEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1570,7 +1570,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
 			var _groupLabel = stack.alloc(groupLabel);
-			wgpuRenderPassEncoderPushDebugGroup.invoke(_renderPassEncoder, _groupLabel);
+			wgpuRenderPassEncoderPushDebugGroup.invokeExact(_renderPassEncoder, _groupLabel);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1584,7 +1584,7 @@ public class WebGPU {
 			var _group = group;
 			var _dynamicOffsetCount = (long) (dynamicOffsets == null ? 0 : dynamicOffsets.length);
 			var _dynamicOffsets = stack.alloc(dynamicOffsets);
-			wgpuRenderPassEncoderSetBindGroup.invoke(_renderPassEncoder, _groupIndex, _group, _dynamicOffsetCount, _dynamicOffsets);
+			wgpuRenderPassEncoderSetBindGroup.invokeExact(_renderPassEncoder, _groupIndex, _group, _dynamicOffsetCount, _dynamicOffsets);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1595,7 +1595,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
 			var _color = stack.alloc(color);
-			wgpuRenderPassEncoderSetBlendConstant.invoke(_renderPassEncoder, _color);
+			wgpuRenderPassEncoderSetBlendConstant.invokeExact(_renderPassEncoder, _color);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1609,7 +1609,7 @@ public class WebGPU {
 			var _format = format == null ? 0 : format.bits;
 			var _offset = (long) offset;
 			var _size = (long) size;
-			wgpuRenderPassEncoderSetIndexBuffer.invoke(_renderPassEncoder, _buffer, _format, _offset, _size);
+			wgpuRenderPassEncoderSetIndexBuffer.invokeExact(_renderPassEncoder, _buffer, _format, _offset, _size);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1620,7 +1620,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
 			var _label = stack.alloc(label);
-			wgpuRenderPassEncoderSetLabel.invoke(_renderPassEncoder, _label);
+			wgpuRenderPassEncoderSetLabel.invokeExact(_renderPassEncoder, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1631,7 +1631,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
 			var _pipeline = pipeline;
-			wgpuRenderPassEncoderSetPipeline.invoke(_renderPassEncoder, _pipeline);
+			wgpuRenderPassEncoderSetPipeline.invokeExact(_renderPassEncoder, _pipeline);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1645,7 +1645,7 @@ public class WebGPU {
 			var _y = (int) y;
 			var _width = (int) width;
 			var _height = (int) height;
-			wgpuRenderPassEncoderSetScissorRect.invoke(_renderPassEncoder, _x, _y, _width, _height);
+			wgpuRenderPassEncoderSetScissorRect.invokeExact(_renderPassEncoder, _x, _y, _width, _height);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1656,7 +1656,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
 			var _reference = (int) reference;
-			wgpuRenderPassEncoderSetStencilReference.invoke(_renderPassEncoder, _reference);
+			wgpuRenderPassEncoderSetStencilReference.invokeExact(_renderPassEncoder, _reference);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1670,7 +1670,7 @@ public class WebGPU {
 			var _buffer = buffer;
 			var _offset = (long) offset;
 			var _size = (long) size;
-			wgpuRenderPassEncoderSetVertexBuffer.invoke(_renderPassEncoder, _slot, _buffer, _offset, _size);
+			wgpuRenderPassEncoderSetVertexBuffer.invokeExact(_renderPassEncoder, _slot, _buffer, _offset, _size);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1686,7 +1686,7 @@ public class WebGPU {
 			var _height = (float) height;
 			var _minDepth = (float) minDepth;
 			var _maxDepth = (float) maxDepth;
-			wgpuRenderPassEncoderSetViewport.invoke(_renderPassEncoder, _x, _y, _width, _height, _minDepth, _maxDepth);
+			wgpuRenderPassEncoderSetViewport.invokeExact(_renderPassEncoder, _x, _y, _width, _height, _minDepth, _maxDepth);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1696,7 +1696,7 @@ public class WebGPU {
 	public static void wgpuRenderPassEncoderReference(final long renderPassEncoder) {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
-			wgpuRenderPassEncoderReference.invoke(_renderPassEncoder);
+			wgpuRenderPassEncoderReference.invokeExact(_renderPassEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1706,7 +1706,7 @@ public class WebGPU {
 	public static void wgpuRenderPassEncoderRelease(final long renderPassEncoder) {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
-			wgpuRenderPassEncoderRelease.invoke(_renderPassEncoder);
+			wgpuRenderPassEncoderRelease.invokeExact(_renderPassEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1717,7 +1717,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderPipeline = renderPipeline;
 			var _groupIndex = (int) groupIndex;
-			var ret = (long) wgpuRenderPipelineGetBindGroupLayout.invoke(_renderPipeline, _groupIndex);
+			var ret = (long) wgpuRenderPipelineGetBindGroupLayout.invokeExact(_renderPipeline, _groupIndex);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1729,7 +1729,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _renderPipeline = renderPipeline;
 			var _label = stack.alloc(label);
-			wgpuRenderPipelineSetLabel.invoke(_renderPipeline, _label);
+			wgpuRenderPipelineSetLabel.invokeExact(_renderPipeline, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1739,7 +1739,7 @@ public class WebGPU {
 	public static void wgpuRenderPipelineReference(final long renderPipeline) {
 		try(var stack = Stack.get()) {
 			var _renderPipeline = renderPipeline;
-			wgpuRenderPipelineReference.invoke(_renderPipeline);
+			wgpuRenderPipelineReference.invokeExact(_renderPipeline);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1749,7 +1749,7 @@ public class WebGPU {
 	public static void wgpuRenderPipelineRelease(final long renderPipeline) {
 		try(var stack = Stack.get()) {
 			var _renderPipeline = renderPipeline;
-			wgpuRenderPipelineRelease.invoke(_renderPipeline);
+			wgpuRenderPipelineRelease.invokeExact(_renderPipeline);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1760,7 +1760,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _sampler = sampler;
 			var _label = stack.alloc(label);
-			wgpuSamplerSetLabel.invoke(_sampler, _label);
+			wgpuSamplerSetLabel.invokeExact(_sampler, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1770,7 +1770,7 @@ public class WebGPU {
 	public static void wgpuSamplerReference(final long sampler) {
 		try(var stack = Stack.get()) {
 			var _sampler = sampler;
-			wgpuSamplerReference.invoke(_sampler);
+			wgpuSamplerReference.invokeExact(_sampler);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1780,7 +1780,7 @@ public class WebGPU {
 	public static void wgpuSamplerRelease(final long sampler) {
 		try(var stack = Stack.get()) {
 			var _sampler = sampler;
-			wgpuSamplerRelease.invoke(_sampler);
+			wgpuSamplerRelease.invokeExact(_sampler);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1792,7 +1792,7 @@ public class WebGPU {
 			var _shaderModule = shaderModule;
 			var _callback = WGPUCallback.createStub(callback, callback.handle, callback.desc);
 			var _userdata = (long) userdata;
-			wgpuShaderModuleGetCompilationInfo.invoke(_shaderModule, _callback, _userdata);
+			wgpuShaderModuleGetCompilationInfo.invokeExact(_shaderModule, _callback, _userdata);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1803,7 +1803,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _shaderModule = shaderModule;
 			var _label = stack.alloc(label);
-			wgpuShaderModuleSetLabel.invoke(_shaderModule, _label);
+			wgpuShaderModuleSetLabel.invokeExact(_shaderModule, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1813,7 +1813,7 @@ public class WebGPU {
 	public static void wgpuShaderModuleReference(final long shaderModule) {
 		try(var stack = Stack.get()) {
 			var _shaderModule = shaderModule;
-			wgpuShaderModuleReference.invoke(_shaderModule);
+			wgpuShaderModuleReference.invokeExact(_shaderModule);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1823,7 +1823,7 @@ public class WebGPU {
 	public static void wgpuShaderModuleRelease(final long shaderModule) {
 		try(var stack = Stack.get()) {
 			var _shaderModule = shaderModule;
-			wgpuShaderModuleRelease.invoke(_shaderModule);
+			wgpuShaderModuleRelease.invokeExact(_shaderModule);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1834,7 +1834,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _surface = surface;
 			var _config = stack.alloc(config);
-			wgpuSurfaceConfigure.invoke(_surface, _config);
+			wgpuSurfaceConfigure.invokeExact(_surface, _config);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1846,7 +1846,7 @@ public class WebGPU {
 			var _surface = surface;
 			var _adapter = adapter;
 			var _capabilities = stack.prealloc(capabilities);
-			wgpuSurfaceGetCapabilities.invoke(_surface, _adapter, _capabilities);
+			wgpuSurfaceGetCapabilities.invokeExact(_surface, _adapter, _capabilities);
 			((WGPUStruct)capabilities).load(_capabilities);
 			wgpuSurfaceCapabilitiesFreeMembers.invoke(wrap(_capabilities, 64));
 		} catch (Throwable e) {
@@ -1859,7 +1859,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _surface = surface;
 			var _surfaceTexture = stack.prealloc(surfaceTexture);
-			wgpuSurfaceGetCurrentTexture.invoke(_surface, _surfaceTexture);
+			wgpuSurfaceGetCurrentTexture.invokeExact(_surface, _surfaceTexture);
 			((WGPUStruct)surfaceTexture).load(_surfaceTexture);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1870,7 +1870,7 @@ public class WebGPU {
 	public static void wgpuSurfacePresent(final long surface) {
 		try(var stack = Stack.get()) {
 			var _surface = surface;
-			wgpuSurfacePresent.invoke(_surface);
+			wgpuSurfacePresent.invokeExact(_surface);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1881,7 +1881,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _surface = surface;
 			var _label = stack.alloc(label);
-			wgpuSurfaceSetLabel.invoke(_surface, _label);
+			wgpuSurfaceSetLabel.invokeExact(_surface, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1891,7 +1891,7 @@ public class WebGPU {
 	public static void wgpuSurfaceUnconfigure(final long surface) {
 		try(var stack = Stack.get()) {
 			var _surface = surface;
-			wgpuSurfaceUnconfigure.invoke(_surface);
+			wgpuSurfaceUnconfigure.invokeExact(_surface);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1901,7 +1901,7 @@ public class WebGPU {
 	public static void wgpuSurfaceReference(final long surface) {
 		try(var stack = Stack.get()) {
 			var _surface = surface;
-			wgpuSurfaceReference.invoke(_surface);
+			wgpuSurfaceReference.invokeExact(_surface);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1911,7 +1911,7 @@ public class WebGPU {
 	public static void wgpuSurfaceRelease(final long surface) {
 		try(var stack = Stack.get()) {
 			var _surface = surface;
-			wgpuSurfaceRelease.invoke(_surface);
+			wgpuSurfaceRelease.invokeExact(_surface);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1924,7 +1924,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
 			var _descriptor = stack.alloc(descriptor);
-			var ret = (long) wgpuTextureCreateView.invoke(_texture, _descriptor);
+			var ret = (long) wgpuTextureCreateView.invokeExact(_texture, _descriptor);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1935,7 +1935,7 @@ public class WebGPU {
 	public static void wgpuTextureDestroy(final long texture) {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
-			wgpuTextureDestroy.invoke(_texture);
+			wgpuTextureDestroy.invokeExact(_texture);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -1945,7 +1945,7 @@ public class WebGPU {
 	public static int wgpuTextureGetDepthOrArrayLayers(final long texture) {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
-			var ret = (int) wgpuTextureGetDepthOrArrayLayers.invoke(_texture);
+			var ret = (int) wgpuTextureGetDepthOrArrayLayers.invokeExact(_texture);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1956,7 +1956,7 @@ public class WebGPU {
 	public static TextureDimension wgpuTextureGetDimension(final long texture) {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
-			var ret = (int) wgpuTextureGetDimension.invoke(_texture);
+			var ret = (int) wgpuTextureGetDimension.invokeExact(_texture);
 			return TextureDimension.from(ret);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1967,7 +1967,7 @@ public class WebGPU {
 	public static TextureFormat wgpuTextureGetFormat(final long texture) {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
-			var ret = (int) wgpuTextureGetFormat.invoke(_texture);
+			var ret = (int) wgpuTextureGetFormat.invokeExact(_texture);
 			return TextureFormat.from(ret);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1978,7 +1978,7 @@ public class WebGPU {
 	public static int wgpuTextureGetHeight(final long texture) {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
-			var ret = (int) wgpuTextureGetHeight.invoke(_texture);
+			var ret = (int) wgpuTextureGetHeight.invokeExact(_texture);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1989,7 +1989,7 @@ public class WebGPU {
 	public static int wgpuTextureGetMipLevelCount(final long texture) {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
-			var ret = (int) wgpuTextureGetMipLevelCount.invoke(_texture);
+			var ret = (int) wgpuTextureGetMipLevelCount.invokeExact(_texture);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -2000,7 +2000,7 @@ public class WebGPU {
 	public static int wgpuTextureGetSampleCount(final long texture) {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
-			var ret = (int) wgpuTextureGetSampleCount.invoke(_texture);
+			var ret = (int) wgpuTextureGetSampleCount.invokeExact(_texture);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -2011,7 +2011,7 @@ public class WebGPU {
 	public static int wgpuTextureGetUsage(final long texture) {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
-			var ret = (int) wgpuTextureGetUsage.invoke(_texture);
+			var ret = (int) wgpuTextureGetUsage.invokeExact(_texture);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -2022,7 +2022,7 @@ public class WebGPU {
 	public static int wgpuTextureGetWidth(final long texture) {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
-			var ret = (int) wgpuTextureGetWidth.invoke(_texture);
+			var ret = (int) wgpuTextureGetWidth.invokeExact(_texture);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -2034,7 +2034,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
 			var _label = stack.alloc(label);
-			wgpuTextureSetLabel.invoke(_texture, _label);
+			wgpuTextureSetLabel.invokeExact(_texture, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2044,7 +2044,7 @@ public class WebGPU {
 	public static void wgpuTextureReference(final long texture) {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
-			wgpuTextureReference.invoke(_texture);
+			wgpuTextureReference.invokeExact(_texture);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2054,7 +2054,7 @@ public class WebGPU {
 	public static void wgpuTextureRelease(final long texture) {
 		try(var stack = Stack.get()) {
 			var _texture = texture;
-			wgpuTextureRelease.invoke(_texture);
+			wgpuTextureRelease.invokeExact(_texture);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2065,7 +2065,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _textureView = textureView;
 			var _label = stack.alloc(label);
-			wgpuTextureViewSetLabel.invoke(_textureView, _label);
+			wgpuTextureViewSetLabel.invokeExact(_textureView, _label);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2075,7 +2075,7 @@ public class WebGPU {
 	public static void wgpuTextureViewReference(final long textureView) {
 		try(var stack = Stack.get()) {
 			var _textureView = textureView;
-			wgpuTextureViewReference.invoke(_textureView);
+			wgpuTextureViewReference.invokeExact(_textureView);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2085,7 +2085,7 @@ public class WebGPU {
 	public static void wgpuTextureViewRelease(final long textureView) {
 		try(var stack = Stack.get()) {
 			var _textureView = textureView;
-			wgpuTextureViewRelease.invoke(_textureView);
+			wgpuTextureViewRelease.invokeExact(_textureView);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2096,7 +2096,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _instance = instance;
 			var _report = stack.prealloc(report);
-			wgpuGenerateReport.invoke(_instance, _report);
+			wgpuGenerateReport.invokeExact(_instance, _report);
 			((WGPUStruct)report).load(_report);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -2109,7 +2109,7 @@ public class WebGPU {
 			var _instance = instance;
 			var _options = stack.alloc(options);
 			var _adapters = stack.prealloc(adapters);
-			var ret = (long) wgpuInstanceEnumerateAdapters.invoke(_instance, _options, _adapters);
+			var ret = (long) wgpuInstanceEnumerateAdapters.invokeExact(_instance, _options, _adapters);
 			if(adapters != null) {
 				for(int i=0; i<adapters.length; i++) {
 					adapters[i] = new WGPUAdapter(get_long(_adapters + i*8));
@@ -2127,7 +2127,7 @@ public class WebGPU {
 			var _queue = queue;
 			var _commandCount = (long) (commands == null ? 0 : commands.length);
 			var _commands = stack.alloc(commands);
-			var ret = (long) wgpuQueueSubmitForIndex.invoke(_queue, _commandCount, _commands);
+			var ret = (long) wgpuQueueSubmitForIndex.invokeExact(_queue, _commandCount, _commands);
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -2140,7 +2140,7 @@ public class WebGPU {
 			var _device = device;
 			var _wait = (int) (wait ? 1 : 0);
 			var _wrappedSubmissionIndex = stack.alloc(wrappedSubmissionIndex);
-			var ret = (int) wgpuDevicePoll.invoke(_device, _wait, _wrappedSubmissionIndex);
+			var ret = (int) wgpuDevicePoll.invokeExact(_device, _wait, _wrappedSubmissionIndex);
 			return ret != 0;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -2152,7 +2152,7 @@ public class WebGPU {
 		try(var stack = Stack.get()) {
 			var _callback = WGPUCallback.createStub(callback, callback.handle, callback.desc);
 			var _userdata = (long) userdata;
-			wgpuSetLogCallback.invoke(_callback, _userdata);
+			wgpuSetLogCallback.invokeExact(_callback, _userdata);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2162,7 +2162,7 @@ public class WebGPU {
 	public static void wgpuSetLogLevel(final LogLevel level) {
 		try(var stack = Stack.get()) {
 			var _level = level == null ? 0 : level.bits;
-			wgpuSetLogLevel.invoke(_level);
+			wgpuSetLogLevel.invokeExact(_level);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2171,7 +2171,7 @@ public class WebGPU {
 	private static final MethodHandle wgpuGetVersion = lookup(JAVA_INT, "wgpuGetVersion");
 	public static int wgpuGetVersion() {
 		try(var stack = Stack.get()) {
-			var ret = (int) wgpuGetVersion.invoke();
+			var ret = (int) wgpuGetVersion.invokeExact();
 			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -2186,7 +2186,7 @@ public class WebGPU {
 			var _offset = (int) offset;
 			var _sizeBytes = (int) sizeBytes;
 			var _data = data;
-			wgpuRenderPassEncoderSetPushConstants.invoke(_encoder, _stages, _offset, _sizeBytes, _data);
+			wgpuRenderPassEncoderSetPushConstants.invokeExact(_encoder, _stages, _offset, _sizeBytes, _data);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2199,7 +2199,7 @@ public class WebGPU {
 			var _buffer = buffer;
 			var _offset = (long) offset;
 			var _count = (int) count;
-			wgpuRenderPassEncoderMultiDrawIndirect.invoke(_encoder, _buffer, _offset, _count);
+			wgpuRenderPassEncoderMultiDrawIndirect.invokeExact(_encoder, _buffer, _offset, _count);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2212,7 +2212,7 @@ public class WebGPU {
 			var _buffer = buffer;
 			var _offset = (long) offset;
 			var _count = (int) count;
-			wgpuRenderPassEncoderMultiDrawIndexedIndirect.invoke(_encoder, _buffer, _offset, _count);
+			wgpuRenderPassEncoderMultiDrawIndexedIndirect.invokeExact(_encoder, _buffer, _offset, _count);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2227,7 +2227,7 @@ public class WebGPU {
 			var _count_buffer = count_buffer;
 			var _count_buffer_offset = (long) count_buffer_offset;
 			var _max_count = (int) max_count;
-			wgpuRenderPassEncoderMultiDrawIndirectCount.invoke(_encoder, _buffer, _offset, _count_buffer, _count_buffer_offset, _max_count);
+			wgpuRenderPassEncoderMultiDrawIndirectCount.invokeExact(_encoder, _buffer, _offset, _count_buffer, _count_buffer_offset, _max_count);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2242,7 +2242,7 @@ public class WebGPU {
 			var _count_buffer = count_buffer;
 			var _count_buffer_offset = (long) count_buffer_offset;
 			var _max_count = (int) max_count;
-			wgpuRenderPassEncoderMultiDrawIndexedIndirectCount.invoke(_encoder, _buffer, _offset, _count_buffer, _count_buffer_offset, _max_count);
+			wgpuRenderPassEncoderMultiDrawIndexedIndirectCount.invokeExact(_encoder, _buffer, _offset, _count_buffer, _count_buffer_offset, _max_count);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2254,7 +2254,7 @@ public class WebGPU {
 			var _computePassEncoder = computePassEncoder;
 			var _querySet = querySet;
 			var _queryIndex = (int) queryIndex;
-			wgpuComputePassEncoderBeginPipelineStatisticsQuery.invoke(_computePassEncoder, _querySet, _queryIndex);
+			wgpuComputePassEncoderBeginPipelineStatisticsQuery.invokeExact(_computePassEncoder, _querySet, _queryIndex);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2264,7 +2264,7 @@ public class WebGPU {
 	public static void wgpuComputePassEncoderEndPipelineStatisticsQuery(final long computePassEncoder) {
 		try(var stack = Stack.get()) {
 			var _computePassEncoder = computePassEncoder;
-			wgpuComputePassEncoderEndPipelineStatisticsQuery.invoke(_computePassEncoder);
+			wgpuComputePassEncoderEndPipelineStatisticsQuery.invokeExact(_computePassEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2276,7 +2276,7 @@ public class WebGPU {
 			var _renderPassEncoder = renderPassEncoder;
 			var _querySet = querySet;
 			var _queryIndex = (int) queryIndex;
-			wgpuRenderPassEncoderBeginPipelineStatisticsQuery.invoke(_renderPassEncoder, _querySet, _queryIndex);
+			wgpuRenderPassEncoderBeginPipelineStatisticsQuery.invokeExact(_renderPassEncoder, _querySet, _queryIndex);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -2286,7 +2286,7 @@ public class WebGPU {
 	public static void wgpuRenderPassEncoderEndPipelineStatisticsQuery(final long renderPassEncoder) {
 		try(var stack = Stack.get()) {
 			var _renderPassEncoder = renderPassEncoder;
-			wgpuRenderPassEncoderEndPipelineStatisticsQuery.invoke(_renderPassEncoder);
+			wgpuRenderPassEncoderEndPipelineStatisticsQuery.invokeExact(_renderPassEncoder);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
