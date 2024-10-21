@@ -2,7 +2,7 @@ package wgpu;
 
 public abstract class WGPUEnum {
 	public final int bits;
-	protected final String name;
+	public final String name;
 	protected WGPUEnum(int bits, String name) {
 		this.bits = bits;
 		this.name = name;
