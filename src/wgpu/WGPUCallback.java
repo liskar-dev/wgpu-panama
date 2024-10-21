@@ -31,13 +31,18 @@ public interface WGPUCallback {
 		}
 	}
 	
-	static final WeakHashMap<WGPUCallback, Arena> weakMap = new WeakHashMap<>();
+	static final WeakHashMap<WGPUCallback, MemorySegment> weakMap = new WeakHashMap<>();
 	
 	public static MemorySegment createStub(WGPUCallback callback, MethodHandle handle, FunctionDescriptor desc) {
-		var bound = handle.bindTo(callback);
-		var arena = Arena.ofAuto();
-		weakMap.put(callback, arena);
-		return Linker.nativeLinker().upcallStub(bound, desc, arena);
+		MemorySegment stub = weakMap.get(callback);
+		
+		if(stub == null) {
+			var bound = handle.bindTo(callback);
+			stub = Linker.nativeLinker().upcallStub(bound, desc, Arena.ofAuto());
+			weakMap.put(callback, stub);
+		}
+		
+		return stub;
 	}
 	
 
