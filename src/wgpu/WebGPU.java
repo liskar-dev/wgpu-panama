@@ -1194,7 +1194,7 @@ public class WebGPU {
 			var _buffer = buffer;
 			var _bufferOffset = (long) bufferOffset;
 			var _data = data;
-			var _size = (long) (null == null ? 0 : data.byteSize());
+			var _size = (long) (data == null ? 0 : data.byteSize());
 			wgpuQueueWriteBuffer.invokeExact(_queue, _buffer, _bufferOffset, _data, _size);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
@@ -1207,7 +1207,7 @@ public class WebGPU {
 			var _queue = queue;
 			var _destination = stack.alloc(destination);
 			var _data = data;
-			var _dataSize = (long) (null == null ? 0 : data.byteSize());
+			var _dataSize = (long) (data == null ? 0 : data.byteSize());
 			var _dataLayout = stack.alloc(dataLayout);
 			var _writeSize = stack.alloc(writeSize);
 			wgpuQueueWriteTexture.invokeExact(_queue, _destination, _data, _dataSize, _dataLayout, _writeSize);

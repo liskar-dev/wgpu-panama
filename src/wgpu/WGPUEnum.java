@@ -10,6 +10,11 @@ public abstract class WGPUEnum {
 	
 	@Override
 	public String toString() {
+//		return String.format("0x%08x %s", bits, name);
+		return name;
+	}
+	
+	public String debugString() {
 		return String.format("0x%08x %s", bits, name);
 	}
 }
