@@ -1187,7 +1187,7 @@ public class WebGPU {
 		}
 	}
 
-	private static final MethodHandle wgpuQueueWriteBuffer = lookup(null, "wgpuQueueWriteBuffer", JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG);
+	private static final MethodHandle wgpuQueueWriteBuffer = lookup(null, "wgpuQueueWriteBuffer", JAVA_LONG, JAVA_LONG, JAVA_LONG, ADDRESS, JAVA_LONG);
 	public static void wgpuQueueWriteBuffer(final long queue, final long buffer, final long bufferOffset, final MemorySegment data) {
 		try(var stack = Stack.get()) {
 			var _queue = queue;
@@ -1201,7 +1201,7 @@ public class WebGPU {
 		}
 	}
 
-	private static final MethodHandle wgpuQueueWriteTexture = lookup(null, "wgpuQueueWriteTexture", JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG);
+	private static final MethodHandle wgpuQueueWriteTexture = lookup(null, "wgpuQueueWriteTexture", JAVA_LONG, JAVA_LONG, ADDRESS, JAVA_LONG, JAVA_LONG, JAVA_LONG);
 	public static void wgpuQueueWriteTexture(final long queue, final ImageCopyTexture destination, final MemorySegment data, final TextureDataLayout dataLayout, final Extent3D writeSize) {
 		try(var stack = Stack.get()) {
 			var _queue = queue;
@@ -2178,7 +2178,7 @@ public class WebGPU {
 		}
 	}
 
-	private static final MethodHandle wgpuRenderPassEncoderSetPushConstants = lookup(null, "wgpuRenderPassEncoderSetPushConstants", JAVA_LONG, JAVA_INT, JAVA_INT, JAVA_INT, JAVA_LONG);
+	private static final MethodHandle wgpuRenderPassEncoderSetPushConstants = lookup(null, "wgpuRenderPassEncoderSetPushConstants", JAVA_LONG, JAVA_INT, JAVA_INT, JAVA_INT, ADDRESS);
 	public static void wgpuRenderPassEncoderSetPushConstants(final long encoder, final int stages, final int offset, final int sizeBytes, final MemorySegment data) {
 		try(var stack = Stack.get()) {
 			var _encoder = encoder;
