@@ -24,16 +24,18 @@ public class WGPUBuffer extends WGPUImpl {
 		wgpuBufferDestroy(this.handle);
 	}
 
-	public void getConstMappedRange(final long offset, final long size) {
-		wgpuBufferGetConstMappedRange(this.handle, offset, size);
+	public MemorySegment getConstMappedRange(final long offset, final long size) {
+		var addr = wgpuBufferGetConstMappedRange(this.handle, offset, size);
+		return MemorySegment.ofAddress(addr).reinterpret(size);
 	}
 
 	public BufferMapState getMapState() {
 		return wgpuBufferGetMapState(this.handle);
 	}
 
-	public void getMappedRange(final long offset, final long size) {
-		wgpuBufferGetMappedRange(this.handle, offset, size);
+	public MemorySegment getMappedRange(final long offset, final long size) {
+		var addr = wgpuBufferGetMappedRange(this.handle, offset, size);
+		return MemorySegment.ofAddress(addr).reinterpret(size);
 	}
 
 	public long getSize() {

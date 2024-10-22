@@ -201,13 +201,14 @@ public class WebGPU {
 		}
 	}
 
-	private static final MethodHandle wgpuBufferGetConstMappedRange = lookup(POINTER, "wgpuBufferGetConstMappedRange", JAVA_LONG, JAVA_LONG, JAVA_LONG);
-	public static void wgpuBufferGetConstMappedRange(final long buffer, final long offset, final long size) {
+	private static final MethodHandle wgpuBufferGetConstMappedRange = lookup(JAVA_LONG, "wgpuBufferGetConstMappedRange", JAVA_LONG, JAVA_LONG, JAVA_LONG);
+	public static long wgpuBufferGetConstMappedRange(final long buffer, final long offset, final long size) {
 		try(var stack = Stack.get()) {
 			var _buffer = buffer;
 			var _offset = (long) offset;
 			var _size = (long) size;
 			var ret = (long) wgpuBufferGetConstMappedRange.invokeExact(_buffer, _offset, _size);
+			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
@@ -224,13 +225,14 @@ public class WebGPU {
 		}
 	}
 
-	private static final MethodHandle wgpuBufferGetMappedRange = lookup(POINTER, "wgpuBufferGetMappedRange", JAVA_LONG, JAVA_LONG, JAVA_LONG);
-	public static void wgpuBufferGetMappedRange(final long buffer, final long offset, final long size) {
+	private static final MethodHandle wgpuBufferGetMappedRange = lookup(JAVA_LONG, "wgpuBufferGetMappedRange", JAVA_LONG, JAVA_LONG, JAVA_LONG);
+	public static long wgpuBufferGetMappedRange(final long buffer, final long offset, final long size) {
 		try(var stack = Stack.get()) {
 			var _buffer = buffer;
 			var _offset = (long) offset;
 			var _size = (long) size;
 			var ret = (long) wgpuBufferGetMappedRange.invokeExact(_buffer, _offset, _size);
+			return ret;
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
