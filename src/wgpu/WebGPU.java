@@ -1188,13 +1188,13 @@ public class WebGPU {
 	}
 
 	private static final MethodHandle wgpuQueueWriteBuffer = lookup(null, "wgpuQueueWriteBuffer", JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG, JAVA_LONG);
-	public static void wgpuQueueWriteBuffer(final long queue, final long buffer, final long bufferOffset, final MemorySegment data, final long size) {
+	public static void wgpuQueueWriteBuffer(final long queue, final long buffer, final long bufferOffset, final MemorySegment data) {
 		try(var stack = Stack.get()) {
 			var _queue = queue;
 			var _buffer = buffer;
 			var _bufferOffset = (long) bufferOffset;
 			var _data = data;
-			var _size = (long) size;
+			var _size = (long) (null == null ? 0 : data.byteSize());
 			wgpuQueueWriteBuffer.invokeExact(_queue, _buffer, _bufferOffset, _data, _size);
 		} catch (Throwable e) {
 			throw new RuntimeException(e);

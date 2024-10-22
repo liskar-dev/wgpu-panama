@@ -32,8 +32,8 @@ public class WGPUQueue extends WGPUImpl {
 		wgpuQueueSubmit(this.handle, commands);
 	}
 
-	public void writeBuffer(final WGPUBuffer buffer, final long bufferOffset, final MemorySegment data, final long size) {
-		wgpuQueueWriteBuffer(this.handle, buffer.handle, bufferOffset, data, size);
+	public void writeBuffer(final WGPUBuffer buffer, final long bufferOffset, final MemorySegment data) {
+		wgpuQueueWriteBuffer(this.handle, buffer.handle, bufferOffset, data);
 	}
 
 	public void writeTexture(final ImageCopyTexture destination, final MemorySegment data, final TextureDataLayout dataLayout, final Extent3D writeSize) {
