@@ -20,27 +20,47 @@ public class WGPUDevice extends WGPUImpl {
 		super(handle);
 	}
 
-	public long cAddress(final String procName) {
+	public long getProcAddress(final String procName) {
 		return wgpuGetProcAddress(this.handle, procName);
 	}
 
-	public long createBindGroup(final BindGroupDescriptor descriptor) {
+	public WGPUBindGroup createBindGroup(final BindGroupDescriptor descriptor) {
+		return new WGPUBindGroup(wgpuDeviceCreateBindGroup(this.handle, descriptor));
+	}
+
+	public long createBindGroup0(final BindGroupDescriptor descriptor) {
 		return wgpuDeviceCreateBindGroup(this.handle, descriptor);
 	}
 
-	public long createBindGroupLayout(final BindGroupLayoutDescriptor descriptor) {
+	public WGPUBindGroupLayout createBindGroupLayout(final BindGroupLayoutDescriptor descriptor) {
+		return new WGPUBindGroupLayout(wgpuDeviceCreateBindGroupLayout(this.handle, descriptor));
+	}
+
+	public long createBindGroupLayout0(final BindGroupLayoutDescriptor descriptor) {
 		return wgpuDeviceCreateBindGroupLayout(this.handle, descriptor);
 	}
 
-	public long createBuffer(final BufferDescriptor descriptor) {
+	public WGPUBuffer createBuffer(final BufferDescriptor descriptor) {
+		return new WGPUBuffer(wgpuDeviceCreateBuffer(this.handle, descriptor));
+	}
+
+	public long createBuffer0(final BufferDescriptor descriptor) {
 		return wgpuDeviceCreateBuffer(this.handle, descriptor);
 	}
 
-	public long createCommandEncoder(@Nullable final CommandEncoderDescriptor descriptor) {
+	public WGPUCommandEncoder createCommandEncoder(@Nullable final CommandEncoderDescriptor descriptor) {
+		return new WGPUCommandEncoder(wgpuDeviceCreateCommandEncoder(this.handle, descriptor));
+	}
+
+	public long createCommandEncoder0(@Nullable final CommandEncoderDescriptor descriptor) {
 		return wgpuDeviceCreateCommandEncoder(this.handle, descriptor);
 	}
 
-	public long createComputePipeline(final ComputePipelineDescriptor descriptor) {
+	public WGPUComputePipeline createComputePipeline(final ComputePipelineDescriptor descriptor) {
+		return new WGPUComputePipeline(wgpuDeviceCreateComputePipeline(this.handle, descriptor));
+	}
+
+	public long createComputePipeline0(final ComputePipelineDescriptor descriptor) {
 		return wgpuDeviceCreateComputePipeline(this.handle, descriptor);
 	}
 
@@ -48,19 +68,35 @@ public class WGPUDevice extends WGPUImpl {
 		wgpuDeviceCreateComputePipelineAsync(this.handle, descriptor, callback, userdata);
 	}
 
-	public long createPipelineLayout(final PipelineLayoutDescriptor descriptor) {
+	public WGPUPipelineLayout createPipelineLayout(final PipelineLayoutDescriptor descriptor) {
+		return new WGPUPipelineLayout(wgpuDeviceCreatePipelineLayout(this.handle, descriptor));
+	}
+
+	public long createPipelineLayout0(final PipelineLayoutDescriptor descriptor) {
 		return wgpuDeviceCreatePipelineLayout(this.handle, descriptor);
 	}
 
-	public long createQuerySet(final QuerySetDescriptor descriptor) {
+	public WGPUQuerySet createQuerySet(final QuerySetDescriptor descriptor) {
+		return new WGPUQuerySet(wgpuDeviceCreateQuerySet(this.handle, descriptor));
+	}
+
+	public long createQuerySet0(final QuerySetDescriptor descriptor) {
 		return wgpuDeviceCreateQuerySet(this.handle, descriptor);
 	}
 
-	public long createRenderBundleEncoder(final RenderBundleEncoderDescriptor descriptor) {
+	public WGPURenderBundleEncoder createRenderBundleEncoder(final RenderBundleEncoderDescriptor descriptor) {
+		return new WGPURenderBundleEncoder(wgpuDeviceCreateRenderBundleEncoder(this.handle, descriptor));
+	}
+
+	public long createRenderBundleEncoder0(final RenderBundleEncoderDescriptor descriptor) {
 		return wgpuDeviceCreateRenderBundleEncoder(this.handle, descriptor);
 	}
 
-	public long createRenderPipeline(final RenderPipelineDescriptor descriptor) {
+	public WGPURenderPipeline createRenderPipeline(final RenderPipelineDescriptor descriptor) {
+		return new WGPURenderPipeline(wgpuDeviceCreateRenderPipeline(this.handle, descriptor));
+	}
+
+	public long createRenderPipeline0(final RenderPipelineDescriptor descriptor) {
 		return wgpuDeviceCreateRenderPipeline(this.handle, descriptor);
 	}
 
@@ -68,15 +104,27 @@ public class WGPUDevice extends WGPUImpl {
 		wgpuDeviceCreateRenderPipelineAsync(this.handle, descriptor, callback, userdata);
 	}
 
-	public long createSampler(@Nullable final SamplerDescriptor descriptor) {
+	public WGPUSampler createSampler(@Nullable final SamplerDescriptor descriptor) {
+		return new WGPUSampler(wgpuDeviceCreateSampler(this.handle, descriptor));
+	}
+
+	public long createSampler0(@Nullable final SamplerDescriptor descriptor) {
 		return wgpuDeviceCreateSampler(this.handle, descriptor);
 	}
 
-	public long createShaderModule(final ShaderModuleDescriptor descriptor) {
+	public WGPUShaderModule createShaderModule(final ShaderModuleDescriptor descriptor) {
+		return new WGPUShaderModule(wgpuDeviceCreateShaderModule(this.handle, descriptor));
+	}
+
+	public long createShaderModule0(final ShaderModuleDescriptor descriptor) {
 		return wgpuDeviceCreateShaderModule(this.handle, descriptor);
 	}
 
-	public long createTexture(final TextureDescriptor descriptor) {
+	public WGPUTexture createTexture(final TextureDescriptor descriptor) {
+		return new WGPUTexture(wgpuDeviceCreateTexture(this.handle, descriptor));
+	}
+
+	public long createTexture0(final TextureDescriptor descriptor) {
 		return wgpuDeviceCreateTexture(this.handle, descriptor);
 	}
 
@@ -92,7 +140,11 @@ public class WGPUDevice extends WGPUImpl {
 		return wgpuDeviceGetLimits(this.handle, limits);
 	}
 
-	public long getQueue() {
+	public WGPUQueue getQueue() {
+		return new WGPUQueue(wgpuDeviceGetQueue(this.handle));
+	}
+
+	public long getQueue0() {
 		return wgpuDeviceGetQueue(this.handle);
 	}
 

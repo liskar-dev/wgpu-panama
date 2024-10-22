@@ -20,7 +20,11 @@ public class WGPUTexture extends WGPUImpl {
 		super(handle);
 	}
 
-	public long createView(@Nullable final TextureViewDescriptor descriptor) {
+	public WGPUTextureView createView(@Nullable final TextureViewDescriptor descriptor) {
+		return new WGPUTextureView(wgpuTextureCreateView(this.handle, descriptor));
+	}
+
+	public long createView0(@Nullable final TextureViewDescriptor descriptor) {
 		return wgpuTextureCreateView(this.handle, descriptor);
 	}
 

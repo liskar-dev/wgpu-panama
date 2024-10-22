@@ -20,11 +20,19 @@ public class WGPUCommandEncoder extends WGPUImpl {
 		super(handle);
 	}
 
-	public long beginComputePass(@Nullable final ComputePassDescriptor descriptor) {
+	public WGPUComputePassEncoder beginComputePass(@Nullable final ComputePassDescriptor descriptor) {
+		return new WGPUComputePassEncoder(wgpuCommandEncoderBeginComputePass(this.handle, descriptor));
+	}
+
+	public long beginComputePass0(@Nullable final ComputePassDescriptor descriptor) {
 		return wgpuCommandEncoderBeginComputePass(this.handle, descriptor);
 	}
 
-	public long beginRenderPass(final RenderPassDescriptor descriptor) {
+	public WGPURenderPassEncoder beginRenderPass(final RenderPassDescriptor descriptor) {
+		return new WGPURenderPassEncoder(wgpuCommandEncoderBeginRenderPass(this.handle, descriptor));
+	}
+
+	public long beginRenderPass0(final RenderPassDescriptor descriptor) {
 		return wgpuCommandEncoderBeginRenderPass(this.handle, descriptor);
 	}
 
@@ -48,7 +56,11 @@ public class WGPUCommandEncoder extends WGPUImpl {
 		wgpuCommandEncoderCopyTextureToTexture(this.handle, source, destination, copySize);
 	}
 
-	public long finish(@Nullable final CommandBufferDescriptor descriptor) {
+	public WGPUCommandBuffer finish(@Nullable final CommandBufferDescriptor descriptor) {
+		return new WGPUCommandBuffer(wgpuCommandEncoderFinish(this.handle, descriptor));
+	}
+
+	public long finish0(@Nullable final CommandBufferDescriptor descriptor) {
 		return wgpuCommandEncoderFinish(this.handle, descriptor);
 	}
 

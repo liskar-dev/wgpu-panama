@@ -20,7 +20,11 @@ public class WGPUInstance extends WGPUImpl {
 		super(handle);
 	}
 
-	public long createSurface(final SurfaceDescriptor descriptor) {
+	public WGPUSurface createSurface(final SurfaceDescriptor descriptor) {
+		return new WGPUSurface(wgpuInstanceCreateSurface(this.handle, descriptor));
+	}
+
+	public long createSurface0(final SurfaceDescriptor descriptor) {
 		return wgpuInstanceCreateSurface(this.handle, descriptor);
 	}
 
@@ -41,7 +45,7 @@ public class WGPUInstance extends WGPUImpl {
 		this.handle = 0;
 	}
 
-	public void report(GlobalReport report) {
+	public void generateReport(GlobalReport report) {
 		wgpuGenerateReport(this.handle, report);
 	}
 

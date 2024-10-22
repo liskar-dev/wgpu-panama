@@ -105,10 +105,9 @@ public class TriangleExample {
 			}
 		}
 		
-		var handle = instance.createSurface(descriptor);
-		if(handle == 0)
+		surface = instance.createSurface(descriptor);
+		if(surface.handle == 0)
 			throw new NullPointerException("NULL Surface");
-		surface = new WGPUSurface(handle);
 	}
 
 	private static void requestAdapter() {
@@ -180,7 +179,7 @@ public class TriangleExample {
 		
 		surface.configure(config);
 		
-		queue = new WGPUQueue(device.getQueue());
+		queue = device.getQueue();
 		if(queue.handle == 0)
 			throw new NullPointerException("NULL Queue");
 		
@@ -215,7 +214,7 @@ public class TriangleExample {
 				}
 			""";
 		
-		WGPUShaderModule shader = new WGPUShaderModule(device.createShaderModule(shaderDesc));
+		WGPUShaderModule shader = device.createShaderModule(shaderDesc);
 		if(shader.handle == 0)
 			throw new NullPointerException("NULL ShaderModule");
 		
@@ -257,7 +256,7 @@ public class TriangleExample {
 		pipelineDesc.multisample.mask = ~0;
 		pipelineDesc.multisample.alphaToCoverageEnabled = false;
 
-		pipeline = new WGPURenderPipeline(device.createRenderPipeline(pipelineDesc));
+		pipeline = device.createRenderPipeline(pipelineDesc);
 		if(pipeline.handle == 0)
 			throw new NullPointerException("NULL RenderPipeline");
 
@@ -311,9 +310,9 @@ public class TriangleExample {
 			textViewDesc.format = surfaceTexture.texture.getFormat();
 			
 			
-			colorAttachment.view.handle = surfaceTexture.texture.createView(textViewDesc);
-			encoder.handle = device.createCommandEncoder(encoderDesc);
-			renderPass.handle = encoder.beginRenderPass(renderPassDesc);
+			colorAttachment.view.handle = surfaceTexture.texture.createView0(textViewDesc);
+			encoder.handle = device.createCommandEncoder0(encoderDesc);
+			renderPass.handle = encoder.beginRenderPass0(renderPassDesc);
 			colorAttachment.view.release();
 			
 			renderPass.setPipeline(pipeline);
@@ -324,7 +323,7 @@ public class TriangleExample {
 			renderPass.end();
 			renderPass.release();
 			
-			commands[0].handle = encoder.finish(cbuffDesc);
+			commands[0].handle = encoder.finish0(cbuffDesc);
 			queue.submit(commands);
 			commands[0].release();
 			encoder.release();

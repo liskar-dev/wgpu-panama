@@ -36,7 +36,11 @@ public class WGPURenderBundleEncoder extends WGPUImpl {
 		wgpuRenderBundleEncoderDrawIndirect(this.handle, indirectBuffer.handle, indirectOffset);
 	}
 
-	public long finish(@Nullable final RenderBundleDescriptor descriptor) {
+	public WGPURenderBundle finish(@Nullable final RenderBundleDescriptor descriptor) {
+		return new WGPURenderBundle(wgpuRenderBundleEncoderFinish(this.handle, descriptor));
+	}
+
+	public long finish0(@Nullable final RenderBundleDescriptor descriptor) {
 		return wgpuRenderBundleEncoderFinish(this.handle, descriptor);
 	}
 

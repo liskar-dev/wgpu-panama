@@ -20,7 +20,11 @@ public class WGPURenderPipeline extends WGPUImpl {
 		super(handle);
 	}
 
-	public long getBindGroupLayout(final int groupIndex) {
+	public WGPUBindGroupLayout getBindGroupLayout(final int groupIndex) {
+		return new WGPUBindGroupLayout(wgpuRenderPipelineGetBindGroupLayout(this.handle, groupIndex));
+	}
+
+	public long getBindGroupLayout0(final int groupIndex) {
 		return wgpuRenderPipelineGetBindGroupLayout(this.handle, groupIndex);
 	}
 
