@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class AddressMode extends WGPUEnum {
+public class AddressMode extends CEnum {
 	private static final Map<Integer, AddressMode> map = new HashMap<>();
 	public static final AddressMode REPEAT = new AddressMode(0x00000000, "REPEAT");
 	public static final AddressMode MIRROR_REPEAT = new AddressMode(0x00000001, "MIRROR_REPEAT");

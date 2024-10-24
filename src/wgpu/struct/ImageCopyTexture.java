@@ -12,9 +12,9 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class ImageCopyTexture extends WGPUStruct {
+public class ImageCopyTexture extends CStruct {
 	public ChainedStruct nextInChain;
-	public WGPUTexture texture = new WGPUTexture(0);
+	public GPUTexture texture = new GPUTexture(0);
 	public int mipLevel;
 	public Origin3D origin = new Origin3D();
 	public TextureAspect aspect;

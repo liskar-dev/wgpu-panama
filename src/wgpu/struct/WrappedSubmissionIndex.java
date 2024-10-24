@@ -12,8 +12,8 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class WrappedSubmissionIndex extends WGPUStruct {
-	public WGPUQueue queue = new WGPUQueue(0);
+public class WrappedSubmissionIndex extends CStruct {
+	public GPUQueue queue = new GPUQueue(0);
 	public long submissionIndex;
 
 	protected static final int byteSize = 16;

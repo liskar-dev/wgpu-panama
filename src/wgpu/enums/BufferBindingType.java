@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class BufferBindingType extends WGPUEnum {
+public class BufferBindingType extends CEnum {
 	private static final Map<Integer, BufferBindingType> map = new HashMap<>();
 	public static final BufferBindingType UNDEFINED = new BufferBindingType(0x00000000, "UNDEFINED");
 	public static final BufferBindingType UNIFORM = new BufferBindingType(0x00000001, "UNIFORM");

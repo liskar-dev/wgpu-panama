@@ -13,9 +13,9 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 import java.lang.invoke.MethodHandle;
-import static wgpu.WGPUCallback.*;
+import static wgpu.Callback.*;
 
-public interface ErrorCallback extends WGPUCallback {
+public interface ErrorCallback extends Callback {
 	/** Callback: void ErrorCallback [ErrorType type, char const * message, size_t userdata] */
 	void apply(ErrorType type, String message, long userdata);
 

@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class CullMode extends WGPUEnum {
+public class CullMode extends CEnum {
 	private static final Map<Integer, CullMode> map = new HashMap<>();
 	public static final CullMode NONE = new CullMode(0x00000000, "NONE");
 	public static final CullMode FRONT = new CullMode(0x00000001, "FRONT");

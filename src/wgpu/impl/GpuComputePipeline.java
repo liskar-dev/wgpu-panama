@@ -12,15 +12,20 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-import static wgpu.WebGPU.*;
+import static wgpu.WGPU.*;
 
-public class WGPUComputePipeline extends WGPUImpl {
-	public WGPUComputePipeline(long handle) {
+public class GPUComputePipeline extends GPUObject {
+
+	public GPUComputePipeline(long handle) {
 		super(handle);
 	}
 
-	public WGPUBindGroupLayout getBindGroupLayout(final int groupIndex) {
-		return new WGPUBindGroupLayout(wgpuComputePipelineGetBindGroupLayout(this.handle, groupIndex));
+	public GPUComputePipeline() {
+		super();
+	}
+
+	public GPUBindGroupLayout getBindGroupLayout(final int groupIndex) {
+		return new GPUBindGroupLayout(wgpuComputePipelineGetBindGroupLayout(this.handle, groupIndex));
 	}
 
 	public long getBindGroupLayout0(final int groupIndex) {

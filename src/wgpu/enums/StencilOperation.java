@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class StencilOperation extends WGPUEnum {
+public class StencilOperation extends CEnum {
 	private static final Map<Integer, StencilOperation> map = new HashMap<>();
 	public static final StencilOperation KEEP = new StencilOperation(0x00000000, "KEEP");
 	public static final StencilOperation ZERO = new StencilOperation(0x00000001, "ZERO");

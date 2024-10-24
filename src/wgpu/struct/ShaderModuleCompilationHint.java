@@ -12,10 +12,10 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class ShaderModuleCompilationHint extends WGPUStruct {
+public class ShaderModuleCompilationHint extends CStruct {
 	public ChainedStruct nextInChain;
 	public String entryPoint;
-	public WGPUPipelineLayout layout = new WGPUPipelineLayout(0);
+	public GPUPipelineLayout layout = new GPUPipelineLayout(0);
 
 	protected static final int byteSize = 24;
 	protected int byteSize() {

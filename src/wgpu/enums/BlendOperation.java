@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class BlendOperation extends WGPUEnum {
+public class BlendOperation extends CEnum {
 	private static final Map<Integer, BlendOperation> map = new HashMap<>();
 	public static final BlendOperation ADD = new BlendOperation(0x00000000, "ADD");
 	public static final BlendOperation SUBTRACT = new BlendOperation(0x00000001, "SUBTRACT");

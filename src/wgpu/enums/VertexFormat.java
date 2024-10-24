@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class VertexFormat extends WGPUEnum {
+public class VertexFormat extends CEnum {
 	private static final Map<Integer, VertexFormat> map = new HashMap<>();
 	public static final VertexFormat UNDEFINED = new VertexFormat(0x00000000, "UNDEFINED");
 	public static final VertexFormat UINT8X2 = new VertexFormat(0x00000001, "UINT8X2");

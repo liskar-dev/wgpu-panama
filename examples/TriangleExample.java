@@ -6,22 +6,22 @@ import org.lwjgl.glfw.GLFWNativeWin32;
 import org.lwjgl.glfw.GLFWNativeX11;
 import org.lwjgl.system.windows.WinBase;
 
+import wgpu.WebGPU;
 import wgpu.callback.*;
 import wgpu.enums.*;
 import wgpu.impl.*;
 import wgpu.struct.*;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static wgpu.WebGPU.*;
 
 public class TriangleExample {
 	static long window;
-	static WGPUInstance instance;
-	static WGPUAdapter adapter;
-	static WGPUSurface surface;
-	static WGPUDevice device;
-	static WGPUQueue queue;
-	static WGPURenderPipeline pipeline;
+	static GPUInstance instance;
+	static GPUAdapter adapter;
+	static GPUSurface surface;
+	static GPUDevice device;
+	static GPUQueue queue;
+	static GPURenderPipeline pipeline;
 
 	static QueueOnSubmittedWorkDoneCallback queueCallback;
 	static LogCallback logCallback;
@@ -41,8 +41,8 @@ public class TriangleExample {
 			System.err.println("LOG [" +level.name + "]: " + message);
 		};
 		
-		wgpuSetLogCallback(logCallback, 0);
-		wgpuSetLogLevel(LogLevel.WARN);
+		WebGPU.setLogCallback(logCallback);
+		WebGPU.setLogLevel(LogLevel.WARN);
 		
 		createInstance();
 		createGlfwSurface();
@@ -60,10 +60,9 @@ public class TriangleExample {
 	
 	private static void createInstance() {
 		var descriptor = new InstanceDescriptor();
-		var handle = wgpuCreateInstance(descriptor);
-		if(handle == 0)
+		instance = WebGPU.createInstance(descriptor);
+		if(instance.handle == 0)
 			throw new NullPointerException("Instance is NULL");
-		instance = new WGPUInstance(handle);
 	}
 
 	static void createGlfwSurface() {
@@ -214,7 +213,7 @@ public class TriangleExample {
 				}
 			""";
 		
-		WGPUShaderModule shader = device.createShaderModule(shaderDesc);
+		GPUShaderModule shader = device.createShaderModule(shaderDesc);
 		if(shader.handle == 0)
 			throw new NullPointerException("NULL ShaderModule");
 		
@@ -293,9 +292,9 @@ public class TriangleExample {
 		var surfaceTexture = new SurfaceTexture();
 
 		// setup these for reuse to avoid allocation
-		WGPUCommandEncoder encoder = new WGPUCommandEncoder(0);
-		WGPURenderPassEncoder renderPass = new WGPURenderPassEncoder(0);
-		WGPUCommandBuffer[] commands = { new WGPUCommandBuffer(0) };
+		GPUCommandEncoder encoder = new GPUCommandEncoder();
+		GPURenderPassEncoder renderPass = new GPURenderPassEncoder();
+		GPUCommandBuffer[] commands = { new GPUCommandBuffer() };
 		
 		while (!glfwWindowShouldClose(window)) {
 			

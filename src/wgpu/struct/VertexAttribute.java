@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class VertexAttribute extends WGPUStruct {
+public class VertexAttribute extends CStruct {
 	public VertexFormat format;
 	// padding 4
 	public long offset;

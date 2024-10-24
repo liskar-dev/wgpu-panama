@@ -12,9 +12,9 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class RequestAdapterOptions extends WGPUStruct {
+public class RequestAdapterOptions extends CStruct {
 	public ChainedStruct nextInChain;
-	public WGPUSurface compatibleSurface = new WGPUSurface(0);
+	public GPUSurface compatibleSurface = new GPUSurface(0);
 	public PowerPreference powerPreference;
 	public BackendType backendType;
 	public boolean forceFallbackAdapter;

@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class ShaderDefine extends WGPUStruct {
+public class ShaderDefine extends CStruct {
 	public String name;
 	public String value;
 

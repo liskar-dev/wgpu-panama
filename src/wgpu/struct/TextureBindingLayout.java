@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class TextureBindingLayout extends WGPUStruct {
+public class TextureBindingLayout extends CStruct {
 	public ChainedStruct nextInChain;
 	public TextureSampleType sampleType;
 	public TextureViewDimension viewDimension;

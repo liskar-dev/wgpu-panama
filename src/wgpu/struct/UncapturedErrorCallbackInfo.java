@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class UncapturedErrorCallbackInfo extends WGPUStruct {
+public class UncapturedErrorCallbackInfo extends CStruct {
 	public ChainedStruct nextInChain;
 	public ErrorCallback callback;
 	public long userdata;
@@ -24,7 +24,7 @@ public class UncapturedErrorCallbackInfo extends WGPUStruct {
 
 	protected long store(Stack stack, long address) {
 		put_value(address+0, stack.alloc(nextInChain));
-		put_pointer(address+8, WGPUCallback.createStub(callback, callback.handle, callback.desc));
+		put_pointer(address+8, Callback.createStub(callback, callback.handle, callback.desc));
 		put_value(address+16, (long) userdata);
 		return address;
 	}

@@ -12,18 +12,23 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-import static wgpu.WebGPU.*;
+import static wgpu.WGPU.*;
 
-public class WGPUComputePassEncoder extends WGPUImpl {
-	public WGPUComputePassEncoder(long handle) {
+public class GPUComputePassEncoder extends GPUObject {
+
+	public GPUComputePassEncoder(long handle) {
 		super(handle);
+	}
+
+	public GPUComputePassEncoder() {
+		super();
 	}
 
 	public void dispatchWorkgroups(final int workgroupCountX, final int workgroupCountY, final int workgroupCountZ) {
 		wgpuComputePassEncoderDispatchWorkgroups(this.handle, workgroupCountX, workgroupCountY, workgroupCountZ);
 	}
 
-	public void dispatchWorkgroupsIndirect(final WGPUBuffer indirectBuffer, final long indirectOffset) {
+	public void dispatchWorkgroupsIndirect(final GPUBuffer indirectBuffer, final long indirectOffset) {
 		wgpuComputePassEncoderDispatchWorkgroupsIndirect(this.handle, indirectBuffer.handle, indirectOffset);
 	}
 
@@ -43,7 +48,7 @@ public class WGPUComputePassEncoder extends WGPUImpl {
 		wgpuComputePassEncoderPushDebugGroup(this.handle, groupLabel);
 	}
 
-	public void setBindGroup(final int groupIndex, @Nullable final WGPUBindGroup group, final int[] dynamicOffsets) {
+	public void setBindGroup(final int groupIndex, @Nullable final GPUBindGroup group, final int[] dynamicOffsets) {
 		wgpuComputePassEncoderSetBindGroup(this.handle, groupIndex, group.handle, dynamicOffsets);
 	}
 
@@ -51,7 +56,7 @@ public class WGPUComputePassEncoder extends WGPUImpl {
 		wgpuComputePassEncoderSetLabel(this.handle, label);
 	}
 
-	public void setPipeline(final WGPUComputePipeline pipeline) {
+	public void setPipeline(final GPUComputePipeline pipeline) {
 		wgpuComputePassEncoderSetPipeline(this.handle, pipeline.handle);
 	}
 
@@ -60,7 +65,7 @@ public class WGPUComputePassEncoder extends WGPUImpl {
 		this.handle = 0;
 	}
 
-	public void beginPipelineStatisticsQuery(final WGPUQuerySet querySet, final int queryIndex) {
+	public void beginPipelineStatisticsQuery(final GPUQuerySet querySet, final int queryIndex) {
 		wgpuComputePassEncoderBeginPipelineStatisticsQuery(this.handle, querySet.handle, queryIndex);
 	}
 

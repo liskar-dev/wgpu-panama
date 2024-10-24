@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class IndexFormat extends WGPUEnum {
+public class IndexFormat extends CEnum {
 	private static final Map<Integer, IndexFormat> map = new HashMap<>();
 	public static final IndexFormat UNDEFINED = new IndexFormat(0x00000000, "UNDEFINED");
 	public static final IndexFormat UINT16 = new IndexFormat(0x00000001, "UINT16");

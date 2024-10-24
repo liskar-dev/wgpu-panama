@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class QueryType extends WGPUEnum {
+public class QueryType extends CEnum {
 	private static final Map<Integer, QueryType> map = new HashMap<>();
 	public static final QueryType OCCLUSION = new QueryType(0x00000000, "OCCLUSION");
 	public static final QueryType TIMESTAMP = new QueryType(0x00000001, "TIMESTAMP");

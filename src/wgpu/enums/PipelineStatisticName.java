@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class PipelineStatisticName extends WGPUEnum {
+public class PipelineStatisticName extends CEnum {
 	private static final Map<Integer, PipelineStatisticName> map = new HashMap<>();
 	public static final PipelineStatisticName VERTEX_SHADER_INVOCATIONS = new PipelineStatisticName(0x00000000, "VERTEX_SHADER_INVOCATIONS");
 	public static final PipelineStatisticName CLIPPER_INVOCATIONS = new PipelineStatisticName(0x00000001, "CLIPPER_INVOCATIONS");

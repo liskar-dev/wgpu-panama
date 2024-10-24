@@ -12,8 +12,8 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class ComputePassTimestampWrites extends WGPUStruct {
-	public WGPUQuerySet querySet = new WGPUQuerySet(0);
+public class ComputePassTimestampWrites extends CStruct {
+	public GPUQuerySet querySet = new GPUQuerySet(0);
 	public int beginningOfPassWriteIndex;
 	public int endOfPassWriteIndex;
 

@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class GlobalReport extends WGPUStruct {
+public class GlobalReport extends CStruct {
 	public RegistryReport surfaces = new RegistryReport();
 	public BackendType backendType;
 	// padding 4

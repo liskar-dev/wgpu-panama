@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class Dx12Compiler extends WGPUEnum {
+public class Dx12Compiler extends CEnum {
 	private static final Map<Integer, Dx12Compiler> map = new HashMap<>();
 	public static final Dx12Compiler UNDEFINED = new Dx12Compiler(0x00000000, "UNDEFINED");
 	public static final Dx12Compiler FXC = new Dx12Compiler(0x00000001, "FXC");

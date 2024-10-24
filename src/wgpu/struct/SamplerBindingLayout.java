@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class SamplerBindingLayout extends WGPUStruct {
+public class SamplerBindingLayout extends CStruct {
 	public ChainedStruct nextInChain;
 	public SamplerBindingType type;
 	// padding 4

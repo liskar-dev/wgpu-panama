@@ -12,9 +12,9 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class SurfaceConfiguration extends WGPUStruct {
+public class SurfaceConfiguration extends CStruct {
 	public ChainedStruct nextInChain;
-	public WGPUDevice device = new WGPUDevice(0);
+	public GPUDevice device = new GPUDevice(0);
 	public TextureFormat format;
 	/** @see TextureUsage */
 	public int usage;

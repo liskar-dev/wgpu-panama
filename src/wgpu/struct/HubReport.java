@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class HubReport extends WGPUStruct {
+public class HubReport extends CStruct {
 	public RegistryReport adapters = new RegistryReport();
 	public RegistryReport devices = new RegistryReport();
 	public RegistryReport queues = new RegistryReport();

@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class DeviceLostReason extends WGPUEnum {
+public class DeviceLostReason extends CEnum {
 	private static final Map<Integer, DeviceLostReason> map = new HashMap<>();
 	public static final DeviceLostReason UNKNOWN = new DeviceLostReason(0x00000001, "UNKNOWN");
 	public static final DeviceLostReason DESTROYED = new DeviceLostReason(0x00000002, "DESTROYED");

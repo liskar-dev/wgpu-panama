@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class BufferMapState extends WGPUEnum {
+public class BufferMapState extends CEnum {
 	private static final Map<Integer, BufferMapState> map = new HashMap<>();
 	public static final BufferMapState UNMAPPED = new BufferMapState(0x00000000, "UNMAPPED");
 	public static final BufferMapState PENDING = new BufferMapState(0x00000001, "PENDING");

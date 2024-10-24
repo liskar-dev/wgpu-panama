@@ -12,15 +12,20 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-import static wgpu.WebGPU.*;
+import static wgpu.WGPU.*;
 
-public class WGPUInstance extends WGPUImpl {
-	public WGPUInstance(long handle) {
+public class GPUInstance extends GPUObject {
+
+	public GPUInstance(long handle) {
 		super(handle);
 	}
 
-	public WGPUSurface createSurface(final SurfaceDescriptor descriptor) {
-		return new WGPUSurface(wgpuInstanceCreateSurface(this.handle, descriptor));
+	public GPUInstance() {
+		super();
+	}
+
+	public GPUSurface createSurface(final SurfaceDescriptor descriptor) {
+		return new GPUSurface(wgpuInstanceCreateSurface(this.handle, descriptor));
 	}
 
 	public long createSurface0(final SurfaceDescriptor descriptor) {
@@ -48,7 +53,7 @@ public class WGPUInstance extends WGPUImpl {
 		wgpuGenerateReport(this.handle, report);
 	}
 
-	public long enumerateAdapters(@Nullable final InstanceEnumerateAdapterOptions options, WGPUAdapter[] adapters) {
+	public long enumerateAdapters(@Nullable final InstanceEnumerateAdapterOptions options, GPUAdapter[] adapters) {
 		return wgpuInstanceEnumerateAdapters(this.handle, options, adapters);
 	}
 }

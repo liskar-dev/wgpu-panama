@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class TextureViewDimension extends WGPUEnum {
+public class TextureViewDimension extends CEnum {
 	private static final Map<Integer, TextureViewDimension> map = new HashMap<>();
 	public static final TextureViewDimension UNDEFINED = new TextureViewDimension(0x00000000, "UNDEFINED");
 	public static final TextureViewDimension D1 = new TextureViewDimension(0x00000001, "D1");

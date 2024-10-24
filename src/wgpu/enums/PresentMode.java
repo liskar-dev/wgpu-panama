@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class PresentMode extends WGPUEnum {
+public class PresentMode extends CEnum {
 	private static final Map<Integer, PresentMode> map = new HashMap<>();
 	public static final PresentMode FIFO = new PresentMode(0x00000000, "FIFO");
 	public static final PresentMode FIFO_RELAXED = new PresentMode(0x00000001, "FIFO_RELAXED");

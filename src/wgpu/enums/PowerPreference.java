@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class PowerPreference extends WGPUEnum {
+public class PowerPreference extends CEnum {
 	private static final Map<Integer, PowerPreference> map = new HashMap<>();
 	public static final PowerPreference UNDEFINED = new PowerPreference(0x00000000, "UNDEFINED");
 	public static final PowerPreference LOW_POWER = new PowerPreference(0x00000001, "LOW_POWER");

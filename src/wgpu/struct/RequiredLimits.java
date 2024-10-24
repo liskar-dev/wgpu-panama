@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class RequiredLimits extends WGPUStruct {
+public class RequiredLimits extends CStruct {
 	public ChainedStruct nextInChain;
 	public Limits limits = new Limits();
 

@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class CompilationMessageType extends WGPUEnum {
+public class CompilationMessageType extends CEnum {
 	private static final Map<Integer, CompilationMessageType> map = new HashMap<>();
 	public static final CompilationMessageType ERROR = new CompilationMessageType(0x00000000, "ERROR");
 	public static final CompilationMessageType WARNING = new CompilationMessageType(0x00000001, "WARNING");

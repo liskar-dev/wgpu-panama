@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class BindGroupLayoutEntry extends WGPUStruct {
+public class BindGroupLayoutEntry extends CStruct {
 	public ChainedStruct nextInChain;
 	public int binding;
 	/** @see ShaderStage */

@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class Extent3D extends WGPUStruct {
+public class Extent3D extends CStruct {
 	public int width;
 	public int height;
 	public int depthOrArrayLayers;

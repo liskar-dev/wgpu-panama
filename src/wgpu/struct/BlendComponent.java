@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class BlendComponent extends WGPUStruct {
+public class BlendComponent extends CStruct {
 	public BlendOperation operation;
 	public BlendFactor srcFactor;
 	public BlendFactor dstFactor;

@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class MultisampleState extends WGPUStruct {
+public class MultisampleState extends CStruct {
 	public ChainedStruct nextInChain;
 	public int count;
 	public int mask;

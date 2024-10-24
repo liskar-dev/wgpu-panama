@@ -14,11 +14,11 @@ import static java.lang.foreign.MemoryLayout.*;
 
 public class BindGroupEntryExtras extends ChainedStruct {
 	// ChainedStruct chain;
-	public WGPUBuffer[] buffers;
+	public GPUBuffer[] buffers;
 	// size_t bufferCount
-	public WGPUSampler[] samplers;
+	public GPUSampler[] samplers;
 	// size_t samplerCount
-	public WGPUTextureView[] textureViews;
+	public GPUTextureView[] textureViews;
 	// size_t textureViewCount
 
 	protected static final int byteSize = 64;
@@ -51,25 +51,25 @@ public class BindGroupEntryExtras extends ChainedStruct {
 		var textureViewCount = (int) get_long(address+56);
 		super.next = ChainedStruct.from(_next);
 		if(_buffers != 0L) {
-			buffers = buffers != null && buffers.length == bufferCount ? buffers : new WGPUBuffer[bufferCount];
+			buffers = buffers != null && buffers.length == bufferCount ? buffers : new GPUBuffer[bufferCount];
 			for(int i=0; i<buffers.length; i++) {
-				buffers[i] = new WGPUBuffer(get_int(_buffers + i*8));
+				buffers[i] = new GPUBuffer(get_int(_buffers + i*8));
 			}
 		} else {
 			buffers= null;
 		}
 		if(_samplers != 0L) {
-			samplers = samplers != null && samplers.length == samplerCount ? samplers : new WGPUSampler[samplerCount];
+			samplers = samplers != null && samplers.length == samplerCount ? samplers : new GPUSampler[samplerCount];
 			for(int i=0; i<samplers.length; i++) {
-				samplers[i] = new WGPUSampler(get_int(_samplers + i*8));
+				samplers[i] = new GPUSampler(get_int(_samplers + i*8));
 			}
 		} else {
 			samplers= null;
 		}
 		if(_textureViews != 0L) {
-			textureViews = textureViews != null && textureViews.length == textureViewCount ? textureViews : new WGPUTextureView[textureViewCount];
+			textureViews = textureViews != null && textureViews.length == textureViewCount ? textureViews : new GPUTextureView[textureViewCount];
 			for(int i=0; i<textureViews.length; i++) {
-				textureViews[i] = new WGPUTextureView(get_int(_textureViews + i*8));
+				textureViews[i] = new GPUTextureView(get_int(_textureViews + i*8));
 			}
 		} else {
 			textureViews= null;

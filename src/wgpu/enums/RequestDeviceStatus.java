@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class RequestDeviceStatus extends WGPUEnum {
+public class RequestDeviceStatus extends CEnum {
 	private static final Map<Integer, RequestDeviceStatus> map = new HashMap<>();
 	public static final RequestDeviceStatus SUCCESS = new RequestDeviceStatus(0x00000000, "SUCCESS");
 	public static final RequestDeviceStatus ERROR = new RequestDeviceStatus(0x00000001, "ERROR");

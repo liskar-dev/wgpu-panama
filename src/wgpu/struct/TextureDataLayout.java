@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class TextureDataLayout extends WGPUStruct {
+public class TextureDataLayout extends CStruct {
 	public ChainedStruct nextInChain;
 	public long offset;
 	public int bytesPerRow;

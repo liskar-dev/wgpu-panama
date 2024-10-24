@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class VertexBufferLayout extends WGPUStruct {
+public class VertexBufferLayout extends CStruct {
 	public long arrayStride;
 	public VertexStepMode stepMode;
 	// padding 4

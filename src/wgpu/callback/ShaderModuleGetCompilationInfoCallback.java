@@ -13,9 +13,9 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 import java.lang.invoke.MethodHandle;
-import static wgpu.WGPUCallback.*;
+import static wgpu.Callback.*;
 
-public interface ShaderModuleGetCompilationInfoCallback extends WGPUCallback {
+public interface ShaderModuleGetCompilationInfoCallback extends Callback {
 	/** Callback: void ShaderModuleGetCompilationInfoCallback [CompilationInfoRequestStatus status, CompilationInfo const * compilationInfo, size_t userdata] */
 	void apply(CompilationInfoRequestStatus status, CompilationInfo compilationInfo, long userdata);
 

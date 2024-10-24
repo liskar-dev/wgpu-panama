@@ -12,15 +12,20 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-import static wgpu.WebGPU.*;
+import static wgpu.WGPU.*;
 
-public class WGPUTexture extends WGPUImpl {
-	public WGPUTexture(long handle) {
+public class GPUTexture extends GPUObject {
+
+	public GPUTexture(long handle) {
 		super(handle);
 	}
 
-	public WGPUTextureView createView(@Nullable final TextureViewDescriptor descriptor) {
-		return new WGPUTextureView(wgpuTextureCreateView(this.handle, descriptor));
+	public GPUTexture() {
+		super();
+	}
+
+	public GPUTextureView createView(@Nullable final TextureViewDescriptor descriptor) {
+		return new GPUTextureView(wgpuTextureCreateView(this.handle, descriptor));
 	}
 
 	public long createView0(@Nullable final TextureViewDescriptor descriptor) {

@@ -12,11 +12,11 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class ComputePipelineDescriptor extends WGPUStruct {
+public class ComputePipelineDescriptor extends CStruct {
 	public ChainedStruct nextInChain;
 	@Nullable
 	public String label;
-	public WGPUPipelineLayout layout = new WGPUPipelineLayout(0);
+	public GPUPipelineLayout layout = new GPUPipelineLayout(0);
 	public ProgrammableStageDescriptor compute = new ProgrammableStageDescriptor();
 
 	protected static final int byteSize = 64;

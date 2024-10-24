@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class Gles3MinorVersion extends WGPUEnum {
+public class Gles3MinorVersion extends CEnum {
 	private static final Map<Integer, Gles3MinorVersion> map = new HashMap<>();
 	public static final Gles3MinorVersion AUTOMATIC = new Gles3MinorVersion(0x00000000, "AUTOMATIC");
 	public static final Gles3MinorVersion VERSION0 = new Gles3MinorVersion(0x00000001, "VERSION0");

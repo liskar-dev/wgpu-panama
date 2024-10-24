@@ -12,10 +12,10 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class ImageCopyBuffer extends WGPUStruct {
+public class ImageCopyBuffer extends CStruct {
 	public ChainedStruct nextInChain;
 	public TextureDataLayout layout = new TextureDataLayout();
-	public WGPUBuffer buffer = new WGPUBuffer(0);
+	public GPUBuffer buffer = new GPUBuffer(0);
 
 	protected static final int byteSize = 40;
 	protected int byteSize() {

@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class BufferMapAsyncStatus extends WGPUEnum {
+public class BufferMapAsyncStatus extends CEnum {
 	private static final Map<Integer, BufferMapAsyncStatus> map = new HashMap<>();
 	public static final BufferMapAsyncStatus SUCCESS = new BufferMapAsyncStatus(0x00000000, "SUCCESS");
 	public static final BufferMapAsyncStatus VALIDATION_ERROR = new BufferMapAsyncStatus(0x00000001, "VALIDATION_ERROR");

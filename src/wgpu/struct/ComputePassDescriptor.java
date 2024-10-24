@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class ComputePassDescriptor extends WGPUStruct {
+public class ComputePassDescriptor extends CStruct {
 	public ChainedStruct nextInChain;
 	@Nullable
 	public String label;

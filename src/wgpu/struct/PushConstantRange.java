@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class PushConstantRange extends WGPUStruct {
+public class PushConstantRange extends CStruct {
 	/** @see ShaderStage */
 	public int stages;
 	public int start;

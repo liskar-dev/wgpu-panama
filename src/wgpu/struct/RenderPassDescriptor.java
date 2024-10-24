@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class RenderPassDescriptor extends WGPUStruct {
+public class RenderPassDescriptor extends CStruct {
 	public ChainedStruct nextInChain;
 	@Nullable
 	public String label;
@@ -20,7 +20,7 @@ public class RenderPassDescriptor extends WGPUStruct {
 	public RenderPassColorAttachment[] colorAttachments;
 	@Nullable
 	public RenderPassDepthStencilAttachment depthStencilAttachment;
-	public WGPUQuerySet occlusionQuerySet = new WGPUQuerySet(0);
+	public GPUQuerySet occlusionQuerySet = new GPUQuerySet(0);
 	@Nullable
 	public RenderPassTimestampWrites timestampWrites;
 

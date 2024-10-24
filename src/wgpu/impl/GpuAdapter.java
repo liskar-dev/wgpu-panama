@@ -12,11 +12,16 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-import static wgpu.WebGPU.*;
+import static wgpu.WGPU.*;
 
-public class WGPUAdapter extends WGPUImpl {
-	public WGPUAdapter(long handle) {
+public class GPUAdapter extends GPUObject {
+
+	public GPUAdapter(long handle) {
 		super(handle);
+	}
+
+	public GPUAdapter() {
+		super();
 	}
 
 	public long enumerateFeatures(FeatureName[] features) {

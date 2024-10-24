@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class SurfaceGetCurrentTextureStatus extends WGPUEnum {
+public class SurfaceGetCurrentTextureStatus extends CEnum {
 	private static final Map<Integer, SurfaceGetCurrentTextureStatus> map = new HashMap<>();
 	public static final SurfaceGetCurrentTextureStatus SUCCESS = new SurfaceGetCurrentTextureStatus(0x00000000, "SUCCESS");
 	public static final SurfaceGetCurrentTextureStatus TIMEOUT = new SurfaceGetCurrentTextureStatus(0x00000001, "TIMEOUT");

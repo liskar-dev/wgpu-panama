@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class BackendType extends WGPUEnum {
+public class BackendType extends CEnum {
 	private static final Map<Integer, BackendType> map = new HashMap<>();
 	public static final BackendType UNDEFINED = new BackendType(0x00000000, "UNDEFINED");
 	public static final BackendType NULL = new BackendType(0x00000001, "NULL");

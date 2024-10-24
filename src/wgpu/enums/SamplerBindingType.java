@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class SamplerBindingType extends WGPUEnum {
+public class SamplerBindingType extends CEnum {
 	private static final Map<Integer, SamplerBindingType> map = new HashMap<>();
 	public static final SamplerBindingType UNDEFINED = new SamplerBindingType(0x00000000, "UNDEFINED");
 	public static final SamplerBindingType FILTERING = new SamplerBindingType(0x00000001, "FILTERING");

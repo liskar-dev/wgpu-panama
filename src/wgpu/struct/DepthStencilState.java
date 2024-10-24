@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class DepthStencilState extends WGPUStruct {
+public class DepthStencilState extends CStruct {
 	public ChainedStruct nextInChain;
 	public TextureFormat format;
 	public boolean depthWriteEnabled;

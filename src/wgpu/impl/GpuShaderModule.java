@@ -12,11 +12,16 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-import static wgpu.WebGPU.*;
+import static wgpu.WGPU.*;
 
-public class WGPUShaderModule extends WGPUImpl {
-	public WGPUShaderModule(long handle) {
+public class GPUShaderModule extends GPUObject {
+
+	public GPUShaderModule(long handle) {
 		super(handle);
+	}
+
+	public GPUShaderModule() {
+		super();
 	}
 
 	public void getCompilationInfo(final ShaderModuleGetCompilationInfoCallback callback, final long userdata) {

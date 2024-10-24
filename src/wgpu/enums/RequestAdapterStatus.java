@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class RequestAdapterStatus extends WGPUEnum {
+public class RequestAdapterStatus extends CEnum {
 	private static final Map<Integer, RequestAdapterStatus> map = new HashMap<>();
 	public static final RequestAdapterStatus SUCCESS = new RequestAdapterStatus(0x00000000, "SUCCESS");
 	public static final RequestAdapterStatus UNAVAILABLE = new RequestAdapterStatus(0x00000001, "UNAVAILABLE");

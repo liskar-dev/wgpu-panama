@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class NativeLimits extends WGPUStruct {
+public class NativeLimits extends CStruct {
 	public int maxPushConstantSize;
 	public int maxNonSamplerBindings;
 

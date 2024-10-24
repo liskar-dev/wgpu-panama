@@ -1,9 +1,9 @@
 package wgpu;
 
-public abstract class WGPUEnum {
+public abstract class CEnum {
 	public final int bits;
 	public final String name;
-	protected WGPUEnum(int bits, String name) {
+	protected CEnum(int bits, String name) {
 		this.bits = bits;
 		this.name = name;
 	}

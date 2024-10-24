@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class VertexStepMode extends WGPUEnum {
+public class VertexStepMode extends CEnum {
 	private static final Map<Integer, VertexStepMode> map = new HashMap<>();
 	public static final VertexStepMode VERTEX = new VertexStepMode(0x00000000, "VERTEX");
 	public static final VertexStepMode INSTANCE = new VertexStepMode(0x00000001, "INSTANCE");

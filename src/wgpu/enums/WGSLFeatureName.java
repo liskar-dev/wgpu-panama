@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class WGSLFeatureName extends WGPUEnum {
+public class WGSLFeatureName extends CEnum {
 	private static final Map<Integer, WGSLFeatureName> map = new HashMap<>();
 	public static final WGSLFeatureName UNDEFINED = new WGSLFeatureName(0x00000000, "UNDEFINED");
 	public static final WGSLFeatureName READONLY_AND_READWRITE_STORAGE_TEXTURES = new WGSLFeatureName(0x00000001, "READONLY_AND_READWRITE_STORAGE_TEXTURES");

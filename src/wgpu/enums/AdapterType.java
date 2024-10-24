@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class AdapterType extends WGPUEnum {
+public class AdapterType extends CEnum {
 	private static final Map<Integer, AdapterType> map = new HashMap<>();
 	public static final AdapterType DISCRETE_GPU = new AdapterType(0x00000000, "DISCRETE_GPU");
 	public static final AdapterType INTEGRATED_GPU = new AdapterType(0x00000001, "INTEGRATED_GPU");

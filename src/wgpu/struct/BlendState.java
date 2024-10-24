@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class BlendState extends WGPUStruct {
+public class BlendState extends CStruct {
 	public BlendComponent color = new BlendComponent();
 	public BlendComponent alpha = new BlendComponent();
 

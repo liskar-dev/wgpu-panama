@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public abstract class ChainedStruct extends WGPUStruct {
+public abstract class ChainedStruct extends CStruct {
 	public ChainedStruct next;
 	// SType sType;
 	// padding 4

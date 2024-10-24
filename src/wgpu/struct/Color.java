@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class Color extends WGPUStruct {
+public class Color extends CStruct {
 	public double r;
 	public double g;
 	public double b;

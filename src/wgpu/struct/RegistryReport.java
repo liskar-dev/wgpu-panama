@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class RegistryReport extends WGPUStruct {
+public class RegistryReport extends CStruct {
 	public long numAllocated;
 	public long numKeptFromUser;
 	public long numReleasedFromUser;

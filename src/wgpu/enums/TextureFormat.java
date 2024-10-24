@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class TextureFormat extends WGPUEnum {
+public class TextureFormat extends CEnum {
 	private static final Map<Integer, TextureFormat> map = new HashMap<>();
 	public static final TextureFormat UNDEFINED = new TextureFormat(0x00000000, "UNDEFINED");
 	public static final TextureFormat R8_UNORM = new TextureFormat(0x00000001, "R8_UNORM");

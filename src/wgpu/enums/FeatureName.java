@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class FeatureName extends WGPUEnum {
+public class FeatureName extends CEnum {
 	private static final Map<Integer, FeatureName> map = new HashMap<>();
 	public static final FeatureName UNDEFINED = new FeatureName(0x00000000, "UNDEFINED");
 	public static final FeatureName DEPTH_CLIP_CONTROL = new FeatureName(0x00000001, "DEPTH_CLIP_CONTROL");

@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class Limits extends WGPUStruct {
+public class Limits extends CStruct {
 	public int maxTextureDimension1D;
 	public int maxTextureDimension2D;
 	public int maxTextureDimension3D;

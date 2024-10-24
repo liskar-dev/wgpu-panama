@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class StorageTextureAccess extends WGPUEnum {
+public class StorageTextureAccess extends CEnum {
 	private static final Map<Integer, StorageTextureAccess> map = new HashMap<>();
 	public static final StorageTextureAccess UNDEFINED = new StorageTextureAccess(0x00000000, "UNDEFINED");
 	public static final StorageTextureAccess WRITE_ONLY = new StorageTextureAccess(0x00000001, "WRITE_ONLY");

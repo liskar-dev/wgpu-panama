@@ -13,15 +13,15 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 import java.lang.invoke.MethodHandle;
-import static wgpu.WGPUCallback.*;
+import static wgpu.Callback.*;
 
-public interface DeviceCreateComputePipelineAsyncCallback extends WGPUCallback {
-	/** Callback: void DeviceCreateComputePipelineAsyncCallback [CreatePipelineAsyncStatus status, WGPUComputePipeline * pipeline, char const * message, size_t userdata] */
-	void apply(CreatePipelineAsyncStatus status, WGPUComputePipeline pipeline, String message, long userdata);
+public interface DeviceCreateComputePipelineAsyncCallback extends Callback {
+	/** Callback: void DeviceCreateComputePipelineAsyncCallback [CreatePipelineAsyncStatus status, GPUComputePipeline * pipeline, char const * message, size_t userdata] */
+	void apply(CreatePipelineAsyncStatus status, GPUComputePipeline pipeline, String message, long userdata);
 
 	default void stub(final int status, final long pipeline, final long message, final long userdata) {
 		var _status = CreatePipelineAsyncStatus.from(status);
-		var _pipeline = new WGPUComputePipeline(pipeline);
+		var _pipeline = new GPUComputePipeline(pipeline);
 		var _message = get_string(message);
 		var _userdata = userdata;
 		apply(_status, _pipeline, _message, _userdata);

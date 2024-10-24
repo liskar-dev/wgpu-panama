@@ -12,8 +12,8 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class RenderPassDepthStencilAttachment extends WGPUStruct {
-	public WGPUTextureView view = new WGPUTextureView(0);
+public class RenderPassDepthStencilAttachment extends CStruct {
+	public GPUTextureView view = new GPUTextureView(0);
 	public LoadOp depthLoadOp;
 	public StoreOp depthStoreOp;
 	public float depthClearValue;

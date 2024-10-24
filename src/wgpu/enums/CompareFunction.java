@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class CompareFunction extends WGPUEnum {
+public class CompareFunction extends CEnum {
 	private static final Map<Integer, CompareFunction> map = new HashMap<>();
 	public static final CompareFunction UNDEFINED = new CompareFunction(0x00000000, "UNDEFINED");
 	public static final CompareFunction NEVER = new CompareFunction(0x00000001, "NEVER");

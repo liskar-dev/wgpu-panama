@@ -13,9 +13,9 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 import java.lang.invoke.MethodHandle;
-import static wgpu.WGPUCallback.*;
+import static wgpu.Callback.*;
 
-public interface QueueOnSubmittedWorkDoneCallback extends WGPUCallback {
+public interface QueueOnSubmittedWorkDoneCallback extends Callback {
 	/** Callback: void QueueOnSubmittedWorkDoneCallback [QueueWorkDoneStatus status, size_t userdata] */
 	void apply(QueueWorkDoneStatus status, long userdata);
 

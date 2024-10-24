@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class DeviceDescriptor extends WGPUStruct {
+public class DeviceDescriptor extends CStruct {
 	public ChainedStruct nextInChain;
 	@Nullable
 	public String label;
@@ -37,7 +37,7 @@ public class DeviceDescriptor extends WGPUStruct {
 		put_value(address+24, stack.alloc(requiredFeatures));
 		put_value(address+32, stack.alloc(requiredLimits));
 		defaultQueue.store(stack, address+40);
-		put_pointer(address+56, WGPUCallback.createStub(deviceLostCallback, deviceLostCallback.handle, deviceLostCallback.desc));
+		put_pointer(address+56, Callback.createStub(deviceLostCallback, deviceLostCallback.handle, deviceLostCallback.desc));
 		put_value(address+64, (long) deviceLostUserdata);
 		uncapturedErrorCallbackInfo.store(stack, address+72);
 		return address;

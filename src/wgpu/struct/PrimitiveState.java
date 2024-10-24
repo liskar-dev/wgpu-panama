@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class PrimitiveState extends WGPUStruct {
+public class PrimitiveState extends CStruct {
 	public ChainedStruct nextInChain;
 	public PrimitiveTopology topology;
 	public IndexFormat stripIndexFormat;

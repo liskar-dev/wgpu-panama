@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class PrimitiveTopology extends WGPUEnum {
+public class PrimitiveTopology extends CEnum {
 	private static final Map<Integer, PrimitiveTopology> map = new HashMap<>();
 	public static final PrimitiveTopology POINT_LIST = new PrimitiveTopology(0x00000000, "POINT_LIST");
 	public static final PrimitiveTopology LINE_LIST = new PrimitiveTopology(0x00000001, "LINE_LIST");

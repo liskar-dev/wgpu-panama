@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class ErrorType extends WGPUEnum {
+public class ErrorType extends CEnum {
 	private static final Map<Integer, ErrorType> map = new HashMap<>();
 	public static final ErrorType NO_ERROR = new ErrorType(0x00000000, "NO_ERROR");
 	public static final ErrorType VALIDATION = new ErrorType(0x00000001, "VALIDATION");

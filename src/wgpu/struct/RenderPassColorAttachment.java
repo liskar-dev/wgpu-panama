@@ -12,12 +12,12 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class RenderPassColorAttachment extends WGPUStruct {
+public class RenderPassColorAttachment extends CStruct {
 	public ChainedStruct nextInChain;
-	public WGPUTextureView view = new WGPUTextureView(0);
+	public GPUTextureView view = new GPUTextureView(0);
 	public int depthSlice;
 	// padding 4
-	public WGPUTextureView resolveTarget = new WGPUTextureView(0);
+	public GPUTextureView resolveTarget = new GPUTextureView(0);
 	public LoadOp loadOp;
 	public StoreOp storeOp;
 	public Color clearValue = new Color();

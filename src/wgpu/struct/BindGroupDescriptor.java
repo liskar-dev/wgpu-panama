@@ -12,11 +12,11 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class BindGroupDescriptor extends WGPUStruct {
+public class BindGroupDescriptor extends CStruct {
 	public ChainedStruct nextInChain;
 	@Nullable
 	public String label;
-	public WGPUBindGroupLayout layout = new WGPUBindGroupLayout(0);
+	public GPUBindGroupLayout layout = new GPUBindGroupLayout(0);
 	// size_t entryCount
 	public BindGroupEntry[] entries;
 

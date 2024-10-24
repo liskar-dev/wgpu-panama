@@ -13,15 +13,15 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 import java.lang.invoke.MethodHandle;
-import static wgpu.WGPUCallback.*;
+import static wgpu.Callback.*;
 
-public interface AdapterRequestDeviceCallback extends WGPUCallback {
-	/** Callback: void AdapterRequestDeviceCallback [RequestDeviceStatus status, WGPUDevice * device, char const * message, size_t userdata] */
-	void apply(RequestDeviceStatus status, WGPUDevice device, String message, long userdata);
+public interface AdapterRequestDeviceCallback extends Callback {
+	/** Callback: void AdapterRequestDeviceCallback [RequestDeviceStatus status, GPUDevice * device, char const * message, size_t userdata] */
+	void apply(RequestDeviceStatus status, GPUDevice device, String message, long userdata);
 
 	default void stub(final int status, final long device, final long message, final long userdata) {
 		var _status = RequestDeviceStatus.from(status);
-		var _device = new WGPUDevice(device);
+		var _device = new GPUDevice(device);
 		var _message = get_string(message);
 		var _userdata = userdata;
 		apply(_status, _device, _message, _userdata);

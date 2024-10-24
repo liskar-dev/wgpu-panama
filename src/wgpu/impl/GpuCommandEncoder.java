@@ -12,34 +12,39 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-import static wgpu.WebGPU.*;
+import static wgpu.WGPU.*;
 
-public class WGPUCommandEncoder extends WGPUImpl {
-	public WGPUCommandEncoder(long handle) {
+public class GPUCommandEncoder extends GPUObject {
+
+	public GPUCommandEncoder(long handle) {
 		super(handle);
 	}
 
-	public WGPUComputePassEncoder beginComputePass(@Nullable final ComputePassDescriptor descriptor) {
-		return new WGPUComputePassEncoder(wgpuCommandEncoderBeginComputePass(this.handle, descriptor));
+	public GPUCommandEncoder() {
+		super();
+	}
+
+	public GPUComputePassEncoder beginComputePass(@Nullable final ComputePassDescriptor descriptor) {
+		return new GPUComputePassEncoder(wgpuCommandEncoderBeginComputePass(this.handle, descriptor));
 	}
 
 	public long beginComputePass0(@Nullable final ComputePassDescriptor descriptor) {
 		return wgpuCommandEncoderBeginComputePass(this.handle, descriptor);
 	}
 
-	public WGPURenderPassEncoder beginRenderPass(final RenderPassDescriptor descriptor) {
-		return new WGPURenderPassEncoder(wgpuCommandEncoderBeginRenderPass(this.handle, descriptor));
+	public GPURenderPassEncoder beginRenderPass(final RenderPassDescriptor descriptor) {
+		return new GPURenderPassEncoder(wgpuCommandEncoderBeginRenderPass(this.handle, descriptor));
 	}
 
 	public long beginRenderPass0(final RenderPassDescriptor descriptor) {
 		return wgpuCommandEncoderBeginRenderPass(this.handle, descriptor);
 	}
 
-	public void clearBuffer(final WGPUBuffer buffer, final long offset, final long size) {
+	public void clearBuffer(final GPUBuffer buffer, final long offset, final long size) {
 		wgpuCommandEncoderClearBuffer(this.handle, buffer.handle, offset, size);
 	}
 
-	public void copyBufferToBuffer(final WGPUBuffer source, final long sourceOffset, final WGPUBuffer destination, final long destinationOffset, final long size) {
+	public void copyBufferToBuffer(final GPUBuffer source, final long sourceOffset, final GPUBuffer destination, final long destinationOffset, final long size) {
 		wgpuCommandEncoderCopyBufferToBuffer(this.handle, source.handle, sourceOffset, destination.handle, destinationOffset, size);
 	}
 
@@ -55,8 +60,8 @@ public class WGPUCommandEncoder extends WGPUImpl {
 		wgpuCommandEncoderCopyTextureToTexture(this.handle, source, destination, copySize);
 	}
 
-	public WGPUCommandBuffer finish(@Nullable final CommandBufferDescriptor descriptor) {
-		return new WGPUCommandBuffer(wgpuCommandEncoderFinish(this.handle, descriptor));
+	public GPUCommandBuffer finish(@Nullable final CommandBufferDescriptor descriptor) {
+		return new GPUCommandBuffer(wgpuCommandEncoderFinish(this.handle, descriptor));
 	}
 
 	public long finish0(@Nullable final CommandBufferDescriptor descriptor) {
@@ -75,7 +80,7 @@ public class WGPUCommandEncoder extends WGPUImpl {
 		wgpuCommandEncoderPushDebugGroup(this.handle, groupLabel);
 	}
 
-	public void resolveQuerySet(final WGPUQuerySet querySet, final int firstQuery, final int queryCount, final WGPUBuffer destination, final long destinationOffset) {
+	public void resolveQuerySet(final GPUQuerySet querySet, final int firstQuery, final int queryCount, final GPUBuffer destination, final long destinationOffset) {
 		wgpuCommandEncoderResolveQuerySet(this.handle, querySet.handle, firstQuery, queryCount, destination.handle, destinationOffset);
 	}
 
@@ -83,7 +88,7 @@ public class WGPUCommandEncoder extends WGPUImpl {
 		wgpuCommandEncoderSetLabel(this.handle, label);
 	}
 
-	public void writeTimestamp(final WGPUQuerySet querySet, final int queryIndex) {
+	public void writeTimestamp(final GPUQuerySet querySet, final int queryIndex) {
 		wgpuCommandEncoderWriteTimestamp(this.handle, querySet.handle, queryIndex);
 	}
 

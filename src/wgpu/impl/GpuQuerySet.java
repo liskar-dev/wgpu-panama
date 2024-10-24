@@ -12,11 +12,16 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-import static wgpu.WebGPU.*;
+import static wgpu.WGPU.*;
 
-public class WGPUQuerySet extends WGPUImpl {
-	public WGPUQuerySet(long handle) {
+public class GPUQuerySet extends GPUObject {
+
+	public GPUQuerySet(long handle) {
 		super(handle);
+	}
+
+	public GPUQuerySet() {
+		super();
 	}
 
 	public void destroy() {

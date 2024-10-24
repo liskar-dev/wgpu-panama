@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class InstanceDescriptor extends WGPUStruct {
+public class InstanceDescriptor extends CStruct {
 	public ChainedStruct nextInChain;
 
 	protected static final int byteSize = 8;

@@ -13,9 +13,9 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 import java.lang.invoke.MethodHandle;
-import static wgpu.WGPUCallback.*;
+import static wgpu.Callback.*;
 
-public interface LogCallback extends WGPUCallback {
+public interface LogCallback extends Callback {
 	/** Callback: void LogCallback [LogLevel level, char const * message, size_t userdata] */
 	void apply(LogLevel level, String message, long userdata);
 

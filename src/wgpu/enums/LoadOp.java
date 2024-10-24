@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class LoadOp extends WGPUEnum {
+public class LoadOp extends CEnum {
 	private static final Map<Integer, LoadOp> map = new HashMap<>();
 	public static final LoadOp UNDEFINED = new LoadOp(0x00000000, "UNDEFINED");
 	public static final LoadOp CLEAR = new LoadOp(0x00000001, "CLEAR");

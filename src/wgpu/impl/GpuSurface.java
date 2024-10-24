@@ -12,18 +12,23 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-import static wgpu.WebGPU.*;
+import static wgpu.WGPU.*;
 
-public class WGPUSurface extends WGPUImpl {
-	public WGPUSurface(long handle) {
+public class GPUSurface extends GPUObject {
+
+	public GPUSurface(long handle) {
 		super(handle);
+	}
+
+	public GPUSurface() {
+		super();
 	}
 
 	public void configure(final SurfaceConfiguration config) {
 		wgpuSurfaceConfigure(this.handle, config);
 	}
 
-	public void getCapabilities(final WGPUAdapter adapter, SurfaceCapabilities capabilities) {
+	public void getCapabilities(final GPUAdapter adapter, SurfaceCapabilities capabilities) {
 		wgpuSurfaceGetCapabilities(this.handle, adapter.handle, capabilities);
 	}
 

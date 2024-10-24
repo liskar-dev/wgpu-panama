@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class ConstantEntry extends WGPUStruct {
+public class ConstantEntry extends CStruct {
 	public ChainedStruct nextInChain;
 	public String key;
 	public double value;

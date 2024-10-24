@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class CompilationInfoRequestStatus extends WGPUEnum {
+public class CompilationInfoRequestStatus extends CEnum {
 	private static final Map<Integer, CompilationInfoRequestStatus> map = new HashMap<>();
 	public static final CompilationInfoRequestStatus SUCCESS = new CompilationInfoRequestStatus(0x00000000, "SUCCESS");
 	public static final CompilationInfoRequestStatus ERROR = new CompilationInfoRequestStatus(0x00000001, "ERROR");

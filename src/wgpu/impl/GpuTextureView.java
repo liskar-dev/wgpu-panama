@@ -12,19 +12,24 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-import static wgpu.WebGPU.*;
+import static wgpu.WGPU.*;
 
-public class WGPURenderBundle extends WGPUImpl {
-	public WGPURenderBundle(long handle) {
+public class GPUTextureView extends GPUObject {
+
+	public GPUTextureView(long handle) {
 		super(handle);
 	}
 
+	public GPUTextureView() {
+		super();
+	}
+
 	public void setLabel(final String label) {
-		wgpuRenderBundleSetLabel(this.handle, label);
+		wgpuTextureViewSetLabel(this.handle, label);
 	}
 
 	public void release() {
-		wgpuRenderBundleRelease(this.handle);
+		wgpuTextureViewRelease(this.handle);
 		this.handle = 0;
 	}
 }

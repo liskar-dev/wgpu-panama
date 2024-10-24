@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class Origin3D extends WGPUStruct {
+public class Origin3D extends CStruct {
 	public int x;
 	public int y;
 	public int z;

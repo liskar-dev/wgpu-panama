@@ -12,15 +12,15 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class BindGroupEntry extends WGPUStruct {
+public class BindGroupEntry extends CStruct {
 	public ChainedStruct nextInChain;
 	public int binding;
 	// padding 4
-	public WGPUBuffer buffer = new WGPUBuffer(0);
+	public GPUBuffer buffer = new GPUBuffer(0);
 	public long offset;
 	public long size;
-	public WGPUSampler sampler = new WGPUSampler(0);
-	public WGPUTextureView textureView = new WGPUTextureView(0);
+	public GPUSampler sampler = new GPUSampler(0);
+	public GPUTextureView textureView = new GPUTextureView(0);
 
 	protected static final int byteSize = 56;
 	protected int byteSize() {

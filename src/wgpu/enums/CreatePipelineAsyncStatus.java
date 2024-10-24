@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class CreatePipelineAsyncStatus extends WGPUEnum {
+public class CreatePipelineAsyncStatus extends CEnum {
 	private static final Map<Integer, CreatePipelineAsyncStatus> map = new HashMap<>();
 	public static final CreatePipelineAsyncStatus SUCCESS = new CreatePipelineAsyncStatus(0x00000000, "SUCCESS");
 	public static final CreatePipelineAsyncStatus VALIDATION_ERROR = new CreatePipelineAsyncStatus(0x00000001, "VALIDATION_ERROR");

@@ -12,9 +12,9 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class VertexState extends WGPUStruct {
+public class VertexState extends CStruct {
 	public ChainedStruct nextInChain;
-	public WGPUShaderModule module = new WGPUShaderModule(0);
+	public GPUShaderModule module = new GPUShaderModule(0);
 	@Nullable
 	public String entryPoint;
 	// size_t constantCount

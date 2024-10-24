@@ -12,7 +12,7 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class CompilationInfo extends WGPUStruct {
+public class CompilationInfo extends CStruct {
 	public ChainedStruct nextInChain;
 	// size_t messageCount
 	public CompilationMessage[] messages;

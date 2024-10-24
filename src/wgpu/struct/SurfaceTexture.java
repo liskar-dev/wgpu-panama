@@ -12,8 +12,8 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class SurfaceTexture extends WGPUStruct {
-	public WGPUTexture texture = new WGPUTexture(0);
+public class SurfaceTexture extends CStruct {
+	public GPUTexture texture = new GPUTexture(0);
 	public boolean suboptimal;
 	public SurfaceGetCurrentTextureStatus status;
 

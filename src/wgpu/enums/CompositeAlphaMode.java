@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class CompositeAlphaMode extends WGPUEnum {
+public class CompositeAlphaMode extends CEnum {
 	private static final Map<Integer, CompositeAlphaMode> map = new HashMap<>();
 	public static final CompositeAlphaMode AUTO = new CompositeAlphaMode(0x00000000, "AUTO");
 	public static final CompositeAlphaMode OPAQUE = new CompositeAlphaMode(0x00000001, "OPAQUE");

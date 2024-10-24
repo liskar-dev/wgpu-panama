@@ -2,7 +2,7 @@ package wgpu;
 
 import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;
-import static wgpu.WGPUStruct.*;
+import static wgpu.CStruct.*;
 
 public class Stack implements AutoCloseable {
 	final Arena arena;
@@ -61,11 +61,11 @@ public class Stack implements AutoCloseable {
 		return segment;
 	}
 
-	public long alloc(WGPUStruct struct) {
+	public long alloc(CStruct struct) {
 		return struct == null ? 0L : struct.store(this, calloc(struct.byteSize()));
 	}
 
-	public long alloc(WGPUStruct[] array) {
+	public long alloc(CStruct[] array) {
 		if(array == null || array.length == 0) return 0L;
 		var first = array[0];
 		var size = first.byteSize();
@@ -76,7 +76,7 @@ public class Stack implements AutoCloseable {
 		return address;
 	}
 
-	public long alloc(WGPUImpl[] array) {
+	public long alloc(GPUObject[] array) {
 		if(array == null || array.length == 0) return 0L;
 		var address = calloc(8 * array.length);
 		for(int i=0; i<array.length; i++) {
@@ -85,7 +85,7 @@ public class Stack implements AutoCloseable {
 		return address;
 	}
 
-	public long alloc(WGPUEnum[] array) {
+	public long alloc(CEnum[] array) {
 		if(array == null || array.length == 0) return 0L;
 		var address = calloc(4 * array.length);
 		for(int i=0; i<array.length; i++) {
@@ -94,16 +94,16 @@ public class Stack implements AutoCloseable {
 		return address;
 	}
 
-	public long prealloc(WGPUStruct struct) {
+	public long prealloc(CStruct struct) {
 		return struct == null ? 0L : alloc(struct.byteSize());
 	}
 
-	public long prealloc(WGPUEnum[] array) {
+	public long prealloc(CEnum[] array) {
 		if(array == null || array.length == 0) return 0L;
 		return alloc(4 * array.length);
 	}
 
-	public long prealloc(WGPUImpl[] array) {
+	public long prealloc(GPUObject[] array) {
 		if(array == null || array.length == 0) return 0L;
 		return alloc(8 * array.length);
 	}

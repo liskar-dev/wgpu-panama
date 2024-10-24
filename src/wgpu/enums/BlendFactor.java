@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class BlendFactor extends WGPUEnum {
+public class BlendFactor extends CEnum {
 	private static final Map<Integer, BlendFactor> map = new HashMap<>();
 	public static final BlendFactor ZERO = new BlendFactor(0x00000000, "ZERO");
 	public static final BlendFactor ONE = new BlendFactor(0x00000001, "ONE");

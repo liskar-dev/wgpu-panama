@@ -12,11 +12,16 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-import static wgpu.WebGPU.*;
+import static wgpu.WGPU.*;
 
-public class WGPUQueue extends WGPUImpl {
-	public WGPUQueue(long handle) {
+public class GPUQueue extends GPUObject {
+
+	public GPUQueue(long handle) {
 		super(handle);
+	}
+
+	public GPUQueue() {
+		super();
 	}
 
 	public void onSubmittedWorkDone(final QueueOnSubmittedWorkDoneCallback callback, final long userdata) {
@@ -27,11 +32,11 @@ public class WGPUQueue extends WGPUImpl {
 		wgpuQueueSetLabel(this.handle, label);
 	}
 
-	public void submit(final WGPUCommandBuffer[] commands) {
+	public void submit(final GPUCommandBuffer[] commands) {
 		wgpuQueueSubmit(this.handle, commands);
 	}
 
-	public void writeBuffer(final WGPUBuffer buffer, final long bufferOffset, final MemorySegment data) {
+	public void writeBuffer(final GPUBuffer buffer, final long bufferOffset, final MemorySegment data) {
 		wgpuQueueWriteBuffer(this.handle, buffer.handle, bufferOffset, data);
 	}
 
@@ -44,7 +49,7 @@ public class WGPUQueue extends WGPUImpl {
 		this.handle = 0;
 	}
 
-	public long submitForIndex(final WGPUCommandBuffer[] commands) {
+	public long submitForIndex(final GPUCommandBuffer[] commands) {
 		return wgpuQueueSubmitForIndex(this.handle, commands);
 	}
 }

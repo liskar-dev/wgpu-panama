@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class LogLevel extends WGPUEnum {
+public class LogLevel extends CEnum {
 	private static final Map<Integer, LogLevel> map = new HashMap<>();
 	public static final LogLevel OFF = new LogLevel(0x00000000, "OFF");
 	public static final LogLevel ERROR = new LogLevel(0x00000001, "ERROR");

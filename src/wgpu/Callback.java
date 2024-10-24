@@ -10,7 +10,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.util.WeakHashMap;
 
-public interface WGPUCallback {
+public interface Callback {
 	static FunctionDescriptor functionDescriptor(MemoryLayout ret, MemoryLayout...args) {
 		if(ret == null) {
 			return FunctionDescriptor.ofVoid(args);
@@ -27,9 +27,9 @@ public interface WGPUCallback {
 		}
 	}
 	
-	static final WeakHashMap<WGPUCallback, MemorySegment> weakMap = new WeakHashMap<>();
+	static final WeakHashMap<Callback, MemorySegment> weakMap = new WeakHashMap<>();
 	
-	public static MemorySegment createStub(WGPUCallback callback, MethodHandle handle, FunctionDescriptor desc) {
+	static MemorySegment createStub(Callback callback, MethodHandle handle, FunctionDescriptor desc) {
 		MemorySegment stub = weakMap.get(callback);
 		
 		if(stub == null) {
@@ -42,10 +42,10 @@ public interface WGPUCallback {
 	}
 	
 	static String get_string(long address) {
-		return WGPUStruct.get_string(address);
+		return CStruct.get_string(address);
 	}
 
-	static <T extends WGPUStruct> T loadStruct(T struct, long address) {
+	static <T extends CStruct> T loadStruct(T struct, long address) {
 		struct.load(address);
 		return struct;
 	}

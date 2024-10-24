@@ -12,11 +12,16 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-import static wgpu.WebGPU.*;
+import static wgpu.WGPU.*;
 
-public class WGPURenderPassEncoder extends WGPUImpl {
-	public WGPURenderPassEncoder(long handle) {
+public class GPURenderPassEncoder extends GPUObject {
+
+	public GPURenderPassEncoder(long handle) {
 		super(handle);
+	}
+
+	public GPURenderPassEncoder() {
+		super();
 	}
 
 	public void beginOcclusionQuery(final int queryIndex) {
@@ -31,11 +36,11 @@ public class WGPURenderPassEncoder extends WGPUImpl {
 		wgpuRenderPassEncoderDrawIndexed(this.handle, indexCount, instanceCount, firstIndex, baseVertex, firstInstance);
 	}
 
-	public void drawIndexedIndirect(final WGPUBuffer indirectBuffer, final long indirectOffset) {
+	public void drawIndexedIndirect(final GPUBuffer indirectBuffer, final long indirectOffset) {
 		wgpuRenderPassEncoderDrawIndexedIndirect(this.handle, indirectBuffer.handle, indirectOffset);
 	}
 
-	public void drawIndirect(final WGPUBuffer indirectBuffer, final long indirectOffset) {
+	public void drawIndirect(final GPUBuffer indirectBuffer, final long indirectOffset) {
 		wgpuRenderPassEncoderDrawIndirect(this.handle, indirectBuffer.handle, indirectOffset);
 	}
 
@@ -47,7 +52,7 @@ public class WGPURenderPassEncoder extends WGPUImpl {
 		wgpuRenderPassEncoderEndOcclusionQuery(this.handle);
 	}
 
-	public void executeBundles(final WGPURenderBundle[] bundles) {
+	public void executeBundles(final GPURenderBundle[] bundles) {
 		wgpuRenderPassEncoderExecuteBundles(this.handle, bundles);
 	}
 
@@ -63,7 +68,7 @@ public class WGPURenderPassEncoder extends WGPUImpl {
 		wgpuRenderPassEncoderPushDebugGroup(this.handle, groupLabel);
 	}
 
-	public void setBindGroup(final int groupIndex, @Nullable final WGPUBindGroup group, final int[] dynamicOffsets) {
+	public void setBindGroup(final int groupIndex, @Nullable final GPUBindGroup group, final int[] dynamicOffsets) {
 		wgpuRenderPassEncoderSetBindGroup(this.handle, groupIndex, group.handle, dynamicOffsets);
 	}
 
@@ -71,7 +76,7 @@ public class WGPURenderPassEncoder extends WGPUImpl {
 		wgpuRenderPassEncoderSetBlendConstant(this.handle, color);
 	}
 
-	public void setIndexBuffer(final WGPUBuffer buffer, final IndexFormat format, final long offset, final long size) {
+	public void setIndexBuffer(final GPUBuffer buffer, final IndexFormat format, final long offset, final long size) {
 		wgpuRenderPassEncoderSetIndexBuffer(this.handle, buffer.handle, format, offset, size);
 	}
 
@@ -79,7 +84,7 @@ public class WGPURenderPassEncoder extends WGPUImpl {
 		wgpuRenderPassEncoderSetLabel(this.handle, label);
 	}
 
-	public void setPipeline(final WGPURenderPipeline pipeline) {
+	public void setPipeline(final GPURenderPipeline pipeline) {
 		wgpuRenderPassEncoderSetPipeline(this.handle, pipeline.handle);
 	}
 
@@ -91,7 +96,7 @@ public class WGPURenderPassEncoder extends WGPUImpl {
 		wgpuRenderPassEncoderSetStencilReference(this.handle, reference);
 	}
 
-	public void setVertexBuffer(final int slot, @Nullable final WGPUBuffer buffer, final long offset, final long size) {
+	public void setVertexBuffer(final int slot, @Nullable final GPUBuffer buffer, final long offset, final long size) {
 		wgpuRenderPassEncoderSetVertexBuffer(this.handle, slot, buffer.handle, offset, size);
 	}
 
@@ -108,23 +113,23 @@ public class WGPURenderPassEncoder extends WGPUImpl {
 		wgpuRenderPassEncoderSetPushConstants(this.handle, stages, offset, sizeBytes, data);
 	}
 
-	public void multiDrawIndirect(final WGPUBuffer buffer, final long offset, final int count) {
+	public void multiDrawIndirect(final GPUBuffer buffer, final long offset, final int count) {
 		wgpuRenderPassEncoderMultiDrawIndirect(this.handle, buffer.handle, offset, count);
 	}
 
-	public void multiDrawIndexedIndirect(final WGPUBuffer buffer, final long offset, final int count) {
+	public void multiDrawIndexedIndirect(final GPUBuffer buffer, final long offset, final int count) {
 		wgpuRenderPassEncoderMultiDrawIndexedIndirect(this.handle, buffer.handle, offset, count);
 	}
 
-	public void multiDrawIndirectCount(final WGPUBuffer buffer, final long offset, final WGPUBuffer count_buffer, final long count_buffer_offset, final int max_count) {
+	public void multiDrawIndirectCount(final GPUBuffer buffer, final long offset, final GPUBuffer count_buffer, final long count_buffer_offset, final int max_count) {
 		wgpuRenderPassEncoderMultiDrawIndirectCount(this.handle, buffer.handle, offset, count_buffer.handle, count_buffer_offset, max_count);
 	}
 
-	public void multiDrawIndexedIndirectCount(final WGPUBuffer buffer, final long offset, final WGPUBuffer count_buffer, final long count_buffer_offset, final int max_count) {
+	public void multiDrawIndexedIndirectCount(final GPUBuffer buffer, final long offset, final GPUBuffer count_buffer, final long count_buffer_offset, final int max_count) {
 		wgpuRenderPassEncoderMultiDrawIndexedIndirectCount(this.handle, buffer.handle, offset, count_buffer.handle, count_buffer_offset, max_count);
 	}
 
-	public void beginPipelineStatisticsQuery(final WGPUQuerySet querySet, final int queryIndex) {
+	public void beginPipelineStatisticsQuery(final GPUQuerySet querySet, final int queryIndex) {
 		wgpuRenderPassEncoderBeginPipelineStatisticsQuery(this.handle, querySet.handle, queryIndex);
 	}
 

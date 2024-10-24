@@ -12,12 +12,12 @@ import org.jspecify.annotations.*;
 import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
-public class PipelineLayoutDescriptor extends WGPUStruct {
+public class PipelineLayoutDescriptor extends CStruct {
 	public ChainedStruct nextInChain;
 	@Nullable
 	public String label;
 	// size_t bindGroupLayoutCount
-	public WGPUBindGroupLayout[] bindGroupLayouts;
+	public GPUBindGroupLayout[] bindGroupLayouts;
 
 	protected static final int byteSize = 32;
 	protected int byteSize() {
@@ -38,9 +38,9 @@ public class PipelineLayoutDescriptor extends WGPUStruct {
 		var bindGroupLayoutCount = (int) get_long(address+16);
 		var _bindGroupLayouts = get_long(address+24);
 		if(_bindGroupLayouts != 0L) {
-			bindGroupLayouts = bindGroupLayouts != null && bindGroupLayouts.length == bindGroupLayoutCount ? bindGroupLayouts : new WGPUBindGroupLayout[bindGroupLayoutCount];
+			bindGroupLayouts = bindGroupLayouts != null && bindGroupLayouts.length == bindGroupLayoutCount ? bindGroupLayouts : new GPUBindGroupLayout[bindGroupLayoutCount];
 			for(int i=0; i<bindGroupLayouts.length; i++) {
-				bindGroupLayouts[i] = new WGPUBindGroupLayout(get_int(_bindGroupLayouts + i*8));
+				bindGroupLayouts[i] = new GPUBindGroupLayout(get_int(_bindGroupLayouts + i*8));
 			}
 		} else {
 			bindGroupLayouts= null;

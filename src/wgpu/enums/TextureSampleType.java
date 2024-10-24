@@ -1,9 +1,9 @@
 package wgpu.enums;
 
-import wgpu.WGPUEnum;
+import wgpu.CEnum;
 import java.util.*;
 
-public class TextureSampleType extends WGPUEnum {
+public class TextureSampleType extends CEnum {
 	private static final Map<Integer, TextureSampleType> map = new HashMap<>();
 	public static final TextureSampleType UNDEFINED = new TextureSampleType(0x00000000, "UNDEFINED");
 	public static final TextureSampleType FLOAT = new TextureSampleType(0x00000001, "FLOAT");
