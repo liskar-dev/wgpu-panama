@@ -5,9 +5,9 @@ import java.util.*;
 
 public class StoreOp extends CEnum {
 	private static final Map<Integer, StoreOp> map = new HashMap<>();
-	public static final StoreOp UNDEFINED = new StoreOp(0x00000000, "UNDEFINED");
-	public static final StoreOp STORE = new StoreOp(0x00000001, "STORE");
-	public static final StoreOp DISCARD = new StoreOp(0x00000002, "DISCARD");
+	public static final StoreOp UNDEFINED = new StoreOp(0x00000000, "Undefined");
+	public static final StoreOp STORE = new StoreOp(0x00000001, "Store");
+	public static final StoreOp DISCARD = new StoreOp(0x00000002, "Discard");
 
 	public static StoreOp from(int bits) {
 		return map.get(bits);
