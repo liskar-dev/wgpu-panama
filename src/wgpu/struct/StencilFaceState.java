@@ -5,7 +5,6 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;

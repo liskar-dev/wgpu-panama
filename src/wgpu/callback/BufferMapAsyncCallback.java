@@ -5,7 +5,6 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -14,6 +13,7 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 import java.lang.invoke.MethodHandle;
+import static wgpu.WGPUCallback.*;
 
 public interface BufferMapAsyncCallback extends WGPUCallback {
 	/** Callback: void BufferMapAsyncCallback [BufferMapAsyncStatus status, size_t userdata] */
@@ -26,6 +26,6 @@ public interface BufferMapAsyncCallback extends WGPUCallback {
 	}
 
 	public static FunctionDescriptor desc = functionDescriptor(null, JAVA_INT, JAVA_LONG);
-	public static MethodHandle handle = findVirtual(BufferMapAsyncCallback.class, "stub", methodType(void.class, int.class, long.class));
+	public static MethodHandle handle = findVirtual(BufferMapAsyncCallback.class, "stub", void.class, int.class, long.class);
 
 }

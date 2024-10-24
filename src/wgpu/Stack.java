@@ -2,7 +2,7 @@ package wgpu;
 
 import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;
-import static wgpu.StaticHelpers.*;
+import static wgpu.WGPUStruct.*;
 
 public class Stack implements AutoCloseable {
 	final Arena arena;

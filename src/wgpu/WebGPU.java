@@ -5,7 +5,6 @@ import wgpu.impl.*;
 import wgpu.struct.*;
 import wgpu.enums.*;
 import wgpu.callback.*;
-import static wgpu.StaticHelpers.*;
 
 import java.lang.foreign.*;
 import org.jspecify.annotations.*;
@@ -14,6 +13,8 @@ import static java.lang.foreign.ValueLayout.*;
 import static java.lang.foreign.MemoryLayout.*;
 
 import java.lang.invoke.MethodHandle;
+import static wgpu.Helper.*;
+import static wgpu.WGPUStruct.*;
 
 public class WebGPU {
 	private static final MethodHandle wgpuCreateInstance = lookup(JAVA_LONG, "wgpuCreateInstance", JAVA_LONG);

@@ -19,13 +19,9 @@ public interface WGPUCallback {
 		}
 	}
 	
-	static MethodType methodType(Class<?> ret, Class<?>...params) {
-		return MethodType.methodType(ret, params);
-	}
-	
-	static MethodHandle findVirtual(Class<?> refc, String name, MethodType type) {
+	static MethodHandle findVirtual(Class<?> refc, String name, Class<?> ret, Class<?>...params) {
 		try {
-			return MethodHandles.lookup().findVirtual(refc, name, type);
+			return MethodHandles.lookup().findVirtual(refc, name, MethodType.methodType(ret, params));
 		} catch (NoSuchMethodException | IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
@@ -45,5 +41,13 @@ public interface WGPUCallback {
 		return stub;
 	}
 	
+	static String get_string(long address) {
+		return WGPUStruct.get_string(address);
+	}
+
+	static <T extends WGPUStruct> T loadStruct(T struct, long address) {
+		struct.load(address);
+		return struct;
+	}
 
 }
