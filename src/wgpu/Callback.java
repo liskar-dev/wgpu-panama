@@ -30,6 +30,9 @@ public interface Callback {
 	static final WeakHashMap<Callback, MemorySegment> weakMap = new WeakHashMap<>();
 	
 	static MemorySegment createStub(Callback callback, MethodHandle handle, FunctionDescriptor desc) {
+		if(callback == null)
+			return null;
+		
 		MemorySegment stub = weakMap.get(callback);
 		
 		if(stub == null) {
