@@ -1,52 +1,24 @@
+[![Experimental Build](https://github.com/liskar-dev/wgpu-panama/actions/workflows/main.yml/badge.svg)](https://github.com/liskar-dev/wgpu-panama/actions/workflows/main.yml)
+
 # wgpu-panama
 
-This is my attempt at creating Java binding/wrapper for wgpu-native using Panama FFI with very EXPERIMENTAL approach: All structs have Java wrappers that do not hold a reference to native memory. Instead, they are allocated in a confined Arena and their content copied for the purpose of a wgpu function call.
+Java bindings for [wgpu-native](https://github.com/gfx-rs/wgpu-native) using [Panama FFI](https://openjdk.org/jeps/424) with some experimental approach. The goal is to make the API similar to what it looks like in JavaScript.
 
-## About
-
-Requires JDK 23 with Panama and wgpu-native v22.1.0.5 in library path
-
-## Work in progress 🚧
-
-Warning: at current stage it's a mess and is mostly untested.
+Requires JDK 23 and wgpu-native v22.1.0.5
 
 ## Usage
 
-Create instance:
+In general wgpu API can be used "raw" with static methods located under `wgpu.WGPU.*`. These use raw `long` for WGPU object references and `MemorySegment` for data. The other way is to use object wrappers, such as `GPUInstance`, etc.
 
-    var instanceDescriptor = new InstanceDescriptor();
-    var instance = wgpuCreateInstance(instanceDescriptor);
-
-Request adapter with callback:
-
-    InstanceRequestAdapterCallback callback = (status, adapter, message, userdata) -> {
-        System.out.println("Got a callback from adapter ");
-        System.out.println("Status: " + status);
-        System.out.println("Adapter: " + adapter);
-        System.out.println("Message: " + message);
-        System.out.println("UserData: " + userdata);
-    };
-    wgpuInstanceRequestAdapter(instance, null, callback, 0);
+All callback stubs are allocated with `Arena.ofAuto()` and cached by a weak map. You can safely inline short lasting callbacks, but for "long lasting" callbacks (such as device lost callback) you should keep their instance around to avoid GC cleaning the stub up.
 
 
-Enumerate all adapters and print their info:
+## Examples
 
-    int numAdapters = (int) wgpuInstanceEnumerateAdapters(instance, null, null);
-    var adapters = new WGPUAdapter[numAdapters];
-    wgpuInstanceEnumerateAdapters(instance, null, adapters);
+There's a triangle rendering example (without geometry) here: [TriangleExample.java](examples/TriangleExample.java)
 
-    for(var adapter : adapters) {
-        AdapterInfo info = new AdapterInfo();
-        wgpuAdapterGetInfo(adapter, info);
-        
-        System.out.println("adapter: " + info.adapterType);
-        System.out.println("backend: " + info.backendType);
-        System.out.println("vendor: " + info.vendor);
-        System.out.println("device: " + info.device);
-        System.out.println("description: " + info.description);
-        System.out.println();
-    }
+## Work in progress 🚧
 
-All WebGPU.wgpu* method parameters that are effectively const in original headers are marked final. This changes nothing for the code itself, but serves as an information for the user, describing which params are output.
+At current stage it's a bit messy and is mostly untested. The code is generated with custom script (not in the repo yet).
 
-Generator code that was used to generate the bindings is not in this repo as of yet. (it's a total mess with lots out printlns)
+If you want to test it, you can download artifacts from the experimental CI build. You will also need wgpu-native binaries in your library path.

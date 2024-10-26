@@ -1,4 +1,4 @@
-name: Build and Upload JAR
+name: Experimental Build
 
 on:
   push:
