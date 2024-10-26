@@ -16,7 +16,10 @@ import wgpu.struct.InstanceDescriptor;
 public class WebGPU {
 	
 	public static GPUInstance createInstance(InstanceDescriptor descriptor) {
-		return new GPUInstance(WGPU.wgpuCreateInstance(descriptor));
+		long handle = WGPU.wgpuCreateInstance(descriptor);
+		if(handle == 0)
+			throw new RuntimeException("Unable to create instance");
+		return new GPUInstance(handle);
 	}
 	
 	public static void setLogCallback(LogCallback callback) {

@@ -176,4 +176,12 @@ public class GPUDevice extends GPUObject {
 	public boolean poll(final boolean wait, @Nullable final WrappedSubmissionIndex wrappedSubmissionIndex) {
 		return wgpuDevicePoll(this.handle, wait, wrappedSubmissionIndex);
 	}
+
+	public FeatureName[] enumerateFeatures() {
+		int num = (int) wgpuDeviceEnumerateFeatures(this.handle, null);
+		FeatureName[] features = new FeatureName[num];
+		wgpuDeviceEnumerateFeatures(this.handle, features);
+		return features;
+	}
+
 }

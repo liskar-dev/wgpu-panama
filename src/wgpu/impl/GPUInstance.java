@@ -56,4 +56,34 @@ public class GPUInstance extends GPUObject {
 	public long enumerateAdapters(@Nullable final InstanceEnumerateAdapterOptions options, GPUAdapter[] adapters) {
 		return wgpuInstanceEnumerateAdapters(this.handle, options, adapters);
 	}
+
+	public GPUAdapter requestAdapter(@Nullable final RequestAdapterOptions options) {
+		var callback = new InstanceRequestAdapterCallback() {
+			RequestAdapterStatus status;
+			GPUAdapter adapter;
+			String message;
+			@Override
+			public void apply(RequestAdapterStatus _status, GPUAdapter _adapter, String _message, long userdata) {
+				status = _status;
+				adapter = _adapter;
+				message = _message;
+			}
+		};
+
+		wgpuInstanceRequestAdapter(this.handle, options, callback, 0);
+
+		if(callback.status != RequestAdapterStatus.SUCCESS) {
+			throw new RuntimeException(callback.message);
+		}
+
+		return callback.adapter;
+	}
+
+	public GPUAdapter[] enumerateAdapters(@Nullable final InstanceEnumerateAdapterOptions options) {
+		int num = (int) wgpuInstanceEnumerateAdapters(this.handle, options, null);
+		GPUAdapter[] adapters = new GPUAdapter[num];
+		wgpuInstanceEnumerateAdapters(this.handle, options, adapters);
+		return adapters;
+	}
+
 }

@@ -48,4 +48,34 @@ public class GPUAdapter extends GPUObject {
 		wgpuAdapterRelease(this.handle);
 		this.handle = 0;
 	}
+
+	public GPUDevice requestDevice(@Nullable final DeviceDescriptor descriptor) {
+		var callback = new AdapterRequestDeviceCallback() {
+			RequestDeviceStatus status;
+			GPUDevice device;
+			String message;
+			@Override
+			public void apply(RequestDeviceStatus _status, GPUDevice _device, String _message, long userdata) {
+				status = _status;
+				device = _device;
+				message = _message;
+			}
+		};
+
+		wgpuAdapterRequestDevice(this.handle, descriptor, callback, 0L);
+
+		if(callback.status != RequestDeviceStatus.SUCCESS) {
+			throw new RuntimeException(callback.message);
+		}
+
+		return callback.device;
+	}
+
+	public FeatureName[] enumerateFeatures() {
+		int num = (int) wgpuAdapterEnumerateFeatures(this.handle, null);
+		FeatureName[] features = new FeatureName[num];
+		wgpuAdapterEnumerateFeatures(this.handle, features);
+		return features;
+	}
+
 }
