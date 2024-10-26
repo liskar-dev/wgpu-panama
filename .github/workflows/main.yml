@@ -1,0 +1,41 @@
+name: Build and Upload JAR
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: src
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '23'
+
+      - name: Download jspecify
+        run: curl --create-dirs -o ./libs/jspecify-1.0.0.jar https://repo1.maven.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar
+
+      - name: Compile Java Files
+        run: |
+          mkdir -p out
+          javac -cp libs/* -d out $(find src -name "*.java")
+
+      - name: Package JAR
+        run: |
+          mkdir -p dist
+          jar -cvf dist/wgpu-panama.jar -C out .
+
+      - name: Upload JAR Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jar
+          path: dist/wgpu-panama.jar
+          retention-days: 14
